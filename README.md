@@ -1,7 +1,7 @@
 # openclow-prep
 
 > Repositório de preparação do programa OpenClow.
-> Fase atual: **Squad 0 — Pesquisa, Validação e Arquitetura**
+> Fase atual: **Squad 0 — Pesquisa profunda, viabilidade e arquitetura**
 
 ---
 
@@ -9,7 +9,7 @@
 
 Este repositório é a **fonte de verdade** do programa OpenClow durante a fase de preparação.
 
-O OpenClow (produto final) **não é desenvolvido aqui**. Este repositório existe para que o Squad 0 possa pesquisar, validar, documentar e entregar um pacote completo para o Squad 1, que depois construirá o produto.
+O OpenClow (produto final) **não é desenvolvido aqui**. Este repositório existe para que o Squad 0 pesquise o ecossistema, valide a viabilidade técnica e operacional, documente riscos e entregue um pacote previsível para o Squad 1 construir.
 
 ---
 
@@ -33,8 +33,8 @@ O OpenClow (produto final) **não é desenvolvido aqui**. Este repositório exis
 
 | Campo | Valor |
 |---|---|
-| Fase | Squad 0 — Ativo |
-| Última atualização | 2026-04-14 |
+| Fase | Squad 0 — Etapa 1 ativa |
+| Última atualização | 2026-04-15 |
 | Agente atual | ver `handoffs/ACTIVE.md` |
 | Issues abertas | ver GitHub Issues |
 

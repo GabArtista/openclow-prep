@@ -1,8 +1,8 @@
 # WORKPLAN.md — Plano de Trabalho do Squad 0
 
-> **Version:** 1.0
-> **Última atualização:** 2026-04-14
-> **Para atualizar:** criar PR referenciando a issue correspondente
+> **Version:** 2.0
+> **Última atualização:** 2026-04-15
+> **Objetivo:** tornar a Etapa 1 previsível e defensável antes do Squad 1 construir
 
 ---
 
@@ -12,28 +12,32 @@
 Fase 0.1: Fundação (COMPLETO)
     └── Bootstrap do repositório
 
-Fase 0.2: Pesquisa de Domínio
-    ├── Visão do produto
-    ├── Pesquisa de mercado
-    └── Restrições e NFRs
+Fase 0.2: Escopo e Restrições Reais
+    ├── Escopo exato do programa
+    ├── Restrições do ambiente
+    └── Critérios de qualidade
 
-Fase 0.3: Arquitetura e Tecnologia
-    ├── Avaliação de stack
-    ├── Arquitetura de alto nível
-    ├── Modelo de dados
-    └── Integrações
+Fase 0.3: Pesquisa Profunda do Ecossistema
+    ├── OpenClaw
+    ├── Paperclip
+    ├── MCP e interoperabilidade
+    ├── saúde upstream e adaptação
+    └── category reality, horizon e frontier radar
 
-Fase 0.4: Validação e Evidências
-    ├── Validação da visão
-    └── Validação da arquitetura contra NFRs
+Fase 0.4: Validação Arquitetural e Operacional
+    ├── runtime durável
+    ├── observabilidade e evals
+    ├── custo e throughput
+    ├── segurança e agency boundaries
+    └── arquitetura alvo consolidada
 
-Fase 0.5: Montagem do Pacote do Squad 1
-    ├── Glossário
-    ├── Backlog inicial do Squad 1
-    └── Intake Package completo
+Fase 0.5: Preparação do Squad 1
+    ├── definição formal do squad construtor
+    ├── intake package
+    └── backlog inicial de construção
 
 Fase 0.6: Revisão de Saída
-    └── EXIT_CHECKLIST assinado
+    └── critérios de saída e riscos residuais
 ```
 
 ---
@@ -49,103 +53,95 @@ Fase 0.6: Revisão de Saída
 
 ---
 
-## Fase 0.2: Pesquisa de Domínio
+## Fase 0.2: Escopo e Restrições Reais
 **Status:** Não iniciado
 **Tasks:**
-- TASK-001: Visão do produto (P0, S)
-- TASK-002: Domínio e segmentos de usuário (P0, M)
-- TASK-003: Restrições duras (P0, S)
-- TASK-004: NFRs (P0, M)
+- TASK-001: Definir escopo exato do programa OpenClow (P0, M)
+- TASK-002: Mapear restrições reais do ambiente e critérios de qualidade (P0, M)
 
-**Dependências:** nenhuma (pode iniciar imediatamente)
-**Outputs esperados:** `research/product-vision.md`, `research/domain-research.md`, `research/competitive-analysis.md`, `research/constraints.md`, `research/nfr.md`
+**Dependências:** nenhuma
+**Outputs esperados:** `research/program-scope/mission-scope.md`, `research/program-scope/environment-constraints.md`, `research/architecture/quality-criteria.md`
 
-**Critério de conclusão da fase:** TASK-001 a TASK-004 concluídas e mergeadas.
+**Critério de conclusão da fase:** escopo, não-objetivos, restrições e critérios de qualidade documentados com evidência suficiente para orientar as próximas fases.
 
 ---
 
-## Fase 0.3: Arquitetura e Tecnologia
+## Fase 0.3: Pesquisa Profunda do Ecossistema
 **Status:** Não iniciado
 **Tasks:**
-- TASK-005: Avaliação de stack (P1, L)
-- TASK-006: Arquitetura de alto nível (P1, L)
-- TASK-007: Modelo de dados (P1, M)
-- TASK-008: Integrações (P1, M)
+- TASK-003: Estudo profundo do OpenClaw (P0, L)
+- TASK-004: Estudo profundo do Paperclip (P0, L)
+- TASK-005: Mapear ecossistema MCP e requisitos de interoperabilidade (P0, M)
+- TASK-006: Avaliar saúde upstream, comunidade e sinais reais de adoção (P0, M)
+- TASK-011: Horizon scan e realidade da categoria técnica (P1, M)
+- TASK-012: Radar de cientistas, pesquisadores e laboratórios relevantes (P1, S)
 
-**Dependências:** Fase 0.2 deve estar ao menos 70% completa (TASK-001, TASK-003 completas)
-**Outputs esperados:** `research/tech-evaluation.md`, `research/architecture-overview.md`, `research/data-model.md`, `research/integrations.md`, ADRs em `decisions/`
+**Dependências:** Fase 0.2 ao menos parcialmente concluída
+**Outputs esperados:** artefatos em `research/candidate-assessments/`, `research/ecosystem-fit/`, `research/upstream-health/`, `research/horizon/`, `research/frontier/`
 
-**Critério de conclusão da fase:** TASK-005 a TASK-008 concluídas; pelo menos 3 ADRs em `decisions/`.
+**Critério de conclusão da fase:** candidatos avaliados com profundidade suficiente para descartar, adaptar ou levar adiante; riscos upstream e sinais emergentes documentados.
 
 ---
 
-## Fase 0.4: Validação e Evidências
+## Fase 0.4: Validação Arquitetural e Operacional
 **Status:** Não iniciado
 **Tasks:**
-- TASK-009: Validação da visão (P1, M)
-- TASK-010: Validação da arquitetura contra NFRs (P1, M)
+- TASK-007: Definir runtime durável, retomável e control plane alvo (P0, L)
+- TASK-008: Mapear observabilidade, evals e critérios de operação (P0, M)
+- TASK-009: Mapear segurança, supply chain e limites de agência (P0, M)
+- TASK-010: Estimar custo previsível e throughput operacional (P0, M)
+- TASK-013: Consolidar arquitetura alvo e baseline de ADRs (P1, L)
 
-**Dependências:** Fase 0.2 e Fase 0.3 completas
-**Outputs esperados:** `research/validation-evidence.md`, `research/architecture-validation.md`
+**Dependências:** Fase 0.3 substancialmente concluída
+**Outputs esperados:** artefatos em `research/runtime/`, `research/observability/`, `research/security/`, `research/cost/`, `research/architecture/`, ADRs em `decisions/`
 
-**Critério de conclusão da fase:** TASK-009 e TASK-010 concluídas; todos os NFRs têm resposta arquitetural.
+**Critério de conclusão da fase:** arquitetura alvo defensável, com runtime, operação, custo e segurança suficientemente mapeados para handoff.
 
 ---
 
-## Fase 0.5: Montagem do Pacote do Squad 1
+## Fase 0.5: Preparação do Squad 1
 **Status:** Não iniciado
 **Tasks:**
-- TASK-014: Glossário (P2, S)
-- TASK-011: Backlog inicial do Squad 1 (P2, M)
-- TASK-012: Intake Package completo (P2, S)
+- TASK-014: Definir formalmente o Squad 1 construtor (P1, M)
+- TASK-015: Montar o intake package e backlog inicial do Squad 1 (P1, M)
 
-**Dependências:** Fases 0.2, 0.3 e 0.4 completas
-**Outputs esperados:** `research/glossary.md`, `squads/squad-1/INTAKE_PACKAGE.md` completo, 20+ tasks do Squad 1 no backlog
+**Dependências:** Fase 0.4 concluída
+**Outputs esperados:** `research/squad-1-package/squad-1-definition.md`, `squads/squad-1/INTAKE_PACKAGE.md`, backlog inicial do Squad 1 em `workboard/BACKLOG.md`
 
-**Critério de conclusão da fase:** INTAKE_PACKAGE.md sem `{{PLACEHOLDER}}`; aprovado pelo Program Lead.
+**Critério de conclusão da fase:** o Squad 1 recebe missão, papéis, backlog inicial e pacote técnico-operacional coerente.
 
 ---
 
 ## Fase 0.6: Revisão de Saída
 **Status:** Não iniciado
 **Tasks:**
-- TASK-013: Revisão de saída do Squad 0 (P2, S)
+- TASK-016: Revisar critérios de saída, riscos residuais e readiness do handoff (P1, S)
 
-**Dependências:** Fase 0.5 completa; nenhuma issue `blocking-exit` aberta
-**Outputs esperados:** `squads/squad-0/EXIT_CHECKLIST.md` 100% assinado
+**Dependências:** Fase 0.5 concluída; nenhuma issue `blocking-exit` aberta
+**Outputs esperados:** `squads/squad-0/EXIT_CHECKLIST.md` atualizado e riscos residuais explicitados
 
-**Critério de conclusão da fase:** Program Lead aprova formalmente. Squad 1 pode iniciar.
+**Critério de conclusão da fase:** Program Lead aprova formalmente e o Squad 1 pode iniciar.
 
 ---
 
 ## Grafo de Dependências (Resumo)
 
 ```
-TASK-001 (visão) ──→ TASK-002 (domínio)
-TASK-001 ──→ TASK-004 (NFRs)
-TASK-003 (restrições) ──→ TASK-004
-TASK-003 ──→ TASK-005 (stack)
-TASK-004 ──→ TASK-005
-TASK-005 ──→ TASK-006 (arquitetura)
-TASK-004 ──→ TASK-006
-TASK-006 ──→ TASK-007 (dados)
-TASK-006 ──→ TASK-008 (integrações)
-TASK-001 ──→ TASK-009 (validação visão)
-TASK-002 ──→ TASK-009
-TASK-004 ──→ TASK-010 (validação arq)
-TASK-006 ──→ TASK-010
-TASK-001 ──→ TASK-014 (glossário)
-TASK-005..010 ──→ TASK-011 (backlog S1)
-TASK-011 ──→ TASK-012 (intake package)
-TASK-012 ──→ TASK-013 (exit review)
+TASK-001 (escopo) ──→ TASK-003 (OpenClaw)
+TASK-001 ──→ TASK-004 (Paperclip)
+TASK-001 ──→ TASK-005 (MCP)
+TASK-002 (restrições) ──→ TASK-003
+TASK-002 ──→ TASK-004
+TASK-002 ──→ TASK-005
+TASK-003..005 ──→ TASK-006 (upstream/adaptação)
+TASK-003..006 ──→ TASK-007 (runtime)
+TASK-003..006 ──→ TASK-008 (observability/evals)
+TASK-003..006 ──→ TASK-009 (segurança/agência)
+TASK-003..008 ──→ TASK-010 (custo/throughput)
+TASK-006 ──→ TASK-011 (category reality / horizon)
+TASK-011 ──→ TASK-012 (frontier radar)
+TASK-007..012 ──→ TASK-013 (arquitetura alvo)
+TASK-013 ──→ TASK-014 (Squad 1 formal)
+TASK-014 ──→ TASK-015 (intake + backlog inicial)
+TASK-015 ──→ TASK-016 (exit review)
 ```
-
----
-
-## Como Atualizar Este Workplan
-
-1. Criar uma issue com label `task` e `squad-0`
-2. Criar branch `task/<issue>-update-workplan`
-3. Editar este arquivo
-4. Abrir PR referenciando a issue
-5. Mergear após revisão

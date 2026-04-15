@@ -8,94 +8,94 @@
 
 ---
 
-## P0 — Crítico (Caminho Crítico)
+## Etapa 1 — Squad 0
 
-### TASK-001 | P0 | S | Definir visão do produto OpenClow
-- **Output:** `research/product-vision.md`
-- **Critério de aceite:** A visão do produto pode ser lida pelo Squad 1 sem nenhum contexto adicional. Inclui: qual problema resolve, para quem, o que diferencia, e o que o produto NÃO faz.
+### P0 — Crítico (Caminho Crítico)
+
+### TASK-001 | P0 | M | Definir escopo exato do programa OpenClow
+- **Output:** `research/program-scope/mission-scope.md`
+- **Critério de aceite:** documento explicita objetivo do programa, não-objetivos, hipóteses, limites, sucesso/falha e perguntas que a Etapa 1 precisa responder para liberar o Squad 1
 - **Dependências:** nenhuma
-- **Template a usar:** `templates/EVIDENCE.md` para evidências coletadas
 
-### TASK-002 | P0 | M | Pesquisa de domínio e segmentos de usuário
-- **Output:** `research/domain-research.md`, `research/competitive-analysis.md`
-- **Critério de aceite:** mínimo 3 competidores analisados (pontos fortes, fracos, posicionamento), segmentos de usuário definidos com características, tamanho de mercado estimado com fonte
-- **Dependências:** TASK-001 (visão do produto)
-- **Template a usar:** `templates/EVIDENCE.md` para cada evidência
+### TASK-002 | P0 | M | Mapear restrições reais do ambiente e critérios de qualidade
+- **Output:** `research/program-scope/environment-constraints.md`, `research/architecture/quality-criteria.md`
+- **Critério de aceite:** restrições técnicas, operacionais, de budget, governança e segurança estão descritas com origem, impacto e severidade; critérios de qualidade são mensuráveis e úteis para avaliar candidatos
+- **Dependências:** TASK-001
 
-### TASK-003 | P0 | S | Mapear restrições duras do programa
-- **Output:** `research/constraints.md`
-- **Critério de aceite:** cada restrição tem: origem (legal/compliance/técnica/budget), enunciado claro, implicação para a arquitetura
-- **Dependências:** nenhuma (pode ser feita em paralelo com TASK-001)
-- **Template a usar:** livre, mas estruturado
-
-### TASK-004 | P0 | M | Definir requisitos não-funcionais (NFRs)
-- **Output:** `research/nfr.md`
-- **Critério de aceite:** cada NFR é mensurável (tem número ou threshold), categorizado (performance, disponibilidade, segurança, escalabilidade, compliance), e tem fonte/justificativa
-- **Dependências:** TASK-001, TASK-003
-
----
-
-## P1 — Alta Prioridade
-
-### TASK-005 | P1 | L | Avaliação de stack tecnológico
-- **Output:** `research/tech-evaluation.md` + ADRs para cada decisão major em `decisions/`
-- **Critério de aceite:** frontend, backend, banco de dados, e infra avaliados; cada escolha major tem um ADR com alternativas consideradas
-- **Dependências:** TASK-003, TASK-004
-- **Template a usar:** `templates/ADR.md` para cada decisão
-
-### TASK-006 | P1 | L | Proposta de arquitetura de alto nível
-- **Output:** `research/architecture-overview.md` + ADRs para padrões arquiteturais
-- **Critério de aceite:** a arquitetura pode ser desenhada como diagrama de caixas e setas somente lendo o texto; todos os componentes e suas responsabilidades estão descritos; os fluxos de dados principais estão documentados
-- **Dependências:** TASK-004, TASK-005
-- **Template a usar:** `templates/ADR.md` para padrões arquiteturais
-
-### TASK-007 | P1 | M | Proposta de modelo de dados
-- **Output:** `research/data-model.md`
-- **Critério de aceite:** todas as entidades do produto têm representação no modelo; relacionamentos documentados; não é código SQL/ORM, é uma proposta conceitual em markdown
-- **Dependências:** TASK-001, TASK-006
-- **Aviso:** sem código SQL ou de migração
-
-### TASK-008 | P1 | M | Mapeamento de integrações e dependências externas
-- **Output:** `research/integrations.md`
-- **Critério de aceite:** cada integração tem: nome do serviço, propósito, nível de risco, estratégia de fallback, dependência crítica ou não
-- **Dependências:** TASK-006
-
-### TASK-009 | P1 | M | Validar visão do produto com evidências
-- **Output:** `research/validation-evidence.md` (usando template EVIDENCE)
-- **Critério de aceite:** mínimo 5 evidências documentadas (reviews de competidores, fóruns, relatórios de mercado), cada uma com nível de confiança declarado; a visão do produto é confirmada ou ajustada com base nas evidências
+### TASK-003 | P0 | L | Estudo profundo do OpenClaw
+- **Output:** `research/candidate-assessments/openclaw-assessment.md`
+- **Critério de aceite:** avaliação cobre arquitetura, comunidade, ecossistema, adaptabilidade, durabilidade, segurança, custo, riscos e lacunas para o contexto OpenClow
 - **Dependências:** TASK-001, TASK-002
 
-### TASK-010 | P1 | M | Validar arquitetura contra os NFRs
-- **Output:** `research/architecture-validation.md`
-- **Critério de aceite:** cada NFR de TASK-004 é abordado; onde a arquitetura atende, onde potencialmente falha, e qual é o plano de mitigação
-- **Dependências:** TASK-004, TASK-006
-
----
-
-## P2 — Normal
-
-### TASK-011 | P2 | M | Rascunhar backlog inicial do Squad 1
-- **Output:** adições a `workboard/BACKLOG.md` com label `squad-1`
-- **Critério de aceite:** mínimo 20 tasks para o Squad 1, cada uma com tamanho estimado e mapa de dependências
-- **Dependências:** TASK-006, TASK-007, TASK-008
-
-### TASK-012 | P2 | S | Montar pacote de intake do Squad 1
-- **Output:** `squads/squad-1/INTAKE_PACKAGE.md` completo (sem `{{PLACEHOLDER}}` remanescentes)
-- **Critério de aceite:** todas as seções do intake package preenchidas; revisado pelo Program Lead
-- **Dependências:** TASK-005 a TASK-010 completos
-
-### TASK-013 | P2 | S | Revisão de saída do Squad 0
-- **Output:** `squads/squad-0/EXIT_CHECKLIST.md` completamente assinado
-- **Critério de aceite:** 100% dos itens do checklist verificados e assinados com data e ID do agente
-- **Dependências:** TASK-012 completo, nenhuma issue `blocking-exit` aberta
-
-### TASK-014 | P2 | S | Criar glossário do domínio
-- **Output:** `research/glossary.md`
-- **Critério de aceite:** mínimo 20 termos definidos; glossário incluído no pacote de intake do Squad 1
+### TASK-004 | P0 | L | Estudo profundo do Paperclip
+- **Output:** `research/candidate-assessments/paperclip-assessment.md`
+- **Critério de aceite:** avaliação cobre arquitetura, comunidade, ecossistema, adaptabilidade, durabilidade, segurança, custo, riscos e lacunas para o contexto OpenClow
 - **Dependências:** TASK-001, TASK-002
 
+### TASK-005 | P0 | M | Mapear ecossistema MCP e requisitos de interoperabilidade
+- **Output:** `research/ecosystem-fit/mcp-landscape.md`, `research/ecosystem-fit/mcp-interoperability-checklist.md`
+- **Critério de aceite:** landscape documenta componentes, padrões, riscos de interoperabilidade, agency boundaries e requisitos mínimos para o OpenClow operar com previsibilidade
+- **Dependências:** TASK-001, TASK-002
+
+### TASK-006 | P0 | M | Avaliar saúde upstream, comunidade e sinais reais de adoção
+- **Output:** `research/upstream-health/upstream-health-report.md`
+- **Critério de aceite:** relatório distingue popularidade de sustentabilidade; cobre mantenedores, releases, governança, issue velocity, integridade de comunidade e sinais práticos de adoção
+- **Dependências:** TASK-003, TASK-004, TASK-005
+
+### TASK-007 | P0 | L | Definir runtime durável, retomável e control plane alvo
+- **Output:** `research/runtime/durable-runtime-analysis.md`, `research/architecture/control-plane-options.md`
+- **Critério de aceite:** failure modes, recuperação, checkpointing, replay, filas, isolamento e control plane multiagente foram avaliados contra as restrições do programa
+- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
+
+### TASK-008 | P0 | M | Mapear observabilidade, evals e critérios de operação
+- **Output:** `research/observability/observability-and-evals.md`
+- **Critério de aceite:** documento define eventos, traces, logs, métricas, auditabilidade, feedback loops e estratégia de evals contínuos compatíveis com a arquitetura alvo
+- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
+
+### TASK-009 | P0 | M | Mapear segurança, supply chain e limites de agência
+- **Output:** `research/security/security-and-agency-boundaries.md`
+- **Critério de aceite:** documento cobre prompt injection, excessive agency, credenciais, isolamento, dependências, supply chain e blast radius com mitigação proposta
+- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
+
+### TASK-010 | P0 | M | Estimar custo previsível e throughput operacional
+- **Output:** `research/cost/cost-and-throughput-model.md`
+- **Critério de aceite:** budgets, envelopes de custo, throughput esperado, gargalos e guardrails operacionais estão descritos com premissas e incertezas explícitas
+- **Dependências:** TASK-007, TASK-008
+
+### P1 — Alta Prioridade
+
+### TASK-011 | P1 | M | Fazer horizon scan e calibrar a realidade da categoria técnica
+- **Output:** `research/horizon/category-reality.md`, `research/horizon/horizon-scan.md`
+- **Critério de aceite:** documento registra como a categoria amadureceu em 2026 e quais sinais mudam prioridades, critérios de qualidade ou arquitetura do programa
+- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
+
+### TASK-012 | P1 | S | Ativar radar de cientistas, pesquisadores e laboratórios relevantes
+- **Output:** `research/frontier/frontier-radar.md`
+- **Critério de aceite:** radar lista grupos, labs, pesquisadores ou linhas aplicadas somente quando houver relevância plausível para o OpenClow e descreve impacto esperado
+- **Dependências:** TASK-011
+
+### TASK-013 | P1 | L | Consolidar arquitetura alvo e baseline de ADRs
+- **Output:** `research/architecture/architecture-target.md`, ADRs em `decisions/`
+- **Critério de aceite:** arquitetura alvo é coerente com restrições, candidatos avaliados, runtime, observabilidade, segurança e custo; cada decisão major tem ADR ou decisão explícita de adiar
+- **Dependências:** TASK-007, TASK-008, TASK-009, TASK-010, TASK-011, TASK-012
+
+### TASK-014 | P1 | M | Definir formalmente o Squad 1 construtor
+- **Output:** `research/squad-1-package/squad-1-definition.md`
+- **Critério de aceite:** documento explicita missão, responsabilidades, papéis esperados, sequência inicial de execução, dependências e critérios de prontidão do Squad 1
+- **Dependências:** TASK-013
+
+### TASK-015 | P1 | M | Montar intake package e backlog inicial do Squad 1
+- **Output:** `squads/squad-1/INTAKE_PACKAGE.md`, atualização de `workboard/BACKLOG.md` com tasks do Squad 1
+- **Critério de aceite:** intake package está completo, sem seções pendentes, e o backlog inicial do Squad 1 reflete a arquitetura alvo e os guardrails operacionais
+- **Dependências:** TASK-014
+
+### TASK-016 | P1 | S | Revisar critérios de saída, riscos residuais e readiness do handoff
+- **Output:** atualização de `squads/squad-0/EXIT_CHECKLIST.md` e `handoffs/ACTIVE.md`
+- **Critério de aceite:** checklist de saída está verificável, riscos residuais foram explicitados e a próxima ação para liberar o Squad 1 está clara
+- **Dependências:** TASK-015
+
 ---
 
-## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-011)
+## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)
 
-*Esta seção será preenchida quando TASK-011 for concluída.*
+*Esta seção será preenchida quando TASK-015 for concluída.*

@@ -1,7 +1,7 @@
 # ENTRY_CHECKLIST.md — Checklist de Entrada do Squad 1
 
 > **Status:** Aguardando Squad 0 concluir
-> **Última atualização:** 2026-04-14
+> **Última atualização:** 2026-04-15
 
 O Squad 1 deve executar este checklist **antes do primeiro commit** no repositório de produto.
 
@@ -10,7 +10,7 @@ O Squad 1 deve executar este checklist **antes do primeiro commit** no repositó
 ## Pré-requisitos (verificar antes de qualquer ação)
 
 - [ ] `squads/squad-0/EXIT_CHECKLIST.md` está 100% assinado com aprovação do Program Lead
-- [ ] `squads/squad-1/INTAKE_PACKAGE.md` está com status `COMPLETO` (sem `{{PLACEHOLDER}}`)
+- [ ] `squads/squad-1/INTAKE_PACKAGE.md` está com status `COMPLETO` (sem seções pendentes)
 - [ ] `handoffs/ACTIVE.md` indica que o bastão está disponível para o Squad 1
 - [ ] Nenhuma issue aberta com label `blocking-exit` ou `handoff-conflict`
 

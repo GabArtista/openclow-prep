@@ -8,35 +8,39 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** claude-code (Bootstrap Architect)
-- **last-updated-at:** 2026-04-14 00:00 UTC
-- **last-read-by:** —
-- **last-read-at:** —
+- **last-updated-by:** codex (Bootstrap Architect — Part 2 / Squad 0 Realignment)
+- **last-updated-at:** 2026-04-15 14:55 -03
+- **last-read-by:** codex
+- **last-read-at:** 2026-04-15 14:55 -03
 
 ---
 
 ## Tasks em Voo
 
-Nenhuma. Bootstrap recém concluído.
+Nenhuma.
 
 ---
 
 ## Última Ação Completada
 
-Bootstrap completo do repositório `openclow-prep`.
-Todos os 31 arquivos de fundação foram criados: estrutura de diretórios, CLAUDE.md, MISSION.md, templates, squads, workboard, handoffs, GitHub workflow e CI.
+Realinhamento estrutural do `openclow-prep` para refletir a missão real da Etapa 1 / Squad 0.
+
+**Mudanças concluídas nesta sessão:**
+- `MISSION.md` reescrito para focar viabilidade técnica, previsibilidade e pacote técnico-operacional
+- `squads/squad-0/ROLES.md` expandido com papéis especializados de upstream, ecossistema, runtime, custo, observabilidade, segurança, backlog e frontier radar
+- `workboard/BACKLOG.md` reorganizado para abandonar discovery genérico de produto e priorizar ecossistema, runtime, segurança, custo e preparação do Squad 1
+- `squads/squad-0/WORKPLAN.md`, `EXIT_CHECKLIST.md` e `squads/squad-1/INTAKE_PACKAGE.md` realinhados à nova missão
+- árvore `research/` e `prompts/squad-0/` preparada para as novas frentes de trabalho
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Ler `CLAUDE.md` para entender o contrato comportamental
-2. Ler `MISSION.md` para entender o objetivo do Squad 0
-3. Acessar `workboard/BACKLOG.md` e pegar a primeira task P0 disponível
-4. Criar uma branch `task/<numero-issue>-<slug>` e abrir uma issue no GitHub para a task escolhida
-5. Atualizar este arquivo com o ID do agente e a task sendo trabalhada
+1. Iniciar `TASK-001` — Definir escopo exato do programa OpenClow
+2. Em seguida, executar `TASK-002` para consolidar restrições reais do ambiente e critérios de qualidade
+3. Só depois abrir as pesquisas profundas de OpenClaw, Paperclip e MCP com base nas restrições já fixadas
 
-**Task P0 recomendada para começar:** `TASK-001` — Definir visão do produto OpenClow
+**Papéis recomendados para a próxima sessão:** `Research Lead / Research Librarian`, `Program Architect`, `Backlog Manager`
 
 ---
 
@@ -48,31 +52,22 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-NENHUM. (Bootstrap não requer snapshot — o repositório é o snapshot.)
+NENHUM.
 
 ---
 
 ## Notas para o Próximo Agente
 
-Este repositório foi bootstrapado do zero em 2026-04-14.
+Esta sessão corrigiu o direcionamento do Squad 0.
 
-**O que foi criado:**
-- Estrutura completa de diretórios
-- CLAUDE.md (contrato comportamental)
-- MISSION.md (objetivo do Squad 0)
-- context/POLICY.md (política de acesso)
-- handoffs/PROTOCOL.md (protocolo de handoff)
-- workboard/BACKLOG.md (14 tasks iniciais)
-- squads/squad-0/ (charter, roles, workplan, exit checklist)
-- squads/squad-1/ (intake package, entry checklist)
-- templates/ (task, ADR, runbook, evidence, rollback)
-- .github/ (issue templates, PR template, labels, CI)
+**O que mudou no entendimento do programa:**
+- Squad 0 deixou de ser tratado como discovery clássico de produto
+- A Etapa 1 agora está explicitamente orientada a viabilização profunda, risco, evidência, arquitetura e preparação do Squad 1
+- Comunidade upstream, adaptabilidade, durabilidade, observabilidade, custo, segurança e frontier radar agora são frentes formais
 
-**O que ainda não existe:**
-- Nenhum ADR em `decisions/` (o primeiro será o bootstrap-architecture ADR)
-- Nenhum arquivo de pesquisa em `research/`
-- Nenhum item completado no Squad 0
+**O que fazer a seguir:**
+- Trabalhar em `TASK-001` e `TASK-002` antes de aprofundar qualquer candidato
+- Produzir os primeiros artefatos em `research/program-scope/`
+- Usar os prompts novos em `prompts/squad-0/` para dividir as frentes especializadas
 
-**Primeira decisão a tomar:** Qual é a visão do produto OpenClow? (TASK-001 no backlog)
-
-Boa sorte, Squad 0.
+**Próximo agente recomendado:** um agente atuando como `Research Lead / Research Librarian` com suporte de `Program Architect`

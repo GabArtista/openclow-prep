@@ -10,6 +10,7 @@
 ```
 ### TASK-XXX | [título]
 - **Owner:** [agent-id]
+- **Papéis ativos:** [Role A | Role B]
 - **Iniciada em:** YYYY-MM-DD
 - **Branch:** task/<numero-issue>-<slug>
 - **Issue:** #<numero>
@@ -24,6 +25,6 @@
 
 *Nenhuma task em progresso.*
 
-Bootstrap completo em 2026-04-14. Pronto para o Squad 0 iniciar.
+Realinhamento estrutural concluído em 2026-04-15. Pronto para a primeira task da Etapa 1 realinhada.
 
-Para começar: pegar `TASK-001` do `workboard/BACKLOG.md`, criar issue no GitHub, criar branch `task/<issue>-product-vision`, e atualizar este arquivo.
+Para começar: pegar `TASK-001` do `workboard/BACKLOG.md`, criar issue no GitHub, criar branch `task/<issue>-program-scope`, declarar papéis ativos e atualizar este arquivo.
