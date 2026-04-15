@@ -1,0 +1,82 @@
+name: "Task"
+description: "Uma unidade de trabalho do Squad 0"
+labels: ["task", "squad-0"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Preencha todos os campos. Consulte `templates/TASK.md` para referência.
+        Após criar a issue, atualize `workboard/BACKLOG.md` com o número da issue.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: "Tipo"
+      options:
+        - research
+        - documentation
+        - decision
+        - validation
+        - meta
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Prioridade"
+      options:
+        - "P0 — Crítico (bloqueia tudo)"
+        - "P1 — Alta"
+        - "P2 — Normal"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: "Tamanho estimado"
+      options:
+        - "S — menos de 2h"
+        - "M — 2 a 8h"
+        - "L — 1 a 3 dias"
+        - "XL — mais de 3 dias"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Descrição"
+      description: "O que precisa ser feito e por quê. Deve ser autocontida — um agente sem contexto deve conseguir entender."
+      placeholder: "Descreva a task de forma clara e completa..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Critérios de aceite"
+      description: "Liste os critérios mensuráveis que definem 'done' para esta task."
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: "Output esperado"
+      description: "Quais arquivos esta task cria ou modifica?"
+      placeholder: "- research/arquivo.md\n- decisions/ADR-NNNN.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: "Dependências"
+      description: "Esta task depende de outras? Liste os números de issue."
+      placeholder: "Depende de #N (opcional)"

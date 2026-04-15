@@ -1,0 +1,50 @@
+name: "Pergunta / Esclarecimento necessário"
+description: "Uma questão não resolvida que está bloqueando ou pode bloquear o progresso"
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este template quando um agente não souber como proceder e precisar de orientação.
+        Regra do CLAUDE.md: na incerteza, pare e pergunte — nunca adivinhe.
+        Após criar a issue, atualizar `handoffs/ACTIVE.md` com o bloqueador.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: "Pergunta"
+      description: "Qual é a dúvida ou questão? Seja específico."
+      placeholder: "Estou tentando fazer X, mas não sei se devo Y ou Z porque..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "Contexto"
+      description: "O que você estava tentando fazer quando esta dúvida surgiu?"
+      placeholder: "Estava trabalhando em TASK-XXX quando..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: blocking
+    attributes:
+      label: "Esta pergunta está bloqueando trabalho?"
+      options:
+        - label: "Sim — não consigo avançar sem esta resposta"
+        - label: "Não — posso continuar com outras tasks enquanto aguardo"
+
+  - type: input
+    id: who
+    attributes:
+      label: "Quem pode responder?"
+      description: "Program Lead, outro agente, ou qualquer pessoa?"
+      placeholder: "Program Lead"
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impacto se não respondida"
+      description: "O que acontece se esta pergunta ficar sem resposta?"
+      placeholder: "Sem esta resposta, não consigo completar..."

@@ -1,0 +1,75 @@
+# Labels do repositório openclow-prep
+# Compatível com github-label-sync
+# Para aplicar: gh label create --force (ou usar a ferramenta de sua preferência)
+
+- name: "task"
+  color: "0075ca"
+  description: "Uma unidade de trabalho do programa"
+
+- name: "adr"
+  color: "7057ff"
+  description: "Architecture Decision Record"
+
+- name: "decision"
+  color: "7057ff"
+  description: "Requer uma decisão"
+
+- name: "question"
+  color: "e4e669"
+  description: "Pergunta bloqueante aguardando resposta"
+
+- name: "bug"
+  color: "d73a4a"
+  description: "Erro de documentação ou violação de protocolo"
+
+- name: "research"
+  color: "0e8a16"
+  description: "Task de pesquisa"
+
+- name: "documentation"
+  color: "cfd3d7"
+  description: "Task de documentação"
+
+- name: "validation"
+  color: "e99695"
+  description: "Task de validação ou evidência"
+
+- name: "P0"
+  color: "b60205"
+  description: "Prioridade crítica — bloqueia tudo"
+
+- name: "P1"
+  color: "e4700c"
+  description: "Prioridade alta"
+
+- name: "P2"
+  color: "94969b"
+  description: "Prioridade normal"
+
+- name: "blocking-exit"
+  color: "5c0000"
+  description: "Bloqueia a saída do Squad 0"
+
+- name: "policy-gap"
+  color: "f9d0c4"
+  description: "Situação não coberta pela política — aguarda orientação"
+
+- name: "handoff-conflict"
+  color: "b60205"
+  description: "Dois agentes acreditam ter o bastão — resolver antes de continuar"
+
+- name: "squad-0"
+  color: "0e8a16"
+  description: "Pertence ao Squad 0"
+
+- name: "squad-1"
+  color: "006b75"
+  description: "Pertence ao Squad 1"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "Reconhecido, mas não será endereçado"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "Duplicata de outra issue"

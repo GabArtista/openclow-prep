@@ -1,0 +1,151 @@
+name: Validate Repository Structure
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-required-files:
+    name: Check required files exist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify ACTIVE.md exists
+        run: |
+          if [ ! -f "handoffs/ACTIVE.md" ]; then
+            echo "::error::handoffs/ACTIVE.md not found. This file must always exist."
+            exit 1
+          fi
+          echo "✓ handoffs/ACTIVE.md exists"
+
+      - name: Verify IN_PROGRESS.md exists
+        run: |
+          if [ ! -f "workboard/IN_PROGRESS.md" ]; then
+            echo "::error::workboard/IN_PROGRESS.md not found."
+            exit 1
+          fi
+          echo "✓ workboard/IN_PROGRESS.md exists"
+
+      - name: Verify CLAUDE.md exists
+        run: |
+          if [ ! -f "CLAUDE.md" ]; then
+            echo "::error::CLAUDE.md not found. This is the behavioral contract for AI agents."
+            exit 1
+          fi
+          echo "✓ CLAUDE.md exists"
+
+  check-no-product-code:
+    name: Check no product code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for product code extensions
+        run: |
+          FORBIDDEN_EXTENSIONS="ts tsx js jsx mjs cjs py go rs java rb php cs swift kt sql graphql"
+          FOUND=0
+
+          for EXT in $FORBIDDEN_EXTENSIONS; do
+            FILES=$(find . \
+              -not -path './.git/*' \
+              -not -path './.github/workflows/*' \
+              -name "*.${EXT}" 2>/dev/null)
+
+            if [ -n "$FILES" ]; then
+              echo "::error::Product code found (*.${EXT}):"
+              echo "$FILES"
+              FOUND=1
+            fi
+          done
+
+          if [ $FOUND -eq 1 ]; then
+            echo ""
+            echo "::error::Squad 0 must not contain product code. See CLAUDE.md Section 6."
+            exit 1
+          fi
+
+          echo "✓ No product code found"
+
+      - name: Check for Dockerfile (product)
+        run: |
+          DOCKERFILES=$(find . \
+            -not -path './.git/*' \
+            -name "Dockerfile" -o -name "docker-compose.yml" -o -name "docker-compose.yaml" 2>/dev/null | \
+            grep -v ".git" || true)
+
+          if [ -n "$DOCKERFILES" ]; then
+            echo "::warning::Dockerfile or docker-compose found. Verify these are not product code:"
+            echo "$DOCKERFILES"
+          else
+            echo "✓ No Dockerfiles found"
+          fi
+
+  check-no-secrets:
+    name: Check no secrets committed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for common secret patterns
+        run: |
+          FOUND=0
+
+          # API key patterns
+          PATTERNS=(
+            "sk-[A-Za-z0-9]{32,}"
+            "ghp_[A-Za-z0-9]{36}"
+            "gho_[A-Za-z0-9]{36}"
+            "github_pat_[A-Za-z0-9_]{82}"
+            "AKIA[0-9A-Z]{16}"
+            "AIza[0-9A-Za-z_-]{35}"
+            "password\s*=\s*['\"][^'\"]{8,}"
+            "secret\s*=\s*['\"][^'\"]{8,}"
+            "api[_-]?key\s*=\s*['\"][^'\"]{8,}"
+          )
+
+          for PATTERN in "${PATTERNS[@]}"; do
+            MATCHES=$(grep -rE --include="*.md" --include="*.yml" --include="*.yaml" \
+              -l "$PATTERN" . \
+              --exclude-dir=".git" 2>/dev/null || true)
+
+            if [ -n "$MATCHES" ]; then
+              echo "::error::Possible secret pattern '$PATTERN' found in:"
+              echo "$MATCHES"
+              FOUND=1
+            fi
+          done
+
+          if [ $FOUND -eq 1 ]; then
+            echo ""
+            echo "::error::Potential secrets detected. See context/POLICY.md Section 5."
+            exit 1
+          fi
+
+          echo "✓ No secret patterns detected"
+
+  check-template-placeholders:
+    name: Check no unfilled placeholders outside templates/
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for unfilled {{PLACEHOLDER}} outside templates/
+        run: |
+          FILES=$(grep -rEl "\{\{[A-Z_]+\}\}" \
+            --include="*.md" \
+            --exclude-dir=".git" \
+            . 2>/dev/null | \
+            grep -v "^./templates/" || true)
+
+          if [ -n "$FILES" ]; then
+            echo "::warning::Unfilled {{PLACEHOLDER}} found outside templates/:"
+            echo "$FILES"
+            echo ""
+            echo "These files have template placeholders that should be filled."
+            echo "This is a warning only — it may be intentional for shell documents."
+          else
+            echo "✓ No unfilled placeholders outside templates/"
+          fi

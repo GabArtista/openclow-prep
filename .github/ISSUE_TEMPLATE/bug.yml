@@ -1,0 +1,52 @@
+name: "Bug de Documentação / Violação de Protocolo"
+description: "Algo no repositório está incorreto, quebrado, ou viola o protocolo"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Neste repositório, um "bug" é:
+        - Um erro de conteúdo em um documento
+        - Um link quebrado
+        - Um campo de template não preenchido que deveria estar
+        - Uma violação das regras do CLAUDE.md
+        - Um arquivo no lugar errado
+        NÃO é um bug de código — código de produto não existe neste repositório.
+
+  - type: input
+    id: file
+    attributes:
+      label: "Arquivo afetado"
+      description: "Caminho do arquivo com o problema."
+      placeholder: "squads/squad-0/CHARTER.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_wrong
+    attributes:
+      label: "O que está errado"
+      description: "Descreva o problema com precisão."
+      placeholder: "O campo X está incorreto / o link Y está quebrado / ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_should_be
+    attributes:
+      label: "O que deveria ser"
+      description: "Qual é o estado correto esperado?"
+      placeholder: "Deveria ser / ter / conter..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severidade"
+      options:
+        - "Alta — bloqueia trabalho do Squad 0 ou Squad 1"
+        - "Média — causa confusão mas não bloqueia"
+        - "Baixa — cosmético ou menor"
+    validations:
+      required: true

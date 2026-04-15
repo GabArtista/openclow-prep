@@ -1,0 +1,57 @@
+name: "Architecture Decision Record (ADR)"
+description: "Propor e rastrear uma decisão arquitetural"
+labels: ["adr", "decision", "squad-0"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este template para propor uma decisão arquitetural.
+        Após criar a issue, crie o arquivo ADR em `decisions/ADR-NNNN-titulo.md` usando `templates/ADR.md`.
+        ADRs são imutáveis após merge. Para reverter, crie um novo ADR que supersede este.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "Contexto"
+      description: "Qual situação ou problema motivou esta decisão? O que acontece se não decidirmos agora?"
+      placeholder: "Descreva o contexto que força esta decisão..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: "Decisão proposta"
+      description: "O que você propõe decidir? Seja direto — uma ou duas frases."
+      placeholder: "Proposta: adotar X porque Y..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternativas consideradas"
+      description: "Quais outras opções foram avaliadas? Por que foram rejeitadas?"
+      placeholder: "Alternativa A: ...\nAlternativa B: ..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: "Status inicial"
+      options:
+        - "proposed"
+        - "accepted"
+        - "rejected"
+    validations:
+      required: true
+
+  - type: input
+    id: deciders
+    attributes:
+      label: "Decisores"
+      description: "IDs dos agentes ou pessoas envolvidos na decisão."
+      placeholder: "claude-code, program-lead"
+    validations:
+      required: true
