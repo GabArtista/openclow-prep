@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: OpenClow API
+  version: 1.0.0
+  description: >
+    API minima do MVP para capabilities, runs, checkpoints, approvals e outputs.
+servers:
+  - url: https://openclow.local/v1
+paths:
+  /capabilities:
+    get:
+      summary: List capabilities
+      responses:
+        "200":
+          description: Capability list
+    post:
+      summary: Create capability
+      responses:
+        "201":
+          description: Capability created
+  /capabilities/{capabilityId}:
+    get:
+      summary: Get capability
+      parameters:
+        - $ref: "#/components/parameters/CapabilityId"
+      responses:
+        "200":
+          description: Capability payload
+    patch:
+      summary: Update capability
+      parameters:
+        - $ref: "#/components/parameters/CapabilityId"
+      responses:
+        "200":
+          description: Capability updated
+  /capabilities/{capabilityId}/promotions:
+    post:
+      summary: Promote capability between lifecycle stages
+      parameters:
+        - $ref: "#/components/parameters/CapabilityId"
+      responses:
+        "202":
+          description: Promotion queued for approval
+  /runs:
+    post:
+      summary: Start run
+      responses:
+        "202":
+          description: Run accepted
+  /runs/{runId}:
+    get:
+      summary: Get run state
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      responses:
+        "200":
+          description: Run payload
+  /runs/{runId}/outputs:
+    get:
+      summary: Get run outputs
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      responses:
+        "200":
+          description: Output collection
+  /checkpoints/{checkpointId}/approve:
+    post:
+      summary: Approve checkpoint
+      parameters:
+        - $ref: "#/components/parameters/CheckpointId"
+      responses:
+        "200":
+          description: Checkpoint approved
+  /checkpoints/{checkpointId}/reject:
+    post:
+      summary: Reject checkpoint
+      parameters:
+        - $ref: "#/components/parameters/CheckpointId"
+      responses:
+        "200":
+          description: Checkpoint rejected
+components:
+  parameters:
+    CapabilityId:
+      name: capabilityId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    RunId:
+      name: runId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    CheckpointId:
+      name: checkpointId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid

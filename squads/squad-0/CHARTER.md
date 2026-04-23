@@ -2,7 +2,7 @@
 
 > **Version:** 2.0
 > **Status:** Ativo
-> **Atualizado em:** 2026-04-15
+> **Atualizado em:** 2026-04-23
 > **Encerramento previsto:** Quando `EXIT_CHECKLIST.md` estiver 100% assinado
 
 ---
@@ -26,7 +26,11 @@ O Squad 0 está autorizado a:
 - Definir o escopo exato do programa OpenClow, seus limites e critérios de sucesso
 - Pesquisar profundamente tecnologias candidatas, comunidades upstream, interoperabilidade e durabilidade operacional
 - Avaliar OpenClaw, Paperclip e o ecossistema MCP com foco em viabilidade real no nosso contexto
+- Estudar sistemas internos já operacionais da Doze, em especial o `opensquad`, para decidir o que portar, adaptar, reescrever ou descartar
+- Inventariar o servidor de referência, integrações reais e limites operacionais antes de qualquer build de produto
 - Produzir documentos sobre arquitetura, runtime, observabilidade, evals, custo, throughput, segurança e agency boundaries
+- Definir governança de capacidades do futuro produto, incluindo `skills`, `squads`, `pipelines`, `tools` e meta-squad de auto-construção
+- Abrir e manter a área isolada `product/` como workspace de implementação controlada do OpenClow
 - Rastrear sinais de horizonte técnico e, quando necessário, laboratórios, cientistas e grupos de pesquisa aplicada
 - Criar e manter documentos em `research/`, ADRs em `decisions/`, prompts em `prompts/squad-0/` e artefatos de preparação do Squad 1
 - Reorganizar backlog, handoffs e critérios de saída para refletir a etapa real do programa
@@ -37,13 +41,13 @@ O Squad 0 está autorizado a:
 
 O Squad 0 **não está autorizado** a:
 
-- Escrever qualquer código de produto (ver `CLAUDE.md` Seção 6 para lista completa)
-- Construir protótipos do sistema final
+- Escrever qualquer código de produto fora de `product/` (ver `AGENTS.md` Seção 6 para lista completa)
+- Construir ou validar o sistema final sem ADRs, workboard e guardrails explícitos
 - Assumir que descoberta de mercado substitui validação técnica e operacional
 - Declarar uma decisão arquitetural como final sem ADR correspondente
 - Modificar artefatos do Squad 1 depois do handoff final sem aprovação do Program Lead
 - Contratar serviços externos, criar contas ou assinar planos
-- Trabalhar no repositório final `openclow` antes do handoff formal
+- Tocar produção sem staging/dry-run, checkpoint humano e aprovação explícita
 
 ---
 

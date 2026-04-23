@@ -8,8 +8,8 @@
 
 ## Missão do Programa
 
-O OpenClow será construído pelo Squad 1.
-Antes disso, a **Etapa 1 / Squad 0** existe para reduzir surpresa, retrabalho e risco por meio de pesquisa profunda, validação técnica e evidência operacional.
+O OpenClow continuará sendo construído pelo Squad 1.
+Durante a **Etapa 1 / Squad 0**, este repositório também pode hospedar o bootstrap e a implementação controlada do sistema exclusivamente em `product/`, desde que isso respeite ADRs, workboard, handoffs e a política staging-first.
 
 **Missão do Squad 0:**
 > Produzir um pacote técnico-operacional validado, rastreável e altamente previsível para que o Squad 1 construa o OpenClow sem redescobrir ecossistema, reavaliar restrições críticas ou improvisar decisões arquiteturais e operacionais.
@@ -19,6 +19,8 @@ Seu foco é:
 - esclarecer o escopo exato do programa e seus limites
 - avaliar a viabilidade real das tecnologias candidatas
 - documentar arquitetura, runtime, interoperabilidade, observabilidade, segurança, custo e governança
+- abrir e governar o workspace isolado `product/` para que o build aconteça sem corromper a camada de preparação
+- preservar o papel da raiz deste repositório como base operacional atual da Doze para o trabalho com as empresas da 12
 - preparar um Squad 1 construtor com missão, backlog inicial e critérios claros
 
 ---
@@ -45,14 +47,14 @@ O Squad 0 está concluído quando **todos** os itens abaixo estiverem assinados:
 
 O Squad 0 **não deve**:
 
-- Escrever código de produto (UI, backend, runtime, banco de dados, migrations, Dockerfile de produto)
-- Fazer protótipos do OpenClow ou iniciar implementação do sistema final
+- Escrever código de produto fora de `product/` (UI, backend, runtime, banco de dados, migrations, Dockerfile de produto)
+- Iniciar implementação do sistema final sem ADRs, guardrails operacionais e backlog explícito
 - Assumir que adoção de comunidade equivale a viabilidade operacional sem evidência adicional
 - Tomar decisões arquiteturais sem criar um ADR correspondente em `decisions/`
 - Fazer deploy de qualquer serviço
 - Criar contas em serviços externos sem aprovação do Program Lead
 - Comprometer credenciais ou segredos em qualquer branch
-- Iniciar trabalho do Squad 1 antecipadamente
+- Tocar produção por default ou sem aprovação explícita documentada
 
 ---
 

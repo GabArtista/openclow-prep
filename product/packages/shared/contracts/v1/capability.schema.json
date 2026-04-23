@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclow.local/contracts/v1/capability.schema.json",
+  "title": "Capability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "slug",
+    "status",
+    "version",
+    "risk_level",
+    "allowed_tools"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["skill", "squad", "pipeline", "tool"]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspace_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "staging", "active", "retired"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

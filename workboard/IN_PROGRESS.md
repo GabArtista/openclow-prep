@@ -23,8 +23,10 @@
 
 ## Em Progresso Agora
 
-*Nenhuma task em progresso.*
+Nenhuma task ativa no momento.
 
-Realinhamento estrutural concluído em 2026-04-15. Pronto para a primeira task da Etapa 1 realinhada.
+Próxima captura do bastão:
 
-Para começar: pegar `TASK-001` do `workboard/BACKLOG.md`, criar issue no GitHub, criar branch `task/<issue>-program-scope`, declarar papéis ativos e atualizar este arquivo.
+- abrir issue para `TASK-023`
+- criar branch `task/<issue>-core-server-first`
+- continuar a partir de `handoffs/snapshots/2026-04-23-codex-product-bootstrap.md`

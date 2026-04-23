@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclow.local/contracts/v1/checkpoint.schema.json",
+  "title": "Checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "run_id",
+    "step_id",
+    "status",
+    "risk_level",
+    "reason",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "step_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "approved", "rejected"]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "on_reject": {
+      "type": "string"
+    },
+    "approval_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

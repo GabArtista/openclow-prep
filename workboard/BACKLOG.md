@@ -12,81 +12,56 @@
 
 ### P0 — Crítico (Caminho Crítico)
 
-### TASK-001 | P0 | M | Definir escopo exato do programa OpenClow
-- **Output:** `research/program-scope/mission-scope.md`
-- **Critério de aceite:** documento explicita objetivo do programa, não-objetivos, hipóteses, limites, sucesso/falha e perguntas que a Etapa 1 precisa responder para liberar o Squad 1
-- **Dependências:** nenhuma
+### TASK-023 | P0 | L | Implementar o core server-first do OpenClow em `product/`
+- **Output:** scaffold funcional em `product/apps/api`, `product/apps/dashboard`, `product/apps/worker` e pacotes base
+- **Critério de aceite:** o core mínimo consegue modelar capabilities, iniciar runs, registrar checkpoints e expor histórico sem quebrar a operação atual da Doze na raiz do repositório
+- **Dependências:** TASK-021, TASK-022
 
-### TASK-002 | P0 | M | Mapear restrições reais do ambiente e critérios de qualidade
-- **Output:** `research/program-scope/environment-constraints.md`, `research/architecture/quality-criteria.md`
-- **Critério de aceite:** restrições técnicas, operacionais, de budget, governança e segurança estão descritas com origem, impacto e severidade; critérios de qualidade são mensuráveis e úteis para avaliar candidatos
-- **Dependências:** TASK-001
+### TASK-024 | P0 | M | Integrar runtime local, filas e persistência base
+- **Output:** wiring inicial com `Ollama`, `Postgres`, `Redis` e `MinIO` em `product/`
+- **Critério de aceite:** tiers `fast` e `powerful`, run state, artifact persistence e retry/restart funcionam no ambiente de referência sem tocar produção por default
+- **Dependências:** TASK-023
 
-### TASK-003 | P0 | L | Estudo profundo do OpenClaw
-- **Output:** `research/candidate-assessments/openclaw-assessment.md`
-- **Critério de aceite:** avaliação cobre arquitetura, comunidade, ecossistema, adaptabilidade, durabilidade, segurança, custo, riscos e lacunas para o contexto OpenClow
-- **Dependências:** TASK-001, TASK-002
+### TASK-025 | P0 | L | Portar capacidades day-1 da Doze para o OpenClow
+- **Output:** capacidades equivalentes a `marketing-dozecrew` e `inteligencia-dozecrew`, mais integrações reais day-1
+- **Critério de aceite:** o produto reproduz os fluxos que hoje já sustentam o trabalho da Doze com as empresas da 12, mas com enforcement próprio e lifecycle `draft/staging/active`
+- **Dependências:** TASK-023, TASK-024
 
-### TASK-004 | P0 | L | Estudo profundo do Paperclip
-- **Output:** `research/candidate-assessments/paperclip-assessment.md`
-- **Critério de aceite:** avaliação cobre arquitetura, comunidade, ecossistema, adaptabilidade, durabilidade, segurança, custo, riscos e lacunas para o contexto OpenClow
-- **Dependências:** TASK-001, TASK-002
+### TASK-026 | P0 | M | Implementar registry, promotion flow e meta-squad do MVP
+- **Output:** lifecycle de capabilities, promotion/rollback e base do meta-squad
+- **Critério de aceite:** novas capabilities podem ser criadas e promovidas até `staging`, nunca autopublicadas, com aprovação humana e trilha auditável
+- **Dependências:** TASK-023, TASK-024, TASK-025
 
-### TASK-005 | P0 | M | Mapear ecossistema MCP e requisitos de interoperabilidade
-- **Output:** `research/ecosystem-fit/mcp-landscape.md`, `research/ecosystem-fit/mcp-interoperability-checklist.md`
-- **Critério de aceite:** landscape documenta componentes, padrões, riscos de interoperabilidade, agency boundaries e requisitos mínimos para o OpenClow operar com previsibilidade
-- **Dependências:** TASK-001, TASK-002
+### TASK-027 | P0 | M | Instrumentar observabilidade, segurança e rollback operacional
+- **Output:** baseline de logs, tracing, allowlist de tools, rollback e hardening de segredos
+- **Critério de aceite:** ações externas sem checkpoint falham, capabilities sem permissão não executam tools fora da allowlist e o sistema produz trilha operacional útil
+- **Dependências:** TASK-024, TASK-025, TASK-026
 
-### TASK-006 | P0 | M | Avaliar saúde upstream, comunidade e sinais reais de adoção
-- **Output:** `research/upstream-health/upstream-health-report.md`
-- **Critério de aceite:** relatório distingue popularidade de sustentabilidade; cobre mantenedores, releases, governança, issue velocity, integridade de comunidade e sinais práticos de adoção
-- **Dependências:** TASK-003, TASK-004, TASK-005
-
-### TASK-007 | P0 | L | Definir runtime durável, retomável e control plane alvo
-- **Output:** `research/runtime/durable-runtime-analysis.md`, `research/architecture/control-plane-options.md`
-- **Critério de aceite:** failure modes, recuperação, checkpointing, replay, filas, isolamento e control plane multiagente foram avaliados contra as restrições do programa
-- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
-
-### TASK-008 | P0 | M | Mapear observabilidade, evals e critérios de operação
-- **Output:** `research/observability/observability-and-evals.md`
-- **Critério de aceite:** documento define eventos, traces, logs, métricas, auditabilidade, feedback loops e estratégia de evals contínuos compatíveis com a arquitetura alvo
-- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
-
-### TASK-009 | P0 | M | Mapear segurança, supply chain e limites de agência
-- **Output:** `research/security/security-and-agency-boundaries.md`
-- **Critério de aceite:** documento cobre prompt injection, excessive agency, credenciais, isolamento, dependências, supply chain e blast radius com mitigação proposta
-- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
-
-### TASK-010 | P0 | M | Estimar custo previsível e throughput operacional
-- **Output:** `research/cost/cost-and-throughput-model.md`
-- **Critério de aceite:** budgets, envelopes de custo, throughput esperado, gargalos e guardrails operacionais estão descritos com premissas e incertezas explícitas
-- **Dependências:** TASK-007, TASK-008
+### TASK-028 | P0 | M | Rodar E2E staging-first e preparar validações controladas em produção
+- **Output:** suíte E2E em `product/tests/e2e` e runbook de homologação
+- **Critério de aceite:** marketing, inteligência, checkpoints, promotion e persistência passam em staging; qualquer validação em produção fica restrita a leitura/dry-run com aprovação explícita
+- **Dependências:** TASK-025, TASK-026, TASK-027
 
 ### P1 — Alta Prioridade
 
-### TASK-011 | P1 | M | Fazer horizon scan e calibrar a realidade da categoria técnica
-- **Output:** `research/horizon/category-reality.md`, `research/horizon/horizon-scan.md`
-- **Critério de aceite:** documento registra como a categoria amadureceu em 2026 e quais sinais mudam prioridades, critérios de qualidade ou arquitetura do programa
-- **Dependências:** TASK-003, TASK-004, TASK-005, TASK-006
-
-### TASK-012 | P1 | S | Ativar radar de cientistas, pesquisadores e laboratórios relevantes
-- **Output:** `research/frontier/frontier-radar.md`
-- **Critério de aceite:** radar lista grupos, labs, pesquisadores ou linhas aplicadas somente quando houver relevância plausível para o OpenClow e descreve impacto esperado
-- **Dependências:** TASK-011
-
 ### TASK-013 | P1 | L | Consolidar arquitetura alvo e baseline de ADRs
 - **Output:** `research/architecture/architecture-target.md`, ADRs em `decisions/`
-- **Critério de aceite:** arquitetura alvo é coerente com restrições, candidatos avaliados, runtime, observabilidade, segurança e custo; cada decisão major tem ADR ou decisão explícita de adiar
-- **Dependências:** TASK-007, TASK-008, TASK-009, TASK-010, TASK-011, TASK-012
+- **Critério de aceite:** arquitetura alvo é coerente com o benchmark operacional atual da Doze, runtime, observabilidade, segurança e custo; cada decisão major tem ADR ou decisão explícita de adiar
+- **Dependências:** TASK-023, TASK-024, TASK-025, TASK-026, TASK-027
+
+### TASK-020 | P1 | M | Definir registry de capacidades e meta-squad de auto-construção
+- **Output:** `research/architecture/capability-registry-and-meta-squad.md`
+- **Critério de aceite:** documento define como `skills`, `squads`, `pipelines` e `tools` são versionados, validados, promovidos, revertidos e evoluídos por um meta-squad com checkpoints humanos
+- **Dependências:** TASK-026
 
 ### TASK-014 | P1 | M | Definir formalmente o Squad 1 construtor
 - **Output:** `research/squad-1-package/squad-1-definition.md`
 - **Critério de aceite:** documento explicita missão, responsabilidades, papéis esperados, sequência inicial de execução, dependências e critérios de prontidão do Squad 1
-- **Dependências:** TASK-013
+- **Dependências:** TASK-013, TASK-020, TASK-028
 
 ### TASK-015 | P1 | M | Montar intake package e backlog inicial do Squad 1
-- **Output:** `squads/squad-1/INTAKE_PACKAGE.md`, atualização de `workboard/BACKLOG.md` com tasks do Squad 1
-- **Critério de aceite:** intake package está completo, sem seções pendentes, e o backlog inicial do Squad 1 reflete a arquitetura alvo e os guardrails operacionais
+- **Output:** `squads/squad-1/INTAKE_PACKAGE.md`, `research/squad-1-package/mvp-execution-plan.md`, atualização de `workboard/BACKLOG.md` com tasks do Squad 1
+- **Critério de aceite:** intake package está completo, sem seções pendentes, o backlog inicial do Squad 1 reflete a arquitetura alvo e os guardrails operacionais, e o MVP server-first está quebrado em fases executáveis
 - **Dependências:** TASK-014
 
 ### TASK-016 | P1 | S | Revisar critérios de saída, riscos residuais e readiness do handoff

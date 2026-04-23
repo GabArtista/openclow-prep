@@ -8,39 +8,42 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (Bootstrap Architect — Part 2 / Squad 0 Realignment)
-- **last-updated-at:** 2026-04-15 14:55 -03
+- **last-updated-by:** codex (product governance and bootstrap)
+- **last-updated-at:** 2026-04-23 20:50 -03
 - **last-read-by:** codex
-- **last-read-at:** 2026-04-15 14:55 -03
+- **last-read-at:** 2026-04-23 20:50 -03
 
 ---
 
 ## Tasks em Voo
 
-Nenhuma.
+1. Nenhuma task ativa no momento; `TASK-021 / TASK-022` foram concluídas na branch `task/2-product-monorepo-bootstrap`
+2. Próxima captura do bastão deve abrir `TASK-023` para iniciar o core server-first em `product/`
 
 ---
 
 ## Última Ação Completada
 
-Realinhamento estrutural do `openclow-prep` para refletir a missão real da Etapa 1 / Squad 0.
+Fechamento da governança do `product/`, aceite dos ADRs-base e bootstrap inicial do monorepo separado.
 
 **Mudanças concluídas nesta sessão:**
-- `MISSION.md` reescrito para focar viabilidade técnica, previsibilidade e pacote técnico-operacional
-- `squads/squad-0/ROLES.md` expandido com papéis especializados de upstream, ecossistema, runtime, custo, observabilidade, segurança, backlog e frontier radar
-- `workboard/BACKLOG.md` reorganizado para abandonar discovery genérico de produto e priorizar ecossistema, runtime, segurança, custo e preparação do Squad 1
-- `squads/squad-0/WORKPLAN.md`, `EXIT_CHECKLIST.md` e `squads/squad-1/INTAKE_PACKAGE.md` realinhados à nova missão
-- árvore `research/` e `prompts/squad-0/` preparada para as novas frentes de trabalho
+- `research/ecosystem-fit/opensquad-portability-matrix.md` criado para fechar a matriz de portabilidade do benchmark operacional atual da Doze
+- ADR-0001 a ADR-0005 aceitos como baseline de bootstrap
+- `decisions/ADR-0006-product-workspace-monorepo-boundary.md` criado para liberar implementação apenas em `product/`
+- `AGENTS.md`, `MISSION.md`, `README.md`, `context/POLICY.md`, `squads/squad-0/CHARTER.md`, `squads/squad-0/WORKPLAN.md` e `workboard/` atualizados para refletir a nova governança
+- `.github/workflows/validate-structure.yml` atualizado para validar a fronteira de código em `product/`
+- `product/` bootstrapado com layout inicial de apps, packages, infra, E2E e contratos públicos versionados
+- o papel da raiz do repositório como base operacional atual da Doze com as empresas da 12 foi incorporado à decisão e aos guardrails
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Iniciar `TASK-001` — Definir escopo exato do programa OpenClow
-2. Em seguida, executar `TASK-002` para consolidar restrições reais do ambiente e critérios de qualidade
-3. Só depois abrir as pesquisas profundas de OpenClaw, Paperclip e MCP com base nas restrições já fixadas
+1. Abrir issue para `TASK-023`
+2. Implementar o core server-first do OpenClow em `product/`
+3. Manter a raiz estável para não quebrar o modo atual de operação da Doze
 
-**Papéis recomendados para a próxima sessão:** `Research Lead / Research Librarian`, `Program Architect`, `Backlog Manager`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Backlog Manager`, `Durable Runtime Analyst`
 
 ---
 
@@ -52,22 +55,22 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-NENHUM.
+`handoffs/snapshots/2026-04-23-codex-product-bootstrap.md`
 
 ---
 
 ## Notas para o Próximo Agente
 
-Esta sessão corrigiu o direcionamento do Squad 0.
+O repositório agora tem uma regra operacional clara:
 
-**O que mudou no entendimento do programa:**
-- Squad 0 deixou de ser tratado como discovery clássico de produto
-- A Etapa 1 agora está explicitamente orientada a viabilização profunda, risco, evidência, arquitetura e preparação do Squad 1
-- Comunidade upstream, adaptabilidade, durabilidade, observabilidade, custo, segurança e frontier radar agora são frentes formais
+- a raiz continua sendo a base de trabalho atual da Doze com as empresas da 12
+- o build do OpenClow acontece somente em `product/`
+- o benchmark `mkt-ag-dozecrew/opensquad` foi assumido como referência operacional do day-1
+- os contratos públicos mínimos já existem e o próximo passo correto é implementá-los
 
 **O que fazer a seguir:**
-- Trabalhar em `TASK-001` e `TASK-002` antes de aprofundar qualquer candidato
-- Produzir os primeiros artefatos em `research/program-scope/`
-- Usar os prompts novos em `prompts/squad-0/` para dividir as frentes especializadas
+- abrir `TASK-023` e escolher a stack inicial do core server-first
+- ligar o runtime mínimo ao contrato já definido
+- começar a portabilidade dos squads de marketing e inteligência sem romper o fluxo operacional atual
 
-**Próximo agente recomendado:** um agente atuando como `Research Lead / Research Librarian` com suporte de `Program Architect`
+**Próximo agente recomendado:** `Program Architect` com apoio de `Durable Runtime Analyst`

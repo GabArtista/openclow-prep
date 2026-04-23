@@ -1,9 +1,9 @@
 # ENTRY_CHECKLIST.md — Checklist de Entrada do Squad 1
 
 > **Status:** Aguardando Squad 0 concluir
-> **Última atualização:** 2026-04-15
+> **Última atualização:** 2026-04-23
 
-O Squad 1 deve executar este checklist **antes do primeiro commit** no repositório de produto.
+O Squad 1 deve executar este checklist **antes do primeiro commit de implementação em `product/`**.
 
 ---
 
@@ -19,7 +19,7 @@ O Squad 1 deve executar este checklist **antes do primeiro commit** no repositó
 ## Checklist de Orientação (primeira sessão do Squad 1)
 
 ### Leitura obrigatória (nesta ordem)
-- [ ] `CLAUDE.md` — entender o contrato comportamental
+- [ ] `AGENTS.md` — entender o contrato operacional comum aos agentes
 - [ ] `MISSION.md` — entender o objetivo do programa
 - [ ] `squads/squad-1/INTAKE_PACKAGE.md` — ler completamente, de ponta a ponta
 - [ ] Todos os ADRs em `decisions/` — entender as decisões tomadas pelo Squad 0
