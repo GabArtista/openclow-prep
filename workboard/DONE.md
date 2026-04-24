@@ -37,6 +37,129 @@
   - atualização de `workboard/IN_PROGRESS.md` e `handoffs/ACTIVE.md`
 - **Notas:** O MVP ganhou trilha de auditoria persistida para capabilities, promotions, runs e checkpoints, mais endpoint `GET /v1/audit`. A auditoria foi smoke-testada com capability criada e promoção aprovada.
 
+### TASK-028 | Rodar E2E staging-first e preparar validações controladas em produção
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/ecosystem-fit/doze-marketing-content-workflows.md`
+  - `research/architecture/architecture-target.md`
+  - `research/runtime/durable-runtime-analysis.md`
+  - `research/observability/observability-and-evals.md`
+  - `research/security/security-and-agency-boundaries.md`
+  - `research/observability/staging-rollout-and-rollback-runbook.md`
+  - `research/cost/cost-and-throughput-model.md`
+  - `research/squad-1-package/squad-1-definition.md`
+  - `research/squad-1-package/e2e-contract-vs-surface.md`
+  - `squads/squad-1/INTAKE_PACKAGE.md`
+  - `squads/squad-0/EXIT_CHECKLIST.md`
+  - `decisions/ADR-0008-architecture-target.md`
+  - `decisions/ADR-0009-runtime-durability.md`
+  - `decisions/ADR-0010-observability-and-evals.md`
+  - `decisions/ADR-0011-security-and-agency-boundaries.md`
+  - `product/tests/e2e/README.md`
+  - `product/tests/e2e/SCENARIO_MATRIX.md`
+  - `product/tests/e2e/README-RUNBOOK.md`
+  - `product/tests/e2e/run.mjs`
+  - `product/packages/shared/contracts/v1/openclow-api.yaml`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/BACKLOG.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O contrato staging-first foi formalizado, mapeado contra a superfície real da API/runtime e validado com harness executável. Os cenários de marketing, inteligência, checkpoints, promotion/rollback e restart recovery passaram localmente.
+
+### TASK-029 | Fechar o contrato de identidade e autorização do produto
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/architecture/auth-and-identity-model.md`
+  - `decisions/ADR-0012-auth-and-identity-model.md`
+  - `product/packages/shared/contracts/v1/openclow-api.yaml`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O produto ficou com um modelo mínimo de identidade/autorização que diferencia human, worker, orchestrator, meta-squad e system actor, usando os campos de request já existentes como base de auditoria no MVP.
+
+### TASK-030 | Integrar persistência transacional e filas duráveis do produto
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/runtime/transactional-persistence-and-durable-queue.md`
+  - `decisions/ADR-0013-storage-and-durable-queue.md`
+  - `product/packages/storage/README.md`
+  - `product/packages/storage/src/service.js`
+  - `product/packages/runtime/src/persistence.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/apps/api/src/state.js`
+  - `product/apps/api/src/server.js`
+  - `product/package.json`
+  - `product/tests/e2e/run.mjs`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O MVP agora persiste estado transacional com escrita atômica, queue separada e índices de artefatos. O harness E2E validou marketing, inteligência, promotion/rollback, restart recovery e a trilha durável em disco.
+
+### TASK-016 | Revisar critérios de saída, riscos residuais e readiness do handoff
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `squads/squad-0/EXIT_CHECKLIST.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-028-complete.md`
+- **Notas:** O checklist de saída ficou verificável, os riscos residuais ficaram explicitados e a recomendação de handoff passou a apontar claramente a próxima ação.
+
+### TASK-015 | Montar intake package e backlog inicial do Squad 1
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `squads/squad-1/INTAKE_PACKAGE.md`
+  - `research/squad-1-package/mvp-execution-plan.md`
+  - `research/squad-1-package/squad-1-definition.md`
+  - `research/squad-1-package/e2e-contract-vs-surface.md`
+  - `workboard/BACKLOG.md`
+- **Notas:** O intake package passou a consolidar a arquitetura alvo, os guardrails operacionais e o recorte do MVP server-first em fases executáveis.
+
+### TASK-014 | Definir formalmente o Squad 1 construtor
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/squad-1-package/squad-1-definition.md`
+  - `research/architecture/user-experience-and-meta-squad.md`
+  - `research/architecture/capability-registry-and-meta-squad.md`
+- **Notas:** O Squad 1 ficou definido como o time construtor do produto em `product/`, com critérios claros de prontidão, sequência inicial de execução e fronteiras operacionais.
+
+### TASK-013 | Consolidar arquitetura alvo e baseline de ADRs
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/architecture/architecture-target.md`
+  - `decisions/ADR-0008-architecture-target.md`
+  - `decisions/ADR-0009-runtime-durability.md`
+  - `decisions/ADR-0010-observability-and-evals.md`
+  - `decisions/ADR-0011-security-and-agency-boundaries.md`
+- **Notas:** A arquitetura-alvo foi consolidada em torno de um control plane server-first, com runtime persistente, observabilidade, segurança e staging-first como baseline.
+
+### TASK-020 | Definir registry de capacidades e meta-squad de auto-construção
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/architecture/capability-registry-and-meta-squad.md`
+  - `decisions/ADR-0007-registry-promotion-approval-flow.md`
+  - `decisions/ADR-0004-capability-registry-and-meta-squad.md`
+- **Notas:** O registry ficou definido como lifecycle manager de capabilities com promoção, rollback e aprovação humana; o meta-squad passou a operar como capability interna sem autopublicação.
+
 ### TASK-026 | Implementar registry, promotion flow e meta-squad do MVP
 - **Concluída em:** 2026-04-24
 - **Por:** codex

@@ -21,6 +21,7 @@ export function createInitialState() {
     approvals: [],
     promotions: [],
     audit_events: [],
+    artifacts: [],
     queue: [],
     runtime: {
       ollama: {
