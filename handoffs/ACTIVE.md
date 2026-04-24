@@ -8,35 +8,43 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** claude-code (Bootstrap Architect)
-- **last-updated-at:** 2026-04-14 00:00 UTC
-- **last-read-by:** —
-- **last-read-at:** —
+- **last-updated-by:** codex (TASK-025 concluída / day-1 capabilities)
+- **last-updated-at:** 2026-04-24 10:52 -03
+- **last-read-by:** codex
+- **last-read-at:** 2026-04-24 10:52 -03
 
 ---
 
 ## Tasks em Voo
 
-Nenhuma. Bootstrap recém concluído.
+1. Nenhuma task em voo.
+2. O próximo passo é abrir `TASK-026` para registry/promotion flow ou continuar a camada de runtime persistente, sem tocar o modo operacional atual da Doze.
 
 ---
 
 ## Última Ação Completada
 
-Bootstrap completo do repositório `openclow-prep`.
-Todos os 31 arquivos de fundação foram criados: estrutura de diretórios, CLAUDE.md, MISSION.md, templates, squads, workboard, handoffs, GitHub workflow e CI.
+Conclusão de `TASK-025` com capacidades day-1 da Doze portadas para o runtime persistente do `product/`.
+
+**Mudanças concluídas nesta sessão:**
+- issue `#8` aberta para `TASK-025`
+- branch `task/8-day1-capabilities` criada
+- `product/packages/tools/README.md` criado para documentar as bindings day-1
+- `product/packages/tools/src/runner.js` criado com artefatos estruturados para `ga4`, `woocommerce`, `meta-insights`, `hotjar`, `apify`, `canva`, `instagram-publisher` e `blotato`
+- `product/packages/shared/src/seeds.js` atualizado com as capacidades e bindings das squads `marketing-dozecrew` e `inteligencia-dozecrew`
+- `product/packages/runtime/src/service.js` atualizado para executar tool bindings, respeitar allowlist e adiar `blotato` como opcional
+- `product/package.json` atualizado para incluir o novo módulo de tools no check
+- smoke test executado: runs frescos de `marketing-dozecrew` e `inteligencia-dozecrew` produziram artefatos estruturados, checkpoints foram aprovados e `blotato` apareceu como `optional_tool_skipped`
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Ler `CLAUDE.md` para entender o contrato comportamental
-2. Ler `MISSION.md` para entender o objetivo do Squad 0
-3. Acessar `workboard/BACKLOG.md` e pegar a primeira task P0 disponível
-4. Criar uma branch `task/<numero-issue>-<slug>` e abrir uma issue no GitHub para a task escolhida
-5. Atualizar este arquivo com o ID do agente e a task sendo trabalhada
+1. Implementar `TASK-026` para registry/promotion flow e estados `draft/staging/active/retired`
+2. Manter a raiz estável para não quebrar o modo atual de operação da Doze
+3. Só depois avançar para integrações externas reais e hardening de produção
 
-**Task P0 recomendada para começar:** `TASK-001` — Definir visão do produto OpenClow
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Registry Analyst`, `Security and Agency Boundaries Analyst`
 
 ---
 
@@ -48,31 +56,22 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-NENHUM. (Bootstrap não requer snapshot — o repositório é o snapshot.)
+`handoffs/snapshots/2026-04-24-codex-day1-capabilities.md`
 
 ---
 
 ## Notas para o Próximo Agente
 
-Este repositório foi bootstrapado do zero em 2026-04-14.
+O repositório agora tem duas camadas ativas e coerentes:
 
-**O que foi criado:**
-- Estrutura completa de diretórios
-- CLAUDE.md (contrato comportamental)
-- MISSION.md (objetivo do Squad 0)
-- context/POLICY.md (política de acesso)
-- handoffs/PROTOCOL.md (protocolo de handoff)
-- workboard/BACKLOG.md (14 tasks iniciais)
-- squads/squad-0/ (charter, roles, workplan, exit checklist)
-- squads/squad-1/ (intake package, entry checklist)
-- templates/ (task, ADR, runbook, evidence, rollback)
-- .github/ (issue templates, PR template, labels, CI)
+- a raiz continua sendo a base de trabalho atual da Doze com as empresas da 12
+- `product/` já possui um core server-first executável para desenvolvimento local
+- o benchmark `mkt-ag-dozecrew/opensquad` já influencia seeds, fluxos e checkpoints do workspace `doze`
+- o próximo salto não é mais scaffold, e sim integração com runtime e persistência reais
 
-**O que ainda não existe:**
-- Nenhum ADR em `decisions/` (o primeiro será o bootstrap-architecture ADR)
-- Nenhum arquivo de pesquisa em `research/`
-- Nenhum item completado no Squad 0
+**O que fazer a seguir:**
+- portar as capacidades day-1 da Doze para o runtime persistente
+- adicionar tool bindings e artefatos por integração
+- deixar o caminho pronto para o registry e promotion flow da próxima task
 
-**Primeira decisão a tomar:** Qual é a visão do produto OpenClow? (TASK-001 no backlog)
-
-Boa sorte, Squad 0.
+**Próximo agente recomendado:** `Durable Runtime Analyst` com apoio de `Program Architect`

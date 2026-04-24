@@ -10,6 +10,7 @@
 ```
 ### TASK-XXX | [título]
 - **Owner:** [agent-id]
+- **Papéis ativos:** [Role A | Role B]
 - **Iniciada em:** YYYY-MM-DD
 - **Branch:** task/<numero-issue>-<slug>
 - **Issue:** #<numero>
@@ -22,8 +23,4 @@
 
 ## Em Progresso Agora
 
-*Nenhuma task em progresso.*
-
-Bootstrap completo em 2026-04-14. Pronto para o Squad 0 iniciar.
-
-Para começar: pegar `TASK-001` do `workboard/BACKLOG.md`, criar issue no GitHub, criar branch `task/<issue>-product-vision`, e atualizar este arquivo.
+Nenhuma task em andamento.

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclow.local/contracts/v1/run.schema.json",
+  "title": "Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "squad_id",
+    "pipeline_id",
+    "status",
+    "requested_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "squad_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "pipeline_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "waiting_checkpoint",
+        "succeeded",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_step_id": {
+      "type": "string"
+    }
+  }
+}

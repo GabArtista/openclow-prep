@@ -37,13 +37,13 @@ jobs:
           fi
           echo "✓ CLAUDE.md exists"
 
-  check-no-product-code:
-    name: Check no product code
+  check-product-code-boundary:
+    name: Check product code boundary
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Scan for product code extensions
+      - name: Scan for product code extensions outside product/
         run: |
           FORBIDDEN_EXTENSIONS="ts tsx js jsx mjs cjs py go rs java rb php cs swift kt sql graphql"
           FOUND=0
@@ -52,10 +52,11 @@ jobs:
             FILES=$(find . \
               -not -path './.git/*' \
               -not -path './.github/workflows/*' \
+              -not -path './product/*' \
               -name "*.${EXT}" 2>/dev/null)
 
             if [ -n "$FILES" ]; then
-              echo "::error::Product code found (*.${EXT}):"
+              echo "::error::Product code found outside product/ (*.${EXT}):"
               echo "$FILES"
               FOUND=1
             fi
@@ -63,24 +64,25 @@ jobs:
 
           if [ $FOUND -eq 1 ]; then
             echo ""
-            echo "::error::Squad 0 must not contain product code. See CLAUDE.md Section 6."
+            echo "::error::Product code must stay isolated in product/. See AGENTS.md Section 6."
             exit 1
           fi
 
-          echo "✓ No product code found"
+          echo "✓ Product code boundary preserved"
 
-      - name: Check for Dockerfile (product)
+      - name: Check for Dockerfiles outside product/
         run: |
           DOCKERFILES=$(find . \
             -not -path './.git/*' \
-            -name "Dockerfile" -o -name "docker-compose.yml" -o -name "docker-compose.yaml" 2>/dev/null | \
+            -not -path './product/*' \
+            \( -name "Dockerfile" -o -name "docker-compose.yml" -o -name "docker-compose.yaml" \) 2>/dev/null | \
             grep -v ".git" || true)
 
           if [ -n "$DOCKERFILES" ]; then
-            echo "::warning::Dockerfile or docker-compose found. Verify these are not product code:"
+            echo "::warning::Dockerfile or docker-compose found outside product/:"
             echo "$DOCKERFILES"
           else
-            echo "✓ No Dockerfiles found"
+            echo "✓ No Dockerfiles found outside product/"
           fi
 
   check-no-secrets:

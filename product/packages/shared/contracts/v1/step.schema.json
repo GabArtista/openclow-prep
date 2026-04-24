@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclow.local/contracts/v1/step.schema.json",
+  "title": "Step",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "executor"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["prompt", "tool", "subagent", "checkpoint"]
+    },
+    "executor": {
+      "type": "string",
+      "enum": ["inline", "subagent", "tool-runner", "checkpoint"]
+    },
+    "uses_capability_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "on_success": {
+      "type": "string"
+    },
+    "on_reject": {
+      "type": "string"
+    },
+    "requires_checkpoint": {
+      "type": "boolean"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

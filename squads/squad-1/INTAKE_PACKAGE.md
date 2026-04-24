@@ -1,8 +1,8 @@
 # INTAKE_PACKAGE.md — Pacote de Intake do Squad 1
 
 > **Status:** INCOMPLETO — Squad 0 em progresso
-> **Versão:** 0.1 (shell criado pelo Bootstrap Architect)
-> **Última atualização:** 2026-04-14
+> **Versão:** 0.2
+> **Última atualização:** 2026-04-15
 > **Completado por:** Squad 0
 
 Este documento é a entrega central do Squad 0 para o Squad 1.
@@ -14,143 +14,183 @@ O Squad 1 **não deve iniciar** até que este documento esteja com status `COMPL
 
 | Seção | Status | Última atualização | Por |
 |---|---|---|---|
-| 1. Visão do Produto | PENDENTE | — | — |
-| 2. Domínio e Usuários | PENDENTE | — | — |
-| 3. Restrições e Riscos | PENDENTE | — | — |
-| 4. NFRs | PENDENTE | — | — |
-| 5. Decisões Tecnológicas | PENDENTE | — | — |
-| 6. Arquitetura | PENDENTE | — | — |
-| 7. Modelo de Dados | PENDENTE | — | — |
-| 8. Integrações | PENDENTE | — | — |
+| 1. Escopo do Programa | PENDENTE | — | — |
+| 2. Restrições e Critérios de Qualidade | PENDENTE | — | — |
+| 3. Tecnologias Candidatas | PENDENTE | — | — |
+| 4. Saúde Upstream e Adaptabilidade | PENDENTE | — | — |
+| 5. Arquitetura Alvo e ADRs | PENDENTE | — | — |
+| 6. Runtime, Observabilidade e Evals | PENDENTE | — | — |
+| 7. Segurança, Governança e Custo | PENDENTE | — | — |
+| 8. Horizon Scan, Frontier Radar e Riscos | PENDENTE | — | — |
 | 9. Questões em Aberto | PENDENTE | — | — |
-| 10. Backlog Inicial | PENDENTE | — | — |
-| 11. Glossário | PENDENTE | — | — |
+| 10. Missão e Backlog Inicial do Squad 1 | PENDENTE | — | — |
+| 11. Glossário e Índice de Evidências | PENDENTE | — | — |
 
 ---
 
-## 1. Visão do Produto
+## 1. Escopo do Programa
 
-> *Preencher com output de `research/product-vision.md`*
+> Consolidar a partir de `research/program-scope/mission-scope.md`
 
-**Problema que resolve:**
-{{PLACEHOLDER}}
+**Problema técnico-operacional que o programa precisa resolver:**
+_Pendente. Consolidar a partir de `research/program-scope/mission-scope.md`._
 
-**Para quem:**
-{{PLACEHOLDER}}
+**Objetivo da Etapa 2 / Squad 1:**
+_Pendente. Consolidar a partir de `research/squad-1-package/squad-1-definition.md`._
 
-**O que diferencia:**
-{{PLACEHOLDER}}
+**Não-objetivos explícitos nesta fase:**
+_Pendente. Consolidar a partir de `research/program-scope/mission-scope.md`._
 
-**O que o produto NÃO faz (fora de escopo explícito):**
-{{PLACEHOLDER}}
-
-**Statement de visão em uma frase:**
-{{PLACEHOLDER}}
+**Limites e premissas de trabalho:**
+_Pendente. Consolidar a partir de `research/program-scope/mission-scope.md`._
 
 ---
 
-## 2. Domínio e Usuários
+## 2. Restrições e Critérios de Qualidade
 
-> *Preencher com output de `research/domain-research.md` e `research/competitive-analysis.md`*
+> Consolidar a partir de `research/program-scope/environment-constraints.md` e `research/architecture/quality-criteria.md`
 
-**Segmentos de usuário:**
-{{PLACEHOLDER}}
+**Restrições duras do ambiente:**
+_Pendente. Consolidar a partir de `research/program-scope/environment-constraints.md`._
 
-**Competidores principais:**
-{{PLACEHOLDER}}
+**Critérios de qualidade obrigatórios:**
+_Pendente. Consolidar a partir de `research/architecture/quality-criteria.md`._
 
-**Posicionamento no mercado:**
-{{PLACEHOLDER}}
-
----
-
-## 3. Restrições e Riscos
-
-> *Preencher com output de `research/constraints.md`*
-
-**Restrições duras (não negociáveis):**
-{{PLACEHOLDER}}
-
-**Registro de riscos:**
-> Ver `research/` para risk register detalhado
-
-{{PLACEHOLDER}}
+**Riscos estruturais já conhecidos:**
+_Pendente. Consolidar a partir do registro de riscos da Etapa 1._
 
 ---
 
-## 4. Requisitos Não-Funcionais (NFRs)
+## 3. Tecnologias Candidatas
 
-> *Preencher com output de `research/nfr.md`*
+> Consolidar a partir de `research/candidate-assessments/`
 
-| NFR | Categoria | Threshold | Fonte |
-|---|---|---|---|
-| {{PLACEHOLDER}} | {{PLACEHOLDER}} | {{PLACEHOLDER}} | {{PLACEHOLDER}} |
+**OpenClaw:**
+_Pendente. Consolidar a partir de `research/candidate-assessments/openclaw-assessment.md`._
 
----
+**Paperclip:**
+_Pendente. Consolidar a partir de `research/candidate-assessments/paperclip-assessment.md`._
 
-## 5. Decisões Tecnológicas
+**MCP e componentes adjacentes:**
+_Pendente. Consolidar a partir de `research/ecosystem-fit/`._
 
-> *Links para ADRs em `decisions/`*
-
-| Decisão | Status | ADR |
-|---|---|---|
-| {{PLACEHOLDER}} | Aceito | decisions/ADR-XXXX.md |
+**Alternativas descartadas ou secundárias:**
+_Pendente. Consolidar quando a trilha de candidatos estiver madura._
 
 ---
 
-## 6. Arquitetura de Alto Nível
+## 4. Saúde Upstream e Adaptabilidade
 
-> *Preencher com output de `research/architecture-overview.md`*
+> Consolidar a partir de `research/upstream-health/` e `research/ecosystem-fit/`
 
-**Componentes principais:**
-{{PLACEHOLDER}}
+**Saúde das comunidades upstream:**
+_Pendente. Consolidar a partir de `research/upstream-health/upstream-health-report.md`._
 
-**Fluxos de dados principais:**
-{{PLACEHOLDER}}
+**Sinais reais de adoção:**
+_Pendente. Consolidar a partir de `research/upstream-health/upstream-health-report.md`._
 
-**Padrões arquiteturais adotados:**
-{{PLACEHOLDER}}
+**Gaps de adaptação ao contexto OpenClow:**
+_Pendente. Consolidar a partir de `research/ecosystem-fit/`._
 
----
-
-## 7. Modelo de Dados (Conceitual)
-
-> *Preencher com output de `research/data-model.md`*
-> Nota: este é o modelo conceitual, não implementação SQL/ORM
-
-{{PLACEHOLDER}}
+**Plano de mitigação para gaps críticos:**
+_Pendente. Consolidar a partir de `research/ecosystem-fit/` e ADRs._
 
 ---
 
-## 8. Integrações e Dependências Externas
+## 5. Arquitetura Alvo e ADRs
 
-> *Preencher com output de `research/integrations.md`*
+> Consolidar a partir de `research/architecture/` e `decisions/`
 
-| Serviço/Sistema | Propósito | Risco | Fallback |
-|---|---|---|---|
-| {{PLACEHOLDER}} | {{PLACEHOLDER}} | {{PLACEHOLDER}} | {{PLACEHOLDER}} |
+**Arquitetura alvo:**
+_Pendente. Consolidar a partir de `research/architecture/architecture-target.md`._
+
+**Fronteiras do sistema e responsabilidades principais:**
+_Pendente. Consolidar a partir de `research/architecture/architecture-target.md`._
+
+**ADRs obrigatórios para leitura do Squad 1:**
+_Pendente. Consolidar quando a baseline de ADRs existir._
+
+---
+
+## 6. Runtime, Observabilidade e Evals
+
+> Consolidar a partir de `research/runtime/` e `research/observability/`
+
+**Estratégia de runtime durável e retomável:**
+_Pendente. Consolidar a partir de `research/runtime/durable-runtime-analysis.md`._
+
+**Control plane multiagente e interoperabilidade:**
+_Pendente. Consolidar a partir de `research/runtime/` e `research/ecosystem-fit/`._
+
+**Instrumentação, tracing, logs e métricas:**
+_Pendente. Consolidar a partir de `research/observability/observability-and-evals.md`._
+
+**Estratégia de evals e validação contínua:**
+_Pendente. Consolidar a partir de `research/observability/observability-and-evals.md`._
+
+---
+
+## 7. Segurança, Governança e Custo
+
+> Consolidar a partir de `research/security/` e `research/cost/`
+
+**Limites de agência e controles de segurança:**
+_Pendente. Consolidar a partir de `research/security/security-and-agency-boundaries.md`._
+
+**Riscos de supply chain e credenciais:**
+_Pendente. Consolidar a partir de `research/security/security-and-agency-boundaries.md`._
+
+**Guardrails de custo e throughput:**
+_Pendente. Consolidar a partir de `research/cost/cost-and-throughput-model.md`._
+
+**Políticas de governança operacional:**
+_Pendente. Consolidar a partir de ADRs e das trilhas de operação._
+
+---
+
+## 8. Horizon Scan, Frontier Radar e Riscos
+
+> Consolidar a partir de `research/horizon/`, `research/frontier/` e registros de risco
+
+**Sinais de mercado técnico/categoria:**
+_Pendente. Consolidar a partir de `research/horizon/category-reality.md` e `research/horizon/horizon-scan.md`._
+
+**Pesquisadores, laboratórios ou linhas emergentes relevantes:**
+_Pendente. Consolidar a partir de `research/frontier/frontier-radar.md` quando aplicável._
+
+**Riscos residuais e incertezas aceitas:**
+_Pendente. Consolidar a partir do registro de riscos e decisões da Etapa 1._
 
 ---
 
 ## 9. Questões em Aberto para o Squad 1
 
-> Coisas que o Squad 0 não conseguiu resolver; o Squad 1 deve decidir.
+> Coisas que o Squad 0 não conseguiu resolver; o Squad 1 deve decidir ou validar.
 
-{{PLACEHOLDER}}
-
----
-
-## 10. Backlog Inicial Recomendado para o Squad 1
-
-> *Preencher com output de TASK-011*
-> Ver `workboard/BACKLOG.md` para tasks com label `squad-1`
-
-{{PLACEHOLDER}}
+_Pendente. Registrar aqui somente o que o Squad 0 não resolveu ou decidiu adiar._
 
 ---
 
-## 11. Glossário
+## 10. Missão e Backlog Inicial do Squad 1
 
-> *Preencher com output de `research/glossary.md`*
+> Consolidar a partir de `research/squad-1-package/squad-1-definition.md` e do backlog
 
-{{PLACEHOLDER}}
+**Missão do Squad 1:**
+_Pendente. Consolidar a partir de `research/squad-1-package/squad-1-definition.md`._
+
+**Papéis recomendados:**
+_Pendente. Consolidar a partir de `research/squad-1-package/squad-1-definition.md`._
+
+**Sequência inicial de trabalho:**
+_Pendente. Consolidar a partir de `research/squad-1-package/squad-1-definition.md`._
+
+**Backlog inicial recomendado:**
+_Pendente. Consolidar a partir do backlog gerado em TASK-015._
+
+---
+
+## 11. Glossário e Índice de Evidências
+
+> Consolidar a partir de `research/README.md` e artefatos associados
+
+_Pendente. Consolidar glossário e índice de evidências ao final da Etapa 1._

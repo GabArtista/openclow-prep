@@ -12,6 +12,8 @@ Este documento define quais sistemas externos os agentes IA podem usar, como pod
 
 Todo agente deve ler este documento antes de acessar qualquer sistema externo.
 
+A raiz deste repositório também é uma base operacional em uso pela Doze no trabalho com as empresas da 12. Mudanças estruturais precisam preservar essa operação e isolar o build do OpenClow em `product/`.
+
 ---
 
 ## 1. GitHub
@@ -58,11 +60,13 @@ O Obsidian pode ser usado como ferramenta de rascunho e curadoria pessoal pelo P
 - Ler posts de blog técnicos públicos
 - Ler benchmarks e relatórios de performance públicos
 - Consultar repositórios open-source públicos para referência
+- Executar integrações do OpenClow a partir de `product/` apenas em `dry-run`, sandbox ou staging quando esse modo existir e estiver documentado
 
 ### Proibido
 - Criar contas em serviços externos
 - Contratar ou assinar qualquer serviço
-- Fazer POST para APIs externas (exceto GitHub, conforme seção 1)
+- Fazer POST para APIs externas fora de `product/` ou sem staging/dry-run/checkpoint explícito
+- Usar endpoints ou credenciais de produção por default
 - Fazer scraping de sites que proíbem isso nos seus `robots.txt` ou ToS
 - Compartilhar qualquer dado do repositório com serviços externos não autorizados
 
@@ -87,13 +91,18 @@ O repositório pode ser operado localmente (Linux, macOS) ou em ambiente CI (Git
 - Operações git de escrita dentro das regras de branch (`git add`, `git commit`, `git push` para branches de trabalho)
 - Leitura de arquivos do repositório
 - Criação e edição de arquivos do repositório
+- Criação, execução local e teste de código do OpenClow somente dentro de `product/`
+- Builds e testes locais do `product/` desde que não criem serviços externos nem acionem produção por default
 
 ### Proibido para agentes locais
 - Instalar pacotes globais no sistema (`npm install -g`, `pip install --user`, `apt install`)
 - Modificar configurações do sistema operacional
 - Criar processos em background sem declaração explícita
 - Acessar arquivos fora do diretório do repositório
-- Executar código de produto em qualquer ambiente
+- Executar código de produto fora de `product/`
+- Rodar testes ou integrações contra produção sem aprovação explícita documentada
+- Fazer chamadas destrutivas a sistemas externos sem checkpoint humano
+- Quebrar ou sobrescrever o fluxo operacional atual da Doze na raiz do repositório sem ADR, workboard e migração explícita
 
 ### Ambiente CI (GitHub Actions)
 - Apenas os jobs definidos em `.github/workflows/validate-structure.yml` são autorizados

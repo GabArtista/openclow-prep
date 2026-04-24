@@ -8,94 +8,64 @@
 
 ---
 
-## P0 — Crítico (Caminho Crítico)
+## Etapa 1 — Squad 0
 
-### TASK-001 | P0 | S | Definir visão do produto OpenClow
-- **Output:** `research/product-vision.md`
-- **Critério de aceite:** A visão do produto pode ser lida pelo Squad 1 sem nenhum contexto adicional. Inclui: qual problema resolve, para quem, o que diferencia, e o que o produto NÃO faz.
+### P0 — Crítico (Caminho Crítico)
+
+### TASK-024 | P0 | M | Integrar runtime local, filas e persistência base
+- **Output:** wiring inicial com `Ollama`, `Postgres`, `Redis` e `MinIO` em `product/`
+- **Critério de aceite:** tiers `fast` e `powerful`, run state, artifact persistence e retry/restart funcionam no ambiente de referência sem tocar produção por default
 - **Dependências:** nenhuma
-- **Template a usar:** `templates/EVIDENCE.md` para evidências coletadas
 
-### TASK-002 | P0 | M | Pesquisa de domínio e segmentos de usuário
-- **Output:** `research/domain-research.md`, `research/competitive-analysis.md`
-- **Critério de aceite:** mínimo 3 competidores analisados (pontos fortes, fracos, posicionamento), segmentos de usuário definidos com características, tamanho de mercado estimado com fonte
-- **Dependências:** TASK-001 (visão do produto)
-- **Template a usar:** `templates/EVIDENCE.md` para cada evidência
+### TASK-025 | P0 | L | Portar capacidades day-1 da Doze para o OpenClow
+- **Output:** capacidades equivalentes a `marketing-dozecrew` e `inteligencia-dozecrew`, mais integrações reais day-1
+- **Critério de aceite:** o produto reproduz os fluxos que hoje já sustentam o trabalho da Doze com as empresas da 12, mas com enforcement próprio e lifecycle `draft/staging/active`
+- **Dependências:** TASK-024
 
-### TASK-003 | P0 | S | Mapear restrições duras do programa
-- **Output:** `research/constraints.md`
-- **Critério de aceite:** cada restrição tem: origem (legal/compliance/técnica/budget), enunciado claro, implicação para a arquitetura
-- **Dependências:** nenhuma (pode ser feita em paralelo com TASK-001)
-- **Template a usar:** livre, mas estruturado
+### TASK-026 | P0 | M | Implementar registry, promotion flow e meta-squad do MVP
+- **Output:** lifecycle de capabilities, promotion/rollback e base do meta-squad
+- **Critério de aceite:** novas capabilities podem ser criadas e promovidas até `staging`, nunca autopublicadas, com aprovação humana e trilha auditável
+- **Dependências:** TASK-024, TASK-025
 
-### TASK-004 | P0 | M | Definir requisitos não-funcionais (NFRs)
-- **Output:** `research/nfr.md`
-- **Critério de aceite:** cada NFR é mensurável (tem número ou threshold), categorizado (performance, disponibilidade, segurança, escalabilidade, compliance), e tem fonte/justificativa
-- **Dependências:** TASK-001, TASK-003
+### TASK-027 | P0 | M | Instrumentar observabilidade, segurança e rollback operacional
+- **Output:** baseline de logs, tracing, allowlist de tools, rollback e hardening de segredos
+- **Critério de aceite:** ações externas sem checkpoint falham, capabilities sem permissão não executam tools fora da allowlist e o sistema produz trilha operacional útil
+- **Dependências:** TASK-024, TASK-025, TASK-026
 
----
+### TASK-028 | P0 | M | Rodar E2E staging-first e preparar validações controladas em produção
+- **Output:** suíte E2E em `product/tests/e2e` e runbook de homologação
+- **Critério de aceite:** marketing, inteligência, checkpoints, promotion e persistência passam em staging; qualquer validação em produção fica restrita a leitura/dry-run com aprovação explícita
+- **Dependências:** TASK-025, TASK-026, TASK-027
 
-## P1 — Alta Prioridade
+### P1 — Alta Prioridade
 
-### TASK-005 | P1 | L | Avaliação de stack tecnológico
-- **Output:** `research/tech-evaluation.md` + ADRs para cada decisão major em `decisions/`
-- **Critério de aceite:** frontend, backend, banco de dados, e infra avaliados; cada escolha major tem um ADR com alternativas consideradas
-- **Dependências:** TASK-003, TASK-004
-- **Template a usar:** `templates/ADR.md` para cada decisão
+### TASK-013 | P1 | L | Consolidar arquitetura alvo e baseline de ADRs
+- **Output:** `research/architecture/architecture-target.md`, ADRs em `decisions/`
+- **Critério de aceite:** arquitetura alvo é coerente com o benchmark operacional atual da Doze, runtime, observabilidade, segurança e custo; cada decisão major tem ADR ou decisão explícita de adiar
+- **Dependências:** TASK-023, TASK-024, TASK-025, TASK-026, TASK-027
 
-### TASK-006 | P1 | L | Proposta de arquitetura de alto nível
-- **Output:** `research/architecture-overview.md` + ADRs para padrões arquiteturais
-- **Critério de aceite:** a arquitetura pode ser desenhada como diagrama de caixas e setas somente lendo o texto; todos os componentes e suas responsabilidades estão descritos; os fluxos de dados principais estão documentados
-- **Dependências:** TASK-004, TASK-005
-- **Template a usar:** `templates/ADR.md` para padrões arquiteturais
+### TASK-020 | P1 | M | Definir registry de capacidades e meta-squad de auto-construção
+- **Output:** `research/architecture/capability-registry-and-meta-squad.md`
+- **Critério de aceite:** documento define como `skills`, `squads`, `pipelines` e `tools` são versionados, validados, promovidos, revertidos e evoluídos por um meta-squad com checkpoints humanos
+- **Dependências:** TASK-026
 
-### TASK-007 | P1 | M | Proposta de modelo de dados
-- **Output:** `research/data-model.md`
-- **Critério de aceite:** todas as entidades do produto têm representação no modelo; relacionamentos documentados; não é código SQL/ORM, é uma proposta conceitual em markdown
-- **Dependências:** TASK-001, TASK-006
-- **Aviso:** sem código SQL ou de migração
+### TASK-014 | P1 | M | Definir formalmente o Squad 1 construtor
+- **Output:** `research/squad-1-package/squad-1-definition.md`
+- **Critério de aceite:** documento explicita missão, responsabilidades, papéis esperados, sequência inicial de execução, dependências e critérios de prontidão do Squad 1
+- **Dependências:** TASK-013, TASK-020, TASK-028
 
-### TASK-008 | P1 | M | Mapeamento de integrações e dependências externas
-- **Output:** `research/integrations.md`
-- **Critério de aceite:** cada integração tem: nome do serviço, propósito, nível de risco, estratégia de fallback, dependência crítica ou não
-- **Dependências:** TASK-006
+### TASK-015 | P1 | M | Montar intake package e backlog inicial do Squad 1
+- **Output:** `squads/squad-1/INTAKE_PACKAGE.md`, `research/squad-1-package/mvp-execution-plan.md`, atualização de `workboard/BACKLOG.md` com tasks do Squad 1
+- **Critério de aceite:** intake package está completo, sem seções pendentes, o backlog inicial do Squad 1 reflete a arquitetura alvo e os guardrails operacionais, e o MVP server-first está quebrado em fases executáveis
+- **Dependências:** TASK-014
 
-### TASK-009 | P1 | M | Validar visão do produto com evidências
-- **Output:** `research/validation-evidence.md` (usando template EVIDENCE)
-- **Critério de aceite:** mínimo 5 evidências documentadas (reviews de competidores, fóruns, relatórios de mercado), cada uma com nível de confiança declarado; a visão do produto é confirmada ou ajustada com base nas evidências
-- **Dependências:** TASK-001, TASK-002
-
-### TASK-010 | P1 | M | Validar arquitetura contra os NFRs
-- **Output:** `research/architecture-validation.md`
-- **Critério de aceite:** cada NFR de TASK-004 é abordado; onde a arquitetura atende, onde potencialmente falha, e qual é o plano de mitigação
-- **Dependências:** TASK-004, TASK-006
+### TASK-016 | P1 | S | Revisar critérios de saída, riscos residuais e readiness do handoff
+- **Output:** atualização de `squads/squad-0/EXIT_CHECKLIST.md` e `handoffs/ACTIVE.md`
+- **Critério de aceite:** checklist de saída está verificável, riscos residuais foram explicitados e a próxima ação para liberar o Squad 1 está clara
+- **Dependências:** TASK-015
 
 ---
 
-## P2 — Normal
+## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)
 
-### TASK-011 | P2 | M | Rascunhar backlog inicial do Squad 1
-- **Output:** adições a `workboard/BACKLOG.md` com label `squad-1`
-- **Critério de aceite:** mínimo 20 tasks para o Squad 1, cada uma com tamanho estimado e mapa de dependências
-- **Dependências:** TASK-006, TASK-007, TASK-008
-
-### TASK-012 | P2 | S | Montar pacote de intake do Squad 1
-- **Output:** `squads/squad-1/INTAKE_PACKAGE.md` completo (sem `{{PLACEHOLDER}}` remanescentes)
-- **Critério de aceite:** todas as seções do intake package preenchidas; revisado pelo Program Lead
-- **Dependências:** TASK-005 a TASK-010 completos
-
-### TASK-013 | P2 | S | Revisão de saída do Squad 0
-- **Output:** `squads/squad-0/EXIT_CHECKLIST.md` completamente assinado
-- **Critério de aceite:** 100% dos itens do checklist verificados e assinados com data e ID do agente
-- **Dependências:** TASK-012 completo, nenhuma issue `blocking-exit` aberta
-
-### TASK-014 | P2 | S | Criar glossário do domínio
-- **Output:** `research/glossary.md`
-- **Critério de aceite:** mínimo 20 termos definidos; glossário incluído no pacote de intake do Squad 1
-- **Dependências:** TASK-001, TASK-002
-
----
-
-## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-011)
-
-*Esta seção será preenchida quando TASK-011 for concluída.*
+*Esta seção será preenchida quando TASK-015 for concluída.*
