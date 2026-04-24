@@ -137,6 +137,34 @@ async function handler(request, response) {
       return;
     }
 
+    if (request.method === "GET" && matchRoute(segments, ["v1", "runs", "*", "checkpoints"])) {
+      const run = runtime.getRun(segments[2]);
+
+      if (!run) {
+        notFound(response, "Run not found");
+        return;
+      }
+
+      sendJson(response, 200, {
+        items: run.checkpoints
+      });
+      return;
+    }
+
+    if (request.method === "GET" && matchRoute(segments, ["v1", "runs", "*", "artifacts"])) {
+      const run = runtime.getRun(segments[2]);
+
+      if (!run) {
+        notFound(response, "Run not found");
+        return;
+      }
+
+      sendJson(response, 200, {
+        items: (store.artifacts ?? []).filter((artifact) => artifact.run_id === run.id)
+      });
+      return;
+    }
+
     if (request.method === "GET" && matchRoute(segments, ["v1", "history"])) {
       sendJson(response, 200, {
         items: store.runs.flatMap((run) =>
@@ -187,6 +215,8 @@ async function handler(request, response) {
     if (request.method === "GET" && matchRoute(segments, ["v1", "runtime"])) {
       sendJson(response, 200, {
         state_path: store.statePath,
+        queue_path: store.queuePath ?? null,
+        artifacts_index_path: store.artifactsIndexPath ?? null,
         queue_length: store.queue.length,
         runtime: runtime.getRuntimeStatus()
       });

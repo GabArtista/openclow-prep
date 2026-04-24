@@ -1,7 +1,7 @@
 # Quality Criteria — OpenClow MVP
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 
 ## Purpose
 
@@ -29,7 +29,7 @@ Estes critérios existem para evitar avaliação subjetiva do MVP. O sistema só
 
 ### 4. Integrações Reais
 
-- As integrações day-1 precisam funcionar com contratos estáveis.
+- As integrações do baseline precisam funcionar com contratos estáveis.
 - Cada integração deve ter input/output explícitos, erro observável e comportamento de falha seguro.
 - O sistema deve operar com as integrações reais já provadas na Doze antes de adicionar novas.
 
@@ -52,9 +52,9 @@ Estes critérios existem para evitar avaliação subjetiva do MVP. O sistema só
 - Toda nova capacidade precisa passar por validação estática e eval comportamental.
 - Gerar capacidade não implica publicá-la.
 
-## Day-1 Acceptance Gates
+## Baseline Acceptance Gates
 
-O MVP day-1 só é aceitável se, no mínimo:
+O baseline do MVP só é aceitável se, no mínimo:
 
 1. executar um squad equivalente ao `marketing-dozecrew`
 2. executar um squad equivalente ao `inteligencia-dozecrew`
@@ -71,7 +71,7 @@ O MVP falha se:
 - a execução depender exclusivamente da IDE para enforcement
 - credenciais precisarem ser colocadas em arquivos versionados
 - skills novas puderem se autopromover sem revisão humana
-- as integrações reais da Doze não forem suportadas no recorte day-1
+- as integrações reais da Doze não forem suportadas no recorte do baseline
 
 ## Measurement Guidance
 

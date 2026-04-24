@@ -44,6 +44,27 @@
 
 ---
 
+## Workflow Field Researcher
+
+**Responsabilidades:**
+- estudar como operadores, times pequenos e comunidades técnicas estão usando `Codex`, `Claude Code`, `OpenClaw` e ferramentas adjacentes em workflows reais de criação, edição e automação
+- mapear combinações de ferramentas, padrões de orquestração, formas de QA, hooks, comandos, MCPs, worktrees e camadas de renderização usadas na prática
+- separar sinal real de uso recorrente de hype, showcases promocionais e exemplos não reprodutíveis
+- traduzir padrões de campo em restrições, oportunidades e anti-patterns aplicáveis ao OpenClow
+
+**Entregáveis principais:**
+- relatórios em `research/horizon/` e `research/ecosystem-fit/`
+- sínteses de toolchains reais, failure modes e padrões operacionais
+- recomendações de stack mínima por perfil de máquina e por tipo de workflow criativo
+
+**Escopo:** práticas correntes de mercado e de comunidade para workflows agentic de produção criativa, com foco em uso real e reproduzível.
+
+**Limites:** não transforma anedotas em decisão arquitetural sozinho; não substitui análise upstream, de segurança ou de custo; não confunde showcase de marketing com evidência operacional.
+
+**Quando deve ser acionado:** sempre que o programa precisar desenhar ou revisar workflows criativos, de vídeo, de QA ou de automação operacional baseados em agentes e tooling externo.
+
+---
+
 ## Upstream Community Analyst
 
 **Responsabilidades:**

@@ -4,9 +4,17 @@ info:
   version: 1.0.0
   description: >
     API minima do MVP para capabilities, runs, checkpoints, approvals e outputs.
+    Mutating requests carry actor/requested_by/workspace_slug in the current MVP
+    until dedicated session and identity headers are introduced.
 servers:
   - url: https://openclow.local/v1
 paths:
+  /healthz:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: Runtime and storage health
   /capabilities:
     get:
       summary: List capabilities
@@ -76,12 +84,23 @@ paths:
       responses:
         "200":
           description: Audit event collection
+  /history:
+    get:
+      summary: List run history events
+      responses:
+        "200":
+          description: History collection
   /runs:
     post:
       summary: Start run
       responses:
         "202":
           description: Run accepted
+    get:
+      summary: List runs
+      responses:
+        "200":
+          description: Run collection
   /runs/{runId}:
     get:
       summary: Get run state
@@ -114,6 +133,32 @@ paths:
       responses:
         "200":
           description: Checkpoint rejected
+  /runtime:
+    get:
+      summary: Get runtime status
+      responses:
+        "200":
+          description: Runtime payload
+  /runtime/ollama/probe:
+    post:
+      summary: Probe Ollama runtime
+      responses:
+        "200":
+          description: Ollama status
+  /worker/claim:
+    get:
+      summary: Claim next runnable run
+      responses:
+        "200":
+          description: Claimed run or null
+  /worker/runs/{runId}/tick:
+    post:
+      summary: Tick run execution
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      responses:
+        "200":
+          description: Run tick result
 components:
   parameters:
     CapabilityId:

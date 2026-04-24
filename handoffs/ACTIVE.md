@@ -7,41 +7,42 @@
 
 ## Estado do Bastão
 
-- **baton:** codex
-- **last-updated-by:** codex (TASK-027 observability baseline em andamento)
-- **last-updated-at:** 2026-04-24 12:09 -03
+- **baton:** UNASSIGNED
+- **last-updated-by:** codex (task 036 completed)
+- **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
-- **last-read-at:** 2026-04-24 12:02 -03
+- **last-read-at:** 2026-04-24
 
 ---
 
 ## Tasks em Voo
 
-1. `TASK-027` em execução na branch `task/12-observability-security`
-2. Foco atual: baseline de observabilidade, allowlist de tools e rollback operacional
+1. TASK-036 concluída com a formalização da trilha `Workflow Field Researcher`.
+2. Próximo passo: iniciar `TASK-037` no backlog.
 
 ---
 
 ## Última Ação Completada
 
-Conclusão de `TASK-026` com registry, promotion flow e base do meta-squad do MVP.
+Formalização da pesquisa de campo sobre workflows criativos atuais usando `Codex`, `Claude Code` e `OpenClaw`.
 
 **Mudanças concluídas nesta sessão:**
-- issue `#12` aberta para `TASK-027`
-- branch `task/12-observability-security` criada a partir de `origin/main`
-- `TASK-026` mergeada no `main` após aprovação explícita do PR `#11`
-- `workboard/IN_PROGRESS.md` atualizado para a nova task em execução
-- trilha de auditoria persistida criada e smoke-testada com capability e promotion events
+- `squads/squad-0/ROLES.md` atualizado com o papel `Workflow Field Researcher`
+- `research/horizon/coding-agent-creative-workflows-field-report.md` criado com sinais oficiais e de comunidade
+- `research/horizon/README.md` atualizado para incluir o novo artefato
+- `workboard/BACKLOG.md` atualizado com `TASK-037`
+- `workboard/DONE.md` atualizado para incluir `TASK-036`
+- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-036
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Mapear e endurecer os pontos de enforcement já existentes
-2. Manter a raiz estável para não quebrar o modo atual de operação da Doze
-3. Só depois avançar para integrações externas reais e hardening de produção
+1. Iniciar `TASK-037`
+2. Transformar a pesquisa de campo em arquitetura de referência para workflows criativos
+3. Manter `openclow-prep` como base operacional da Doze
 
-**Papéis recomendados para a próxima sessão:** `Program Architect`, `Registry Analyst`, `Security and Agency Boundaries Analyst`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Workflow Field Researcher`
 
 ---
 
@@ -53,7 +54,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-registry-promotion.md`
+`handoffs/snapshots/2026-04-24-codex-task-036-complete.md`
 
 ---
 
@@ -67,8 +68,8 @@ O repositório agora tem duas camadas ativas e coerentes:
 - o registry agora tem lifecycle formal e approvals explícitos
 
 **O que fazer a seguir:**
-- portar as capacidades day-1 da Doze para o runtime persistente
-- adicionar tool bindings e artefatos por integração
-- deixar o caminho pronto para o registry e promotion flow da próxima task
+- pegar `TASK-037` no backlog
+- usar o field report recém-criado para definir contratos e stack dos workflows criativos
+- seguir preservando o fluxo operacional atual da Doze
 
-**Próximo agente recomendado:** `Durable Runtime Analyst` com apoio de `Program Architect`
+**Próximo agente recomendado:** `Program Architect` com apoio de `Workflow Field Researcher`

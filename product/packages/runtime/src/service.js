@@ -156,6 +156,12 @@ export class RuntimeService {
 
     for (const output of stepOutputs) {
       run.outputs.push(output);
+      this.store.recordArtifact?.({
+        ...output,
+        run_id: run.id,
+        squad_slug: run.squad_slug,
+        workspace_slug: run.workspace_slug
+      });
     }
     run.history.push({
       at: new Date().toISOString(),
@@ -294,6 +300,7 @@ export class RuntimeService {
       {
         id: createId(),
         step_id: step.id,
+        run_id: run.id,
         created_at: new Date().toISOString(),
         summary: `${step.label} executado em modo local de desenvolvimento`,
         artifact_type: "text_note"
@@ -310,6 +317,7 @@ export class RuntimeService {
         {
           id: createId(),
           step_id: step.id,
+          run_id: run.id,
           created_at: new Date().toISOString(),
           summary: `${step.label} executado em modo local de desenvolvimento`,
           artifact_type: "text_note"
@@ -340,6 +348,7 @@ export class RuntimeService {
       outputs.push({
         id: createId(),
         step_id: step.id,
+        run_id: run.id,
         created_at: new Date().toISOString(),
         tool_slug: toolSlug,
         artifact_type: artifact.artifact_type,
@@ -350,13 +359,14 @@ export class RuntimeService {
 
     for (const toolSlug of optionalToolSlugs) {
       if (!allowedTools.has(toolSlug)) {
-        outputs.push({
-          id: createId(),
-          step_id: step.id,
-          created_at: new Date().toISOString(),
-          tool_slug: toolSlug,
-          artifact_type: "optional_tool_skipped",
-          summary: `${toolSlug} adiado para fase posterior`
+      outputs.push({
+        id: createId(),
+        step_id: step.id,
+        run_id: run.id,
+        created_at: new Date().toISOString(),
+        tool_slug: toolSlug,
+        artifact_type: "optional_tool_skipped",
+        summary: `${toolSlug} adiado para fase posterior`
         });
         continue;
       }
@@ -430,16 +440,22 @@ export class RuntimeService {
       .map((run) => run.id)
       .filter((runId) => !filtered.includes(runId));
 
-    this.store.queue = [...filtered, ...missing];
+    const reconciled = [...filtered, ...missing];
+
+    if (reconciled.join("|") !== this.store.queue.join("|")) {
+      this.store.queue = reconciled;
+      this.persist();
+    }
   }
 
   persist() {
-    this.store.persist?.();
+    this.store.commit?.();
   }
 
   getRuntimeStatus() {
     return {
       queue_length: this.store.queue.length,
+      artifact_count: this.store.artifacts?.length ?? 0,
       ollama: this.store.runtime.ollama,
       active_runs: this.store.runs.filter((run) => ["queued", "running", "waiting_checkpoint"].includes(run.status)).length,
       audit_events: this.store.audit_events?.length ?? 0

@@ -1,9 +1,9 @@
 # CHARTER.md — Charter do Squad 0
 
 > **Version:** 2.0
-> **Status:** Ativo
-> **Atualizado em:** 2026-04-23
-> **Encerramento previsto:** Quando `EXIT_CHECKLIST.md` estiver 100% assinado
+> **Status:** Encerrado
+> **Atualizado em:** 2026-04-24
+> **Encerramento:** `EXIT_CHECKLIST.md` assinado e handoff final reconciliado
 
 ---
 
@@ -53,11 +53,11 @@ O Squad 0 **não está autorizado** a:
 
 ## Duração
 
-O Squad 0 está ativo desde o bootstrap (2026-04-14) até o momento em que:
+O Squad 0 esteve ativo desde o bootstrap (2026-04-14) até 2026-04-24, quando:
 
-1. Todos os itens de `EXIT_CHECKLIST.md` estiverem assinados
-2. O Program Lead aprovar formalmente o handoff para o Squad 1
-3. `handoffs/ACTIVE.md` for atualizado para refletir "Etapa 1 concluída / Squad 1 liberado"
+1. Todos os itens de `EXIT_CHECKLIST.md` ficaram assinados
+2. O pacote de handoff foi reconciliado para o estado final
+3. `handoffs/ACTIVE.md` voltou para `UNASSIGNED`
 
 ---
 

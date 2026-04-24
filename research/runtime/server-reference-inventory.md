@@ -1,7 +1,7 @@
 # Server Reference Inventory
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Host:** `root@78.109.16.236`
 
 ## Summary
@@ -39,7 +39,7 @@ O servidor atual é suficiente para um MVP multiagente server-first, desde que o
 
 ## Architectural Implications
 
-### Supports Day-1
+### Supports Baseline
 
 - estratégia
 - pesquisa

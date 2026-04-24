@@ -1,16 +1,16 @@
 # Doze Integrations Inventory
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Primary source:** local `opensquad` skill catalog and active Doze squads
 
 ## Purpose
 
-Este inventário lista as integrações reais já usadas pela Doze e que devem orientar o recorte day-1 do OpenClow MVP.
+Este inventário lista as integrações reais já usadas pela Doze e que devem orientar o recorte do baseline do OpenClow MVP.
 
 ## Proven Integrations
 
-| Integration | Current role in Doze workflows | Day-1 status |
+| Integration | Current role in Doze workflows | Baseline status |
 |---|---|---|
 | `GA4` | analytics e tráfego | required |
 | `WooCommerce` | catálogo, pedidos e vendas | required |
@@ -30,9 +30,9 @@ Além das integrações acima, o ecossistema estudado mostra valor em:
 - `image-creator`
 - `image-ai-generator`
 
-Essas capacidades são relevantes para o OpenClow, mas nem todas precisam entrar no day-1 se comprometerem estabilidade operacional.
+Essas capacidades são relevantes para o OpenClow, mas nem todas precisam entrar no baseline se comprometerem estabilidade operacional.
 
-## Day-1 Recommendation
+## Baseline Recommendation
 
 ### Required
 

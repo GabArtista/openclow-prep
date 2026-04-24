@@ -1,7 +1,7 @@
 # MVP Server Architecture — OpenClow
 
-> **Status:** Draft for Plan 2
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Reference host:** `root@78.109.16.236`
 
 ## Objective
@@ -203,7 +203,7 @@ No MVP, a recomendação é manter:
 - skill com shell irrestrito por padrão
 - segredos persistidos em outputs
 
-## Day-1 Functional Coverage
+## MVP baseline functional coverage
 
 O MVP deve suportar no mínimo:
 

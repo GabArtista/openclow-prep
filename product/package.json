@@ -6,6 +6,8 @@
     "dev:api": "node apps/api/src/server.js",
     "dev:worker": "node apps/worker/src/worker.js",
     "dev:dashboard": "node apps/dashboard/src/server.js",
-    "check": "node --check apps/api/src/server.js && node --check apps/worker/src/worker.js && node --check apps/dashboard/src/server.js && node --check packages/shared/src/contracts.js && node --check packages/shared/src/http.js && node --check packages/shared/src/ids.js && node --check packages/shared/src/seeds.js && node --check packages/registry/src/service.js && node --check packages/orchestrator/src/service.js && node --check packages/runtime/src/persistence.js && node --check packages/runtime/src/ollama.js && node --check packages/runtime/src/service.js && node --check packages/tools/src/runner.js && node --check packages/skills/src/catalog.js"
+    "e2e": "node tests/e2e/run.mjs",
+    "regression": "node tests/e2e/run.mjs",
+    "check": "node --check apps/api/src/server.js && node --check apps/worker/src/worker.js && node --check apps/dashboard/src/server.js && node --check apps/dashboard/src/app.js && node --check packages/shared/src/contracts.js && node --check packages/shared/src/http.js && node --check packages/shared/src/ids.js && node --check packages/shared/src/seeds.js && node --check packages/registry/src/service.js && node --check packages/orchestrator/src/service.js && node --check packages/runtime/src/persistence.js && node --check packages/runtime/src/ollama.js && node --check packages/runtime/src/service.js && node --check packages/storage/src/service.js && node --check packages/tools/src/runner.js && node --check packages/skills/src/catalog.js"
   }
 }

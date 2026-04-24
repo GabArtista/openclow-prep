@@ -1,7 +1,7 @@
 # Opensquad Fit Assessment
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Studied source:** local repo `/home/acer/Documentos/Projetos/mkt-ag/mkt-ag-dozecrew/opensquad`
 
 ## Executive Summary
@@ -20,7 +20,7 @@ O `OpenClow` não deve ignorá-lo nem copiá-lo cegamente.
 - skills reais para integrações da Doze
 - uso operacional real em squads de marketing e inteligência
 
-## Day-1 Patterns Worth Porting
+## Baseline Patterns Worth Porting
 
 - `squad.yaml` como contrato do squad
 - `pipeline.yaml` como contrato do fluxo
@@ -43,7 +43,7 @@ O `OpenClow` não deve ignorá-lo nem copiá-lo cegamente.
 Classificar o `opensquad` como:
 
 - **benchmark obrigatório**
-- **fonte de requisitos day-1**
+- **fonte de requisitos do baseline**
 - **fonte de portabilidade de squads, skills, templates e fluxos**
 
 Não classificá-lo, nesta fase, como:

@@ -1,11 +1,49 @@
 # E2E Tests
 
-Fluxos mínimos que precisam existir antes de qualquer validação controlada em produção:
+> **Status:** staging-first contract
+> **Purpose:** transformar o recorte operacional do OpenClow em cenários verificáveis antes de qualquer validação controlada em produção.
+> **Canonical regression command:** `npm --prefix product run regression`
 
-- executar um squad equivalente ao `marketing-dozecrew`
-- executar um squad equivalente ao `inteligencia-dozecrew`
-- aprovar e rejeitar checkpoints
-- promover capability até `staging`
-- validar memória, outputs e histórico
+## Minimum executable coverage
 
-Todos os cenários devem ser staging-first.
+1. executar um squad equivalente ao `marketing-dozecrew`
+2. executar um squad equivalente ao `inteligencia-dozecrew`
+3. aprovar e rejeitar checkpoints
+4. promover capability até `staging`
+5. validar persistência de memória, outputs e histórico
+6. validar restart safety para runs aguardando checkpoint
+7. validar rollback de capability com trilha auditável
+
+## Scenario matrix
+
+| Scenario | Goal | Expected result | Gate |
+|---|---|---|---|
+| Marketing run | reproduzir o fluxo semanal da Doze | run chega ao checkpoint de publicação com outputs completos | staging only |
+| Intelligence run | reproduzir o fluxo mensal de BI | relatório consolidado e auditável | staging only |
+| Checkpoint approve | liberar um passo bloqueado | run avança para o próximo step | staging only |
+| Checkpoint reject | forçar retrabalho | run retorna ao step definido em `on_reject` | staging only |
+| Promotion to staging | promover capability | status muda para `staging` com aprovação registrada | staging only |
+| Rollback | desfazer uma promoção | status volta ao estado anterior com evento auditado | staging only |
+| Restart recovery | reiniciar API/worker | run retoma do último estado seguro | staging only |
+
+## Acceptance criteria
+
+- nenhum cenário crítico pode depender de memória efêmera
+- toda promoção e rollback precisa gerar rastreio
+- checkpoints rejeitados precisam levar o run para o passo correto
+- os outputs precisam permanecer consultáveis após restart
+- qualquer validação em produção continua proibida até o gate staging ficar verde
+- o comando `npm --prefix product run regression` executa a suíte completa sem passos manuais intermediários
+
+## Source of truth
+
+- workflows de marketing/conteúdo: `../../research/ecosystem-fit/doze-marketing-content-workflows.md`
+- arquitetura alvo: `../../research/architecture/architecture-target.md`
+- runtime durability: `../../research/runtime/durable-runtime-analysis.md`
+- observability and evals: `../../research/observability/observability-and-evals.md`
+- security boundaries: `../../research/security/security-and-agency-boundaries.md`
+- contract vs surface: `../../research/squad-1-package/e2e-contract-vs-surface.md`
+
+## Implementation note
+
+Este diretório é o contrato do que precisa ser testado; o harness de execução já existe e deve ser usado como regressão padrão.

@@ -1,8 +1,8 @@
 # WORKPLAN.md — Plano de Trabalho do Squad 0
 
-> **Version:** 2.0
-> **Última atualização:** 2026-04-23
-> **Objetivo:** tornar a Etapa 1 previsível e defensável antes do Squad 1 construir
+> **Version:** 2.1
+> **Última atualização:** 2026-04-24
+> **Objetivo:** registrar o caminho histórico que levou ao baseline do MVP e ao handoff final do Squad 0
 
 ---
 
@@ -59,7 +59,7 @@ Fase 0.7: Revisão de Saída
 ---
 
 ## Fase 0.2: Escopo e Restrições Reais
-**Status:** Em andamento
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-001: Definir escopo exato do programa OpenClow (P0, M)
 - TASK-002: Mapear restrições reais do ambiente e critérios de qualidade (P0, M)
@@ -70,12 +70,12 @@ Fase 0.7: Revisão de Saída
 **Dependências:** nenhuma
 **Outputs esperados:** `research/program-scope/mission-scope.md`, `research/program-scope/environment-constraints.md`, `research/architecture/quality-criteria.md`, `research/ecosystem-fit/opensquad-fit-assessment.md`, `research/ecosystem-fit/opensquad-portability-matrix.md`, `research/ecosystem-fit/doze-integrations-inventory.md`, `research/runtime/server-reference-inventory.md`
 
-**Critério de conclusão da fase:** escopo, não-objetivos, restrições e critérios de qualidade documentados com evidência suficiente para orientar as próximas fases; `opensquad`, servidor e integrações da Doze já estão formalizados como insumos do MVP.
+**Critério de conclusão da fase:** escopo, não-objetivos, restrições e critérios de qualidade documentados com evidência suficiente para orientar o baseline do MVP; `opensquad`, servidor e integrações da Doze já estão formalizados como insumos do produto.
 
 ---
 
 ## Fase 0.3: Pesquisa Profunda do Ecossistema
-**Status:** Não iniciado
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-003: Estudo profundo do OpenClaw (P0, L)
 - TASK-004: Estudo profundo do Paperclip (P0, L)
@@ -92,7 +92,7 @@ Fase 0.7: Revisão de Saída
 ---
 
 ## Fase 0.4: Validação Arquitetural e Operacional
-**Status:** Não iniciado
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-007: Definir runtime durável, retomável e control plane alvo (P0, L)
 - TASK-008: Mapear observabilidade, evals e critérios de operação (P0, M)
@@ -109,7 +109,7 @@ Fase 0.7: Revisão de Saída
 ---
 
 ## Fase 0.5: Governança de Implementação e Bootstrap do Monorepo
-**Status:** Em andamento
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-021: Formalizar governança do `product/` e limites do monorepo separado (P0, M)
 - TASK-022: Bootstrapar `product/` com layout do MVP e contratos públicos mínimos (P0, M)
@@ -122,7 +122,7 @@ Fase 0.7: Revisão de Saída
 ---
 
 ## Fase 0.6: Preparação do Squad 1
-**Status:** Não iniciado
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-014: Definir formalmente o Squad 1 construtor (P1, M)
 - TASK-015: Montar o intake package e backlog inicial do Squad 1 (P1, M)
@@ -135,7 +135,7 @@ Fase 0.7: Revisão de Saída
 ---
 
 ## Fase 0.7: Revisão de Saída
-**Status:** Não iniciado
+**Status:** COMPLETO ✓
 **Tasks:**
 - TASK-016: Revisar critérios de saída, riscos residuais e readiness do handoff (P1, S)
 
