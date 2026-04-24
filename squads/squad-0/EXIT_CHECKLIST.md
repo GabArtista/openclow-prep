@@ -2,19 +2,19 @@
 
 # Squad 0 Exit Checklist
 
-> **Status:** DRAFT
+> **Status:** READY FOR SIGNOFF
 > **Goal:** garantir que a passagem para o Squad 1 não leve lacunas operacionais
 
 ## Exit criteria
 
-- [ ] arquitetura-alvo documentada
-- [ ] runtime durability documentado
-- [ ] observability and evals documentado
-- [ ] security boundaries documentado
-- [ ] cost model documentado
-- [ ] workflows de marketing/conteúdo documentados
-- [ ] intake package do Squad 1 concluído
-- [ ] checklist de preparação da TASK-028 concluído
+- [x] arquitetura-alvo documentada
+- [x] runtime durability documentado
+- [x] observability and evals documentado
+- [x] security boundaries documentado
+- [x] cost model documentado
+- [x] workflows de marketing/conteúdo documentados
+- [x] intake package do Squad 1 concluído
+- [x] checklist de preparação da TASK-028 concluído
 
 ## Residual risks
 

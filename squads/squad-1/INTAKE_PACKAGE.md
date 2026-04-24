@@ -2,7 +2,7 @@
 
 # Squad 1 Intake Package
 
-> **Status:** READY FOR COMPLETION
+> **Status:** READY FOR SIGNOFF
 > **Source:** Squad 0 prep for OpenClow
 > **Constraint:** nenhum valor secreto deve ser incluído aqui
 
@@ -35,7 +35,7 @@
 
 ## Open risks
 
-- validação em produção ainda não deve ser automatizada
+- validação em produção continua controlada por checkpoint e dry-run
 - write-capable integrations exigem checkpoint e escopo mínimo
 - o dashboard precisa continuar observável durante restart
 

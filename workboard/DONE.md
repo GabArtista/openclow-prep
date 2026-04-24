@@ -21,6 +21,20 @@
 
 ## Histórico
 
+### TASK-034 | Reconciliar pacote de handoff final do Squad 0
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #14 (fechada)
+- **Branch:** task/14-handoff-reconciliation
+- **Output produzido:**
+  - `squads/squad-0/EXIT_CHECKLIST.md`
+  - `squads/squad-1/INTAKE_PACKAGE.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+  - `research/squad-1-package/task-034-handoff-reconciliation.md`
+- **Notas:** O pacote de handoff final do Squad 0 passou a refletir o baseline real do programa, com checklist e intake package em estado de signoff e o backlog voltando a zero.
+
 ### TASK-033 | Fechar o primeiro ciclo de rollout e validação controlada
 - **Concluída em:** 2026-04-24
 - **Por:** codex
