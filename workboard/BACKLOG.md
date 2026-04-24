@@ -15,7 +15,3 @@
 ### P1 — Alta Prioridade
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)
-### TASK-033 | P1 | M | Fechar o primeiro ciclo de rollout e validação controlada
-- **Output:** runbook de leitura/dry-run em produção, checklist de aprovação e evidência de mudança segura
-- **Critério de aceite:** a equipe sabe exatamente como sair de staging para produção sem violar checkpoints ou segredos
-- **Dependências:** TASK-027, TASK-028, TASK-030

@@ -21,6 +21,24 @@
 
 ## Histórico
 
+### TASK-033 | Fechar o primeiro ciclo de rollout e validação controlada
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `research/squad-1-package/task-033-rollout-validation.md`
+  - `research/observability/production-rollout-runbook.md`
+  - `research/observability/production-rollout-rollback.md`
+  - `research/observability/production-change-safety-checklist.md`
+  - `research/observability/production-change-safety-evidence.md`
+  - `research/observability/README.md`
+  - `research/squad-1-package/README.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O primeiro ciclo de rollout controlado ficou documentado com leitura primeiro, dry-run depois e checkpoint humano para qualquer escrita externa. A task não alterou o runtime; fechou o pacote operacional de produção segura.
+
 ### TASK-032 | Formalizar a suíte E2E como regressão automatizada
 - **Concluída em:** 2026-04-24
 - **Por:** codex

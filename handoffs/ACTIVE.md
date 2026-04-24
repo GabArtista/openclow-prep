@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 032 completed)
+- **last-updated-by:** codex (task 033 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,14 +17,14 @@
 
 ## Tasks em Voo
 
-1. TASK-032 concluída com a suíte E2E formalizada como regressão automatizada.
+1. TASK-033 concluída com o ciclo de rollout controlado documentado.
 2. Próximo passo: iniciar a próxima task do backlog.
 
 ---
 
 ## Última Ação Completada
 
-Consolidação da suíte E2E como regressão padrão do produto, a partir do harness staging-first já validado.
+Consolidação do primeiro ciclo de rollout controlado sobre a base staging-first já validada.
 
 **Mudanças concluídas nesta sessão:**
 - dashboard reestruturado para run view, step view, checkpoint panel, outputs e histórico
@@ -34,13 +34,20 @@ Consolidação da suíte E2E como regressão padrão do produto, a partir do har
 - `workboard/DONE.md` atualizado para incluir `TASK-032`
 - `workboard/IN_PROGRESS.md` zerado
 - `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-032
+- `workboard/BACKLOG.md` atualizado para liberar `TASK-033`
+- `workboard/IN_PROGRESS.md` atualizado para refletir a TASK-033
+- `handoffs/ACTIVE.md` atualizado para refletir o início da TASK-033
+- os artefatos de rollout controlado foram criados
+- `workboard/DONE.md` atualizado para incluir `TASK-033`
+- `workboard/IN_PROGRESS.md` zerado
+- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-033
 
 ---
 
 ## Próxima Ação Recomendada
 
 1. Iniciar a próxima task do backlog
-2. Reusar o harness E2E como regressão em cada corte futuro
+2. Reusar o pacote de rollout como base para validações futuras
 3. Manter `openclow-prep` como base operacional da Doze
 
 **Papéis recomendados para a próxima sessão:** `Program Architect`, `Documentation Agent`
@@ -55,7 +62,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-032-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-033-complete.md`
 
 ---
 
