@@ -21,6 +21,20 @@
 
 ## Histórico
 
+### TASK-036 | Formalizar pesquisa de campo sobre workflows criativos com Codex, Claude Code e OpenClaw
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #16 (fechada)
+- **Branch:** task/16-workflow-field-researcher
+- **Output produzido:**
+  - `squads/squad-0/ROLES.md`
+  - `research/horizon/coding-agent-creative-workflows-field-report.md`
+  - `research/horizon/README.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O programa ganhou um papel dedicado a estudar workflows reais de mercado com Codex, Claude Code e OpenClaw, mais um relatório inicial conectando esses sinais ao desenho futuro do OpenClow + Paperclip.
+
 ### TASK-035 | Reconciliar WORKPLAN e CHARTER do Squad 0 com o baseline concluído
 - **Concluída em:** 2026-04-24
 - **Por:** codex

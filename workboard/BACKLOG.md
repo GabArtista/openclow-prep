@@ -14,4 +14,16 @@
 
 ### P1 — Alta Prioridade
 
+### TASK-037 | Traduzir a pesquisa de campo em arquitetura de referência para workflows criativos
+- **Tipo:** research
+- **Prioridade:** P1
+- **Tamanho:** M
+- **Status:** `backlog`
+- **Objetivo:** transformar a trilha inaugurada pela TASK-036 em contratos arquiteturais para `OpenClow + Paperclip`, definindo papéis, camadas de contexto, profiles de tooling por capacidade de máquina e gates de QA.
+- **Dependências:** TASK-036 concluída
+- **Output esperado:**
+  - `research/architecture/creative-workflow-reference-architecture.md`
+  - atualização de `research/ecosystem-fit/` com implicações operacionais
+  - recomendação de ADR ou task de implementação subsequente
+
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

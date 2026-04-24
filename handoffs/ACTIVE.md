@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 035 completed)
+- **last-updated-by:** codex (task 036 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,50 +17,32 @@
 
 ## Tasks em Voo
 
-1. TASK-035 concluída com o charter e o workplan do Squad 0 reconciliados.
-2. Próximo passo: iniciar a próxima task do backlog.
+1. TASK-036 concluída com a formalização da trilha `Workflow Field Researcher`.
+2. Próximo passo: iniciar `TASK-037` no backlog.
 
 ---
 
 ## Última Ação Completada
 
-Consolidação do baseline do Squad 0 como documento histórico e encerrado.
+Formalização da pesquisa de campo sobre workflows criativos atuais usando `Codex`, `Claude Code` e `OpenClaw`.
 
 **Mudanças concluídas nesta sessão:**
-- dashboard reestruturado para run view, step view, checkpoint panel, outputs e histórico
-- servidor do dashboard passou a injetar `OPENCLOW_API_BASE` no HTML servido
-- harness E2E passou a validar o dashboard além das jornadas de marketing, inteligência, promotion/rollback e restart recovery
-- comando `npm --prefix product run regression` formalizado como entrada canônica da suíte
-- `workboard/DONE.md` atualizado para incluir `TASK-032`
-- `workboard/IN_PROGRESS.md` zerado
-- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-032
-- `workboard/BACKLOG.md` atualizado para liberar `TASK-033`
-- `workboard/IN_PROGRESS.md` atualizado para refletir a TASK-033
-- `handoffs/ACTIVE.md` atualizado para refletir o início da TASK-033
-- os artefatos de rollout controlado foram criados
-- `workboard/DONE.md` atualizado para incluir `TASK-033`
-- `workboard/IN_PROGRESS.md` zerado
-- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-033
-- `workboard/BACKLOG.md` atualizado para liberar `TASK-034`
-- `workboard/IN_PROGRESS.md` atualizado para refletir a TASK-034
-- `handoffs/ACTIVE.md` atualizado para refletir o início da TASK-034
-- `squads/squad-0/EXIT_CHECKLIST.md` e `squads/squad-1/INTAKE_PACKAGE.md` reconciliados para signoff
-- `workboard/DONE.md` atualizado para incluir `TASK-034`
-- `workboard/IN_PROGRESS.md` zerado
-- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-034
-- `squads/squad-0/CHARTER.md` e `squads/squad-0/WORKPLAN.md` reconciliados para baseline encerrado
-- `workboard/DONE.md` atualizado para incluir `TASK-035`
-- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-035
+- `squads/squad-0/ROLES.md` atualizado com o papel `Workflow Field Researcher`
+- `research/horizon/coding-agent-creative-workflows-field-report.md` criado com sinais oficiais e de comunidade
+- `research/horizon/README.md` atualizado para incluir o novo artefato
+- `workboard/BACKLOG.md` atualizado com `TASK-037`
+- `workboard/DONE.md` atualizado para incluir `TASK-036`
+- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-036
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Iniciar a próxima task do backlog
-2. Consolidar o baseline como referência histórica
+1. Iniciar `TASK-037`
+2. Transformar a pesquisa de campo em arquitetura de referência para workflows criativos
 3. Manter `openclow-prep` como base operacional da Doze
 
-**Papéis recomendados para a próxima sessão:** `Program Architect`, `Documentation Agent`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Workflow Field Researcher`
 
 ---
 
@@ -72,7 +54,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-035-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-036-complete.md`
 
 ---
 
@@ -86,8 +68,8 @@ O repositório agora tem duas camadas ativas e coerentes:
 - o registry agora tem lifecycle formal e approvals explícitos
 
 **O que fazer a seguir:**
-- pegar a próxima task no backlog
-- reaproveitar o harness E2E como regressão
+- pegar `TASK-037` no backlog
+- usar o field report recém-criado para definir contratos e stack dos workflows criativos
 - seguir preservando o fluxo operacional atual da Doze
 
-**Próximo agente recomendado:** `Program Architect` com apoio de `Documentation Agent`
+**Próximo agente recomendado:** `Program Architect` com apoio de `Workflow Field Researcher`
