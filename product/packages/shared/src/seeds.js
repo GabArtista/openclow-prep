@@ -6,13 +6,15 @@ function createMarketingSteps() {
       id: "coleta-dados",
       kind: "tool",
       executor: "subagent",
-      label: "Coleta e analisa dados de performance"
+      label: "Coleta e analisa dados de performance",
+      tool_slugs: ["ga4", "woocommerce", "hotjar"]
     },
     {
       id: "pesquisa-mercado",
       kind: "tool",
       executor: "subagent",
-      label: "Pesquisa mercado e referências"
+      label: "Pesquisa mercado e referências",
+      tool_slugs: ["apify"]
     },
     {
       id: "aprovar-estrategia",
@@ -33,7 +35,8 @@ function createMarketingSteps() {
       id: "design-visual",
       kind: "subagent",
       executor: "subagent",
-      label: "Gera design visual para publicação"
+      label: "Gera design visual para publicação",
+      tool_slugs: ["canva"]
     },
     {
       id: "aprovar-publicacao",
@@ -48,7 +51,9 @@ function createMarketingSteps() {
       id: "publicacao",
       kind: "tool",
       executor: "tool-runner",
-      label: "Publica ou agenda peças aprovadas"
+      label: "Publica ou agenda peças aprovadas",
+      tool_slugs: ["instagram-publisher"],
+      optional_tool_slugs: ["blotato"]
     }
   ];
 }
@@ -59,13 +64,15 @@ function createIntelligenceSteps() {
       id: "analise-ecommerce",
       kind: "tool",
       executor: "subagent",
-      label: "Cruza WooCommerce, GA4 e Hotjar"
+      label: "Cruza WooCommerce, GA4 e Hotjar",
+      tool_slugs: ["ga4", "woocommerce", "hotjar"]
     },
     {
       id: "analise-social",
       kind: "tool",
       executor: "subagent",
-      label: "Analisa Meta e redes sociais"
+      label: "Analisa Meta e redes sociais",
+      tool_slugs: ["meta-insights", "apify"]
     },
     {
       id: "correlacao",

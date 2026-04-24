@@ -8,44 +8,43 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (TASK-024 / runtime persistence and queue complete)
-- **last-updated-at:** 2026-04-24 10:13 -03
+- **last-updated-by:** codex (TASK-025 concluída / day-1 capabilities)
+- **last-updated-at:** 2026-04-24 10:52 -03
 - **last-read-by:** codex
-- **last-read-at:** 2026-04-24 10:13 -03
+- **last-read-at:** 2026-04-24 10:52 -03
 
 ---
 
 ## Tasks em Voo
 
-1. Nenhuma task ativa no momento; `TASK-024` foi concluída na branch `task/6-runtime-persistence-queue`
-2. Próxima captura do bastão deve abrir `TASK-025` para portar capacidades day-1 da Doze
+1. Nenhuma task em voo.
+2. O próximo passo é abrir `TASK-026` para registry/promotion flow ou continuar a camada de runtime persistente, sem tocar o modo operacional atual da Doze.
 
 ---
 
 ## Última Ação Completada
 
-Conclusão de `TASK-024` com runtime local persistente e fila durável no `product/`.
+Conclusão de `TASK-025` com capacidades day-1 da Doze portadas para o runtime persistente do `product/`.
 
 **Mudanças concluídas nesta sessão:**
-- issue `#6` aberta para `TASK-024`
-- branch `task/6-runtime-persistence-queue` criada
-- `product/packages/runtime/src/persistence.js` criado para state file local em `product/.local/runtime-state.json`
-- `product/packages/runtime/src/ollama.js` criado para probe opcional de `Ollama`
-- `product/packages/runtime/src/service.js` atualizado para fila durável, persistência e status de runtime
-- `product/apps/api/src/state.js` e `product/apps/api/src/server.js` atualizados para carregar/persistir o state file e expor `v1/runtime`
-- `product/packages/orchestrator/src/service.js` e `product/packages/registry/src/service.js` persistem mudanças
-- `product/package.json` atualizado para checar os novos módulos
-- smoke test executado: run do `inteligencia-dozecrew` sobreviveu a restart da API em `waiting_checkpoint`
+- issue `#8` aberta para `TASK-025`
+- branch `task/8-day1-capabilities` criada
+- `product/packages/tools/README.md` criado para documentar as bindings day-1
+- `product/packages/tools/src/runner.js` criado com artefatos estruturados para `ga4`, `woocommerce`, `meta-insights`, `hotjar`, `apify`, `canva`, `instagram-publisher` e `blotato`
+- `product/packages/shared/src/seeds.js` atualizado com as capacidades e bindings das squads `marketing-dozecrew` e `inteligencia-dozecrew`
+- `product/packages/runtime/src/service.js` atualizado para executar tool bindings, respeitar allowlist e adiar `blotato` como opcional
+- `product/package.json` atualizado para incluir o novo módulo de tools no check
+- smoke test executado: runs frescos de `marketing-dozecrew` e `inteligencia-dozecrew` produziram artefatos estruturados, checkpoints foram aprovados e `blotato` apareceu como `optional_tool_skipped`
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Abrir `TASK-025`
-2. Portar capacidades day-1 da Doze para o runtime persistente
-3. Manter a raiz estável para não quebrar o modo atual de operação da Doze
+1. Implementar `TASK-026` para registry/promotion flow e estados `draft/staging/active/retired`
+2. Manter a raiz estável para não quebrar o modo atual de operação da Doze
+3. Só depois avançar para integrações externas reais e hardening de produção
 
-**Papéis recomendados para a próxima sessão:** `Durable Runtime Analyst`, `Program Architect`, `Observability and Evals Analyst`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Registry Analyst`, `Security and Agency Boundaries Analyst`
 
 ---
 
@@ -57,7 +56,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-runtime-persistence-queue.md`
+`handoffs/snapshots/2026-04-24-codex-day1-capabilities.md`
 
 ---
 
@@ -71,8 +70,8 @@ O repositório agora tem duas camadas ativas e coerentes:
 - o próximo salto não é mais scaffold, e sim integração com runtime e persistência reais
 
 **O que fazer a seguir:**
-- abrir `TASK-025`
 - portar as capacidades day-1 da Doze para o runtime persistente
-- começar a endurecer o lifecycle de capabilities e as integrações reais
+- adicionar tool bindings e artefatos por integração
+- deixar o caminho pronto para o registry e promotion flow da próxima task
 
 **Próximo agente recomendado:** `Durable Runtime Analyst` com apoio de `Program Architect`

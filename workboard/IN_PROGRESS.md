@@ -23,10 +23,4 @@
 
 ## Em Progresso Agora
 
-Nenhuma task ativa no momento.
-
-Próxima captura do bastão:
-
-- abrir `TASK-025`
-- portar capacidades day-1 da Doze para o runtime persistente
-- continuar a partir de `handoffs/snapshots/2026-04-24-codex-runtime-persistence-queue.md`
+Nenhuma task em andamento.

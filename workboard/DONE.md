@@ -21,6 +21,20 @@
 
 ## Histórico
 
+### TASK-025 | Portar capacidades day-1 da Doze para o OpenClow
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #8 (fechada)
+- **Branch:** task/8-day1-capabilities
+- **Output produzido:**
+  - `product/packages/tools/README.md`
+  - `product/packages/tools/src/runner.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/shared/src/seeds.js`
+  - `product/package.json`
+  - atualização de `workboard/IN_PROGRESS.md` e `handoffs/ACTIVE.md`
+- **Notas:** As capacidades day-1 da Doze agora executam artefatos estruturados para marketing e inteligência, com tool bindings para `ga4`, `woocommerce`, `meta-insights`, `hotjar`, `apify`, `canva` e `instagram-publisher`; `blotato` ficou como optional tool e é adiado com artefato explícito. O runtime também ganhou fallback compatível para state files locais antigos sem `tool_slugs`.
+
 ### TASK-024 | Integrar runtime local, persistencia base e fila ao core do `product/`
 - **Concluída em:** 2026-04-24
 - **Por:** codex

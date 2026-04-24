@@ -1,4 +1,5 @@
 import { createId } from "../../shared/src/ids.js";
+import { runToolBinding } from "../../tools/src/runner.js";
 
 export class RuntimeService {
   constructor(store) {
@@ -106,12 +107,11 @@ export class RuntimeService {
       return run;
     }
 
-    run.outputs.push({
-      id: createId(),
-      step_id: step.id,
-      created_at: new Date().toISOString(),
-      summary: `${step.label} executado em modo local de desenvolvimento`
-    });
+    const stepOutputs = this.executeStep(step, run);
+
+    for (const output of stepOutputs) {
+      run.outputs.push(output);
+    }
     run.history.push({
       at: new Date().toISOString(),
       event: "step.completed",
@@ -206,6 +206,128 @@ export class RuntimeService {
       approval,
       run
     };
+  }
+
+  executeStep(step, run) {
+    if (step.kind === "tool" || step.executor === "tool-runner" || step.executor === "subagent") {
+      return this.executeToolStep(step, run);
+    }
+
+    return [
+      {
+        id: createId(),
+        step_id: step.id,
+        created_at: new Date().toISOString(),
+        summary: `${step.label} executado em modo local de desenvolvimento`,
+        artifact_type: "text_note"
+      }
+    ];
+  }
+
+  executeToolStep(step, run) {
+    const toolSlugs = step.tool_slugs ?? this.inferToolSlugs(step, run);
+    const optionalToolSlugs = step.optional_tool_slugs ?? this.inferOptionalToolSlugs(step, run);
+
+    if (toolSlugs.length === 0) {
+      return [
+        {
+          id: createId(),
+          step_id: step.id,
+          created_at: new Date().toISOString(),
+          summary: `${step.label} executado em modo local de desenvolvimento`,
+          artifact_type: "text_note"
+        }
+      ];
+    }
+
+    const allowedTools = new Set(
+      this.store.capabilities
+        .filter((capability) => capability.workspace_slug === run.workspace_slug)
+        .flatMap((capability) => capability.allowed_tools)
+    );
+
+    const outputs = [];
+
+    for (const toolSlug of toolSlugs) {
+      if (!allowedTools.has(toolSlug)) {
+        throw new Error(`Tool not allowed for workspace ${run.workspace_slug}: ${toolSlug}`);
+      }
+
+      const artifact = runToolBinding(toolSlug, {
+        run_id: run.id,
+        squad_slug: run.squad_slug,
+        workspace_slug: run.workspace_slug,
+        step_id: step.id
+      });
+
+      outputs.push({
+        id: createId(),
+        step_id: step.id,
+        created_at: new Date().toISOString(),
+        tool_slug: toolSlug,
+        artifact_type: artifact.artifact_type,
+        summary: artifact.summary,
+        details: artifact.details
+      });
+    }
+
+    for (const toolSlug of optionalToolSlugs) {
+      if (!allowedTools.has(toolSlug)) {
+        outputs.push({
+          id: createId(),
+          step_id: step.id,
+          created_at: new Date().toISOString(),
+          tool_slug: toolSlug,
+          artifact_type: "optional_tool_skipped",
+          summary: `${toolSlug} adiado para fase posterior`
+        });
+        continue;
+      }
+
+      const artifact = runToolBinding(toolSlug, {
+        run_id: run.id,
+        squad_slug: run.squad_slug,
+        workspace_slug: run.workspace_slug,
+        step_id: step.id
+      });
+
+      outputs.push({
+        id: createId(),
+        step_id: step.id,
+        created_at: new Date().toISOString(),
+        tool_slug: toolSlug,
+        artifact_type: artifact.artifact_type,
+        summary: artifact.summary,
+        details: artifact.details
+      });
+    }
+
+    return outputs;
+  }
+
+  inferToolSlugs(step, run) {
+    const fallbackBindings = {
+      "marketing-dozecrew": {
+        "coleta-dados": ["ga4", "woocommerce", "hotjar"],
+        "pesquisa-mercado": ["apify"],
+        "design-visual": ["canva"],
+        "publicacao": ["instagram-publisher"]
+      },
+      "inteligencia-dozecrew": {
+        "analise-ecommerce": ["ga4", "woocommerce", "hotjar"],
+        "analise-social": ["meta-insights", "apify"]
+      }
+    };
+
+    return fallbackBindings[run.squad_slug]?.[step.id] ?? [];
+  }
+
+  inferOptionalToolSlugs(step, run) {
+    if (run.squad_slug === "marketing-dozecrew" && step.id === "publicacao") {
+      return ["blotato"];
+    }
+
+    return [];
   }
 
   enqueueRun(runId) {
