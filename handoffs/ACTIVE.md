@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 036 completed)
+- **last-updated-by:** codex (task 037 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,30 +17,31 @@
 
 ## Tasks em Voo
 
-1. TASK-036 concluída com a formalização da trilha `Workflow Field Researcher`.
-2. Próximo passo: iniciar `TASK-037` no backlog.
+1. TASK-037 concluída com a arquitetura de referência dos workflows criativos.
+2. Próximo passo: iniciar `TASK-038` no backlog.
 
 ---
 
 ## Última Ação Completada
 
-Formalização da pesquisa de campo sobre workflows criativos atuais usando `Codex`, `Claude Code` e `OpenClaw`.
+Fechamento da arquitetura de referência para workflows criativos com `OpenClow + Paperclip`.
 
 **Mudanças concluídas nesta sessão:**
-- `squads/squad-0/ROLES.md` atualizado com o papel `Workflow Field Researcher`
-- `research/horizon/coding-agent-creative-workflows-field-report.md` criado com sinais oficiais e de comunidade
-- `research/horizon/README.md` atualizado para incluir o novo artefato
-- `workboard/BACKLOG.md` atualizado com `TASK-037`
-- `workboard/DONE.md` atualizado para incluir `TASK-036`
-- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-036
+- `research/architecture/creative-workflow-reference-architecture.md` criado
+- `research/ecosystem-fit/creative-tooling-profiles.md` criado
+- `research/architecture/README.md` e `research/ecosystem-fit/README.md` atualizados
+- `workboard/BACKLOG.md` atualizado com `TASK-038`
+- `workboard/IN_PROGRESS.md` zerado
+- `workboard/DONE.md` atualizado para incluir `TASK-037`
+- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-037
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Iniciar `TASK-037`
-2. Transformar a pesquisa de campo em arquitetura de referência para workflows criativos
-3. Manter `openclow-prep` como base operacional da Doze
+1. Iniciar `TASK-038`
+2. Converter a arquitetura em contracts e manifests implementáveis
+3. Manter staging-first antes de qualquer passo ligado ao servidor de produção
 
 **Papéis recomendados para a próxima sessão:** `Program Architect`, `Workflow Field Researcher`
 
@@ -54,7 +55,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-036-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-037-complete.md`
 
 ---
 
@@ -68,8 +69,8 @@ O repositório agora tem duas camadas ativas e coerentes:
 - o registry agora tem lifecycle formal e approvals explícitos
 
 **O que fazer a seguir:**
-- pegar `TASK-037` no backlog
-- usar o field report recém-criado para definir contratos e stack dos workflows criativos
-- seguir preservando o fluxo operacional atual da Doze
+- iniciar `TASK-038`
+- transformar a arquitetura em contracts, manifests e recorte implementável em `product/`
+- seguir preservando o fluxo operacional atual da Doze e o guardrail de staging-first
 
 **Próximo agente recomendado:** `Program Architect` com apoio de `Workflow Field Researcher`

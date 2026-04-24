@@ -21,6 +21,23 @@
 
 ## Histórico
 
+### TASK-037 | Traduzir a pesquisa de campo em arquitetura de referência para workflows criativos
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #18 (fechada)
+- **Branch:** task/18-creative-workflow-architecture
+- **Output produzido:**
+  - `research/architecture/creative-workflow-reference-architecture.md`
+  - `research/ecosystem-fit/creative-tooling-profiles.md`
+  - `research/architecture/README.md`
+  - `research/ecosystem-fit/README.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-037-complete.md`
+- **Notas:** A trilha criativa do programa ficou pronta para sair de pesquisa ampla e entrar em definição de contracts implementáveis. A arquitetura já separa claramente o que pode começar agora em `product/` do que ainda depende de staging antes de tocar o servidor de produção.
+
 ### TASK-036 | Formalizar pesquisa de campo sobre workflows criativos com Codex, Claude Code e OpenClaw
 - **Concluída em:** 2026-04-24
 - **Por:** codex

@@ -14,16 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-037 | Traduzir a pesquisa de campo em arquitetura de referência para workflows criativos
+### TASK-038 | Transformar a arquitetura criativa em contracts e seeds implementáveis
 - **Tipo:** research
 - **Prioridade:** P1
 - **Tamanho:** M
 - **Status:** `backlog`
-- **Objetivo:** transformar a trilha inaugurada pela TASK-036 em contratos arquiteturais para `OpenClow + Paperclip`, definindo papéis, camadas de contexto, profiles de tooling por capacidade de máquina e gates de QA.
-- **Dependências:** TASK-036 concluída
+- **Objetivo:** converter a arquitetura de referência dos workflows criativos em contracts públicos, manifests de squads/skills/tools e backlog de implementação dentro de `product/`.
+- **Dependências:** TASK-037 concluída
 - **Output esperado:**
-  - `research/architecture/creative-workflow-reference-architecture.md`
-  - atualização de `research/ecosystem-fit/` com implicações operacionais
-  - recomendação de ADR ou task de implementação subsequente
+  - `research/architecture/creative-agent-contracts.md`
+  - `research/architecture/creative-squad-manifests.md`
+  - recomendação de alterações em `product/packages/shared/contracts/v1/`
+  - definição do primeiro corte implementável em `product/`
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)
