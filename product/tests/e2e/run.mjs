@@ -283,6 +283,10 @@ async function runCreativeScenario() {
     squads.items.some((item) => item.slug === "creative-video"),
     "Creative video squad should be listed by the API"
   );
+  assert(
+    squads.items.some((item) => item.slug === "publishing-control"),
+    "Publishing control squad should be listed by the API"
+  );
 
   const referenceRun = await requestJson("/v1/runs", {
     method: "POST",
@@ -503,12 +507,60 @@ async function runCreativeScenario() {
     "Creative QA should produce delivery QA output"
   );
 
+  const publishingRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "publishing-control",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-publishing",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      request_context: {
+        channel: "instagram-reels",
+        asset_run_ids: [imageRun.id, videoRun.id],
+        campaign_slug: "opium-drop"
+      }
+    })
+  });
+
+  const completedPublishing = await driveCheckpointedRun(publishingRun.id, { expectedCheckpoints: 1 });
+  assert(completedPublishing.status === "succeeded", "Publishing control run did not finish successfully");
+
+  const publishingOutputs = await requestJson(`/v1/runs/${publishingRun.id}/outputs`);
+  assert(
+    publishingOutputs.items.some((item) => item.artifact_type === "publication_plan"),
+    "Publishing control should produce a publication plan"
+  );
+  assert(
+    publishingOutputs.items.some((item) => item.artifact_type === "publish_receipt"),
+    "Publishing control should produce a publish receipt"
+  );
+
+  const publishingArtifacts = await requestJson(`/v1/runs/${publishingRun.id}/artifacts`);
+  const publishReceiptArtifact = publishingArtifacts.items.find((item) => item.artifact_type === "publish_receipt");
+
+  assert(publishReceiptArtifact, "Publishing control should persist a publish receipt artifact");
+  assert(
+    existsSync(publishReceiptArtifact.details.publication_plan_path),
+    "Publication plan bundle file should exist"
+  );
+  assert(
+    existsSync(publishReceiptArtifact.details.publish_receipt_path),
+    "Publish receipt file should exist"
+  );
+  assert(
+    publishReceiptArtifact.details.packaged_assets >= 2,
+    "Publishing control should package assets from previous creative runs"
+  );
+
   return {
     referenceRunId: referenceRun.id,
     controlRunId: controlRun.id,
     imageRunId: imageRun.id,
     videoRunId: videoRun.id,
-    qaRunId: qaRun.id
+    qaRunId: qaRun.id,
+    publishingRunId: publishingRun.id
   };
 }
 

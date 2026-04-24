@@ -151,6 +151,44 @@ function resolveCompositionDir(context) {
   return candidates.find((candidate) => fs.existsSync(candidate)) ?? candidates[0];
 }
 
+function collectPublishableArtifacts(context) {
+  const artifactRoot = path.join(context.artifacts_dir ?? process.cwd(), context.run_id ?? "global");
+  const requestedRunIds = context.request_context?.asset_run_ids ?? [];
+  const previewCandidates = [];
+
+  for (const referencedRunId of requestedRunIds) {
+    const renderDirs = [
+      path.join(context.artifacts_dir ?? process.cwd(), referencedRunId, "renderizar-previews", "render"),
+      path.join(context.artifacts_dir ?? process.cwd(), referencedRunId, "renderizar-video", "render")
+    ];
+
+    for (const renderDir of renderDirs) {
+      if (!fs.existsSync(renderDir)) {
+        continue;
+      }
+
+      const files = fs
+        .readdirSync(renderDir)
+        .filter((entry) => entry.endsWith(".svg"))
+        .map((entry) => path.join(renderDir, entry));
+
+      previewCandidates.push(...files);
+    }
+  }
+
+  if (previewCandidates.length > 0) {
+    return previewCandidates;
+  }
+
+  const fallbackFiles = fs.existsSync(artifactRoot)
+    ? fs.readdirSync(artifactRoot, { recursive: true })
+        .filter((entry) => typeof entry === "string" && entry.endsWith(".svg"))
+        .map((entry) => path.join(artifactRoot, entry))
+    : [];
+
+  return fallbackFiles;
+}
+
 function buildGa4Artifact(context) {
   return {
     tool: "ga4",
@@ -500,6 +538,36 @@ function buildFfmpegRenderArtifact(context) {
 }
 
 function buildPublishDryRunArtifact(context) {
+  const stepArtifactsDir = getStepArtifactsDir(context);
+  const publishBundlePath = path.join(stepArtifactsDir, "publication-plan.json");
+  const publishReceiptPath = path.join(stepArtifactsDir, "publish-receipt.json");
+  const previewFiles = collectPublishableArtifacts(context);
+  const destination = context.request_context?.channel ?? "instagram";
+  const bundle = {
+    tool: "publish-dry-run",
+    destination,
+    mode: "dry-run",
+    assets: previewFiles.map((filePath, index) => ({
+      index: index + 1,
+      path: filePath
+    })),
+    requested_asset_run_ids: context.request_context?.asset_run_ids ?? []
+  };
+
+  const receipt = {
+    tool: "publish-dry-run",
+    mode: "dry-run",
+    destination,
+    status: "packaged",
+    packaged_assets: previewFiles.length,
+    requested_at: new Date().toISOString(),
+    source_run_id: context.run_id,
+    publication_plan_path: publishBundlePath
+  };
+
+  writeJsonArtifact(publishBundlePath, bundle);
+  writeJsonArtifact(publishReceiptPath, receipt);
+
   return {
     tool: "publish-dry-run",
     artifact_type: "publish_receipt",
@@ -507,7 +575,11 @@ function buildPublishDryRunArtifact(context) {
     details: {
       workspace: context.workspace_slug,
       mode: "dry-run",
-      destination: context.request_context?.channel ?? "instagram"
+      destination,
+      publication_plan_path: publishBundlePath,
+      publish_receipt_path: publishReceiptPath,
+      packaged_assets: previewFiles.length,
+      asset_run_ids: context.request_context?.asset_run_ids ?? []
     }
   };
 }

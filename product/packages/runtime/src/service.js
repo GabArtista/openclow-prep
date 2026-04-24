@@ -441,6 +441,8 @@ export class RuntimeService {
       "shot_plan.json": "Plano de shots consolidado",
       "edit_decision_list.json": "Edit decision list consolidado",
       "vfx_plan.json": "Plano de VFX consolidado",
+      "publication_plan.json": "Plano de publicacao consolidado",
+      "publish_receipt.json": "Recibo de publicacao dry-run consolidado",
       "creative_intent.json": "Intento criativo consolidado",
       "approval_packet.json": "Pacote de aprovacao preparado",
       "brand_context.json": "Contexto de marca consolidado",
