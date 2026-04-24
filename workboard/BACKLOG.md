@@ -14,17 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-042 | Implementar `publishing-control` como empacotamento dry-run do fluxo criativo
+### TASK-043 | Implementar adapters de publicação por canal em staging-first
 - **Tipo:** research
 - **Prioridade:** P1
-- **Tamanho:** M
+- **Tamanho:** L
 - **Status:** `backlog`
-- **Objetivo:** conectar `creative-image` e `creative-video` a um fluxo de empacotamento dry-run com receipts persistidos, sem publicação real por default.
-- **Dependências:** TASK-041 concluída
+- **Objetivo:** expandir o handoff de `publishing-control` para adapters por canal em staging-first, ainda sem escrita externa por default.
+- **Dependências:** TASK-042 concluída
 - **Output esperado:**
-  - fluxo `publishing-control` implementado no `product/`
-  - artifacts persistidos de `publication_plan` e `publish_receipt`
-  - regressão cobrindo o handoff criativo para publicação dry-run
-  - documentação local/staging do empacotamento de entrega
+  - adapters de destino versionados para canais prioritários
+  - receipts mais detalhados por canal em modo staging/dry-run
+  - regressão cobrindo roteamento de destino sem publicação real
+  - documentação de guardrails por canal
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

@@ -64,12 +64,14 @@ O baseline do produto agora também inclui o primeiro corte da trilha criativa:
 - `creative-qa`
 - `creative-image`
 - `creative-video`
+- `publishing-control`
 
 Neste corte:
 - os squads já existem como seeds do produto
-- o fluxo `contexto -> referencia -> composicao/render -> QA` já pode ser iniciado localmente para imagem e video curto
+- o fluxo `contexto -> referencia -> composicao/render -> QA -> publishing dry-run` já pode ser iniciado localmente para imagem e video curto
 - `creative-image` persiste plano de assets, composicao declarativa, previews renderizaveis em SVG e gallery HTML de dry-run
 - `creative-video` persiste `shot_plan`, `vfx_plan`, `edit_decision_list`, storyboard vertical, previews SVG e playlist de dry-run
+- `publishing-control` persiste `publication_plan`, `publish_receipt` e empacota assets anteriores sem publicar em producao
 - o objetivo ainda é `local-dev` e `staging`
 - produção continua fora do caminho default
 
@@ -78,3 +80,4 @@ O que ainda nao entra neste corte:
 - publicação real por default
 - render final dependente de stack externa além do dry-run local/staging
 - integrações multimodais pesadas fora do perfil local/staging
+- qualquer escrita externa além do empacotamento local de dry-run

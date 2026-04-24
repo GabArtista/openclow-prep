@@ -15,6 +15,7 @@
 7. validar rollback de capability com trilha auditável
 8. validar o primeiro fluxo renderizável de `creative-image` com artifacts persistidos
 9. validar o primeiro fluxo vertical renderizável de `creative-video` com shot plan, edit plan e previews persistidos
+10. validar o handoff criativo para `publishing-control` com `publication_plan` e `publish_receipt` persistidos
 
 ## Scenario matrix
 
@@ -29,6 +30,7 @@
 | Restart recovery | reiniciar API/worker | run retoma do último estado seguro | staging only |
 | Creative image render | renderizar a primeira peça estática/carrossel | `asset_plan`, `composition_plan`, `preview_manifest` e previews persistidos | staging only |
 | Creative video render | renderizar o primeiro corte vertical curto | `shot_plan`, `edit_decision_list`, `preview_manifest` e previews verticais persistidos | staging only |
+| Publishing dry-run | empacotar criativos aprovados | `publication_plan`, `publish_receipt` e bundle persistidos | staging only |
 
 ## Acceptance criteria
 
@@ -38,6 +40,7 @@
 - os outputs precisam permanecer consultáveis após restart
 - o fluxo `creative-image` precisa persistir arquivos renderizáveis consultáveis no storage local
 - o fluxo `creative-video` precisa persistir storyboard, previews e playlist consultáveis no storage local
+- o fluxo `publishing-control` precisa persistir bundle e recibo de dry-run sem publicar em sistema externo
 - qualquer validação em produção continua proibida até o gate staging ficar verde
 - o comando `npm --prefix product run regression` executa a suíte completa sem passos manuais intermediários
 

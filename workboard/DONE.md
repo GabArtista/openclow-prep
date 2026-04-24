@@ -21,6 +21,27 @@
 
 ## Histórico
 
+### TASK-042 | Implementar `publishing-control` como empacotamento dry-run do fluxo criativo
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #28 (fechada)
+- **Branch:** task/28-publishing-control-dry-run
+- **Output produzido:**
+  - `product/packages/shared/src/seeds.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/tools/src/runner.js`
+  - `product/tests/e2e/run.mjs`
+  - `product/README.md`
+  - `product/tests/e2e/README.md`
+  - `product/tests/e2e/SCENARIO_MATRIX.md`
+  - `product/tests/e2e/README-RUNBOOK.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-042-complete.md`
+- **Notas:** O produto agora executa `publishing-control` como handoff criativo de staging/dry-run, persistindo `publication_plan`, `publish_receipt` e bundle local sem chamar APIs externas.
+
 ### TASK-041 | Implementar `creative-video` como primeiro fluxo vertical renderizável
 - **Concluída em:** 2026-04-24
 - **Por:** codex

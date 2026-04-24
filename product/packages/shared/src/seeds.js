@@ -331,6 +331,47 @@ function createCreativeVideoSteps() {
   ];
 }
 
+function createPublishingControlSteps() {
+  return [
+    {
+      id: "planejar-publicacao",
+      kind: "prompt",
+      executor: "inline",
+      label: "Consolida o plano de publicacao e handoff de entrega",
+      output_contracts: ["publication_plan.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "empacotar-dry-run",
+      kind: "tool",
+      executor: "tool-runner",
+      label: "Empacota os assets aprovados em modo dry-run",
+      tool_slugs: ["publish-dry-run"],
+      input_contracts: ["publication_plan.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "aprovar-handoff",
+      kind: "checkpoint",
+      executor: "checkpoint",
+      label: "Aprovar handoff de publicacao em dry-run",
+      input_contracts: ["publish_receipt.json"],
+      requiresCheckpoint: true,
+      on_reject: "planejar-publicacao",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand-and-delivery",
+      risk_level: "high"
+    }
+  ];
+}
+
 export function createSeeds() {
   const capabilities = [
     {
@@ -654,6 +695,7 @@ export function createSeeds() {
   const creativeQaId = createId();
   const creativeImageId = createId();
   const creativeVideoId = createId();
+  const publishingControlId = createId();
 
   const squads = [
     {
@@ -796,6 +838,27 @@ export function createSeeds() {
         .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
         .map((capability) => capability.id),
       steps: createCreativeVideoSteps()
+    },
+    {
+      id: publishingControlId,
+      slug: "publishing-control",
+      name: "Publishing Control",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) => ["publish-dry-run", "brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "fast",
+      system_family: "publishing",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      steps: createPublishingControlSteps()
     }
   ];
 
