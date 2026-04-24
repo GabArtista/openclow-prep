@@ -98,6 +98,122 @@ function createIntelligenceSteps() {
   ];
 }
 
+function createCreativeControlSteps() {
+  return [
+    {
+      id: "resolver-contexto",
+      kind: "subagent",
+      executor: "subagent",
+      label: "Resolve contexto de marca, campanha e verdade operacional",
+      tool_slugs: ["brand-context-orchestrator"],
+      output_contracts: ["brand_context.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "local-dev",
+      qa_gate: "none",
+      risk_level: "low"
+    },
+    {
+      id: "construir-intencao",
+      kind: "prompt",
+      executor: "inline",
+      label: "Consolida intenção criativa e packet de aprovação",
+      input_contracts: ["brand_context.json", "reference_pack.json"],
+      output_contracts: ["creative_intent.json", "approval_packet.json"],
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      qa_gate: "brand",
+      risk_level: "medium"
+    },
+    {
+      id: "aprovar-intencao",
+      kind: "checkpoint",
+      executor: "checkpoint",
+      label: "Aprovar intenção criativa antes da composição",
+      input_contracts: ["approval_packet.json"],
+      requiresCheckpoint: true,
+      on_reject: "resolver-contexto",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand",
+      risk_level: "medium"
+    }
+  ];
+}
+
+function createReferenceLabSteps() {
+  return [
+    {
+      id: "ingestao-referencias",
+      kind: "tool",
+      executor: "subagent",
+      label: "Ingesta referências explícitas e assets anexados",
+      tool_slugs: ["reference-fetcher"],
+      output_contracts: ["reference_pack.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "local-dev",
+      qa_gate: "none",
+      risk_level: "low"
+    },
+    {
+      id: "enriquecimento-estilo",
+      kind: "subagent",
+      executor: "subagent",
+      label: "Enriquece referências em sinais visuais e anti-patterns",
+      tool_slugs: ["reference-enricher"],
+      input_contracts: ["reference_pack.json"],
+      output_contracts: ["style_signals.json", "visual_anti_patterns.json", "reference_pack.json"],
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      qa_gate: "brand",
+      risk_level: "low"
+    }
+  ];
+}
+
+function createCreativeQaSteps() {
+  return [
+    {
+      id: "qa-identidade",
+      kind: "prompt",
+      executor: "inline",
+      label: "Executa QA de identidade da peça",
+      tool_slugs: ["brand-qa"],
+      input_contracts: ["creative_intent.json"],
+      output_contracts: ["qa_report_brand.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand",
+      risk_level: "medium"
+    },
+    {
+      id: "qa-entrega",
+      kind: "prompt",
+      executor: "inline",
+      label: "Executa QA técnico e readiness de entrega",
+      tool_slugs: ["delivery-qa"],
+      input_contracts: ["creative_intent.json"],
+      output_contracts: ["qa_report_delivery.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "aprovar-qa",
+      kind: "checkpoint",
+      executor: "checkpoint",
+      label: "Aprovar QA antes da publicação ou render final",
+      input_contracts: ["qa_report_brand.json", "qa_report_delivery.json"],
+      requiresCheckpoint: true,
+      on_reject: "qa-identidade",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand-and-delivery",
+      risk_level: "high"
+    }
+  ];
+}
+
 export function createSeeds() {
   const capabilities = [
     {
@@ -195,11 +311,176 @@ export function createSeeds() {
       risk_level: "high",
       allowed_tools: [],
       summary: "Capability interna para criar, revisar e promover outras capabilities"
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "brand-context-orchestrator",
+      name: "Brand Context Orchestrator",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["brand-context-orchestrator"],
+      summary: "Resolve brand profile, campaign context e verdade operacional",
+      system_family: "creative",
+      machine_profile: "cpu-safe",
+      environment_scope: "local-dev",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["brand_context.json"]
+    },
+    {
+      id: createId(),
+      kind: "tool",
+      slug: "reference-fetcher",
+      name: "Reference Fetcher",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "low",
+      allowed_tools: ["reference-fetcher"],
+      summary: "Ingesta links e assets de referência",
+      system_family: "creative",
+      machine_profile: "cpu-safe",
+      environment_scope: "local-dev",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["reference_pack.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "reference-enricher",
+      name: "Reference Enricher",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "low",
+      allowed_tools: ["reference-enricher"],
+      summary: "Traduz referências em sinais visuais e anti-patterns",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["reference_pack.json", "style_signals.json", "visual_anti_patterns.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "creative-director",
+      name: "Creative Director",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["creative-director"],
+      summary: "Consolida intenção criativa e treatment executável",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      supports_dry_run: true,
+      requires_checkpoint: true,
+      artifact_contracts: ["creative_intent.json", "approval_packet.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "brand-qa",
+      name: "Brand QA",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["brand-qa"],
+      summary: "Valida aderência da peça à identidade da empresa",
+      system_family: "creative",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: true,
+      artifact_contracts: ["qa_report_brand.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "delivery-qa",
+      name: "Delivery QA",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["delivery-qa"],
+      summary: "Valida export, pacing e readiness de entrega",
+      system_family: "creative",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: true,
+      artifact_contracts: ["qa_report_delivery.json"]
+    },
+    {
+      id: createId(),
+      kind: "tool",
+      slug: "paperclip-composer",
+      name: "Paperclip Composer",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["paperclip-composer"],
+      summary: "Composição declarativa de layouts, timelines e overlays",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["asset_plan.json", "shot_plan.json"]
+    },
+    {
+      id: createId(),
+      kind: "tool",
+      slug: "ffmpeg-render",
+      name: "FFmpeg Render",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["ffmpeg-render"],
+      summary: "Render, transformações de mídia e extração de previews",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["edit_decision_list.json", "preview_manifest.json", "vfx_plan.json"]
+    },
+    {
+      id: createId(),
+      kind: "tool",
+      slug: "publish-dry-run",
+      name: "Publish Dry Run",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "high",
+      allowed_tools: ["publish-dry-run"],
+      summary: "Empacota publicação em modo dry-run e gera receipts",
+      system_family: "publishing",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: true,
+      artifact_contracts: ["publication_plan.json", "publish_receipt.json"]
     }
   ];
 
   const marketingId = createId();
   const intelligenceId = createId();
+  const creativeControlId = createId();
+  const referenceLabId = createId();
+  const creativeQaId = createId();
 
   const squads = [
     {
@@ -227,6 +508,69 @@ export function createSeeds() {
       memory_scope: "squad",
       default_model_tier: "powerful",
       steps: createIntelligenceSteps()
+    },
+    {
+      id: creativeControlId,
+      slug: "creative-control",
+      name: "Creative Control",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) =>
+          ["brand-context-orchestrator", "creative-director", "brand-qa", "delivery-qa"].includes(capability.slug)
+        )
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "powerful",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      steps: createCreativeControlSteps()
+    },
+    {
+      id: referenceLabId,
+      slug: "reference-lab",
+      name: "Reference Lab",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) => ["reference-fetcher", "reference-enricher"].includes(capability.slug))
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "powerful",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: [],
+      steps: createReferenceLabSteps()
+    },
+    {
+      id: creativeQaId,
+      slug: "creative-qa",
+      name: "Creative QA",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "fast",
+      system_family: "creative",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      steps: createCreativeQaSteps()
     }
   ];
 

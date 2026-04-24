@@ -14,17 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-038 | Transformar a arquitetura criativa em contracts e seeds implementáveis
+### TASK-039 | Implementar o primeiro corte do sistema criativo em `product/`
 - **Tipo:** research
 - **Prioridade:** P1
 - **Tamanho:** M
 - **Status:** `backlog`
-- **Objetivo:** converter a arquitetura de referência dos workflows criativos em contracts públicos, manifests de squads/skills/tools e backlog de implementação dentro de `product/`.
-- **Dependências:** TASK-037 concluída
+- **Objetivo:** implementar no produto o primeiro corte criativo já definido por `TASK-038`: `creative-control`, `reference-lab` e `creative-qa`, com seeds, contracts e leitura básica via API/dashboard.
+- **Dependências:** TASK-038 concluída
 - **Output esperado:**
-  - `research/architecture/creative-agent-contracts.md`
-  - `research/architecture/creative-squad-manifests.md`
-  - recomendação de alterações em `product/packages/shared/contracts/v1/`
-  - definição do primeiro corte implementável em `product/`
+  - atualização do runtime e da API para expor os squads criativos seeded
+  - primeiro fluxo criativo consultável e iniciável no `product/`
+  - harness ou smoke test cobrindo o fluxo básico de contexto → referência → QA
+  - documentação de uso local/staging do corte criativo inicial
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

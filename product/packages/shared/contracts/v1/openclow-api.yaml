@@ -6,6 +6,8 @@ info:
     API minima do MVP para capabilities, runs, checkpoints, approvals e outputs.
     Mutating requests carry actor/requested_by/workspace_slug in the current MVP
     until dedicated session and identity headers are introduced.
+    Creative workflows may also declare machine_profile, environment_scope
+    and artifact contracts inside the public schemas.
 servers:
   - url: https://openclow.local/v1
 paths:
@@ -26,6 +28,12 @@ paths:
       responses:
         "201":
           description: Capability created
+  /squads:
+    get:
+      summary: List squads
+      responses:
+        "200":
+          description: Squad collection
   /capabilities/{capabilityId}:
     get:
       summary: Get capability
@@ -117,6 +125,12 @@ paths:
       responses:
         "200":
           description: Output collection
+  /checkpoints:
+    get:
+      summary: List checkpoints
+      responses:
+        "200":
+          description: Checkpoint collection
   /checkpoints/{checkpointId}/approve:
     post:
       summary: Approve checkpoint

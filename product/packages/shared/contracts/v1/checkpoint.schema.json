@@ -37,6 +37,10 @@
       "type": "string",
       "minLength": 1
     },
+    "gate_kind": {
+      "type": "string",
+      "enum": ["strategy", "content", "design", "brand-qa", "delivery-qa", "publication"]
+    },
     "on_reject": {
       "type": "string"
     },
