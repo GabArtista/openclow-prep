@@ -21,6 +21,22 @@
 
 ## Histórico
 
+### TASK-031 | Expandir o dashboard operacional para o fluxo real de squads
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `product/apps/dashboard/src/index.html`
+  - `product/apps/dashboard/src/app.js`
+  - `product/apps/dashboard/src/server.js`
+  - `product/apps/api/src/server.js`
+  - `product/package.json`
+  - `product/tests/e2e/run.mjs`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O dashboard foi reestruturado para run view, step view, checkpoint panel, outputs e histórico, e o harness E2E passou a validar também a superfície do dashboard com injection do `OPENCLOW_API_BASE`.
+
 ### TASK-027 | Instrumentar observabilidade, segurança e rollback operacional
 - **Concluída em:** 2026-04-24
 - **Por:** codex

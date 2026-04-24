@@ -12,7 +12,9 @@ const queuePath = path.join(stateDir, "queue.json");
 const artifactsIndexPath = path.join(stateDir, "artifacts.json");
 const artifactsDir = path.join(stateDir, "artifacts");
 const port = 3201;
+const dashboardPort = 3202;
 const baseUrl = `http://127.0.0.1:${port}`;
+const dashboardBaseUrl = `http://127.0.0.1:${dashboardPort}`;
 
 function log(message) {
   console.log(`[e2e] ${message}`);
@@ -42,6 +44,17 @@ async function requestJson(pathname, options = {}) {
   return payload;
 }
 
+async function requestText(base, pathname) {
+  const response = await fetch(`${base}${pathname}`);
+  const payload = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return payload;
+}
+
 function assertDurableStorage() {
   assert(existsSync(statePath), "Persistent state file should exist");
   assert(existsSync(queuePath), "Persistent queue file should exist");
@@ -66,6 +79,23 @@ async function waitForHealth() {
   throw new Error("API did not become healthy in time");
 }
 
+async function waitForDashboard() {
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    try {
+      const payload = await requestText(dashboardBaseUrl, "/");
+      if (payload.includes("OpenClow Local Control Plane")) {
+        return;
+      }
+    } catch {
+      // keep waiting
+    }
+
+    await delay(250);
+  }
+
+  throw new Error("Dashboard did not become available in time");
+}
+
 function startApi() {
   const child = spawn("node", ["apps/api/src/server.js"], {
     cwd: productRoot,
@@ -80,6 +110,23 @@ function startApi() {
 
   child.stdout.on("data", (chunk) => process.stdout.write(`[api] ${chunk}`));
   child.stderr.on("data", (chunk) => process.stderr.write(`[api] ${chunk}`));
+
+  return child;
+}
+
+function startDashboard() {
+  const child = spawn("node", ["apps/dashboard/src/server.js"], {
+    cwd: productRoot,
+    env: {
+      ...process.env,
+      OPENCLOW_DASHBOARD_PORT: String(dashboardPort),
+      OPENCLOW_API_BASE: baseUrl
+    },
+    stdio: ["ignore", "pipe", "pipe"]
+  });
+
+  child.stdout.on("data", (chunk) => process.stdout.write(`[dashboard] ${chunk}`));
+  child.stderr.on("data", (chunk) => process.stderr.write(`[dashboard] ${chunk}`));
 
   return child;
 }
@@ -323,9 +370,16 @@ async function runRestartRecoveryScenario(apiProcess) {
 
 async function main() {
   const apiProcess = startApi();
+  const dashboardProcess = startDashboard();
 
   try {
     await waitForHealth();
+    await waitForDashboard();
+
+    const dashboardHtml = await requestText(dashboardBaseUrl, "/");
+    assert(dashboardHtml.includes("window.OPENCLOW_API_BASE"), "Dashboard should inject API base");
+    assert(dashboardHtml.includes("Run view"), "Dashboard should expose run view");
+    assert(dashboardHtml.includes("Checkpoint panel"), "Dashboard should expose checkpoint panel");
 
     const marketingRunId = await runMarketingScenario();
     const intelligenceRunId = await runIntelligenceScenario();
@@ -355,9 +409,11 @@ async function main() {
     log(`intelligence run: ${intelligenceRunId}`);
     log("all scenarios passed");
 
+    await stop(dashboardProcess);
     await stop(restartedApi);
   } finally {
     await stop(apiProcess);
+    await stop(dashboardProcess);
     rmSync(stateDir, { recursive: true, force: true });
   }
 }

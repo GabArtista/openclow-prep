@@ -19,6 +19,8 @@ const files = {
   }
 };
 
+const apiBase = process.env.OPENCLOW_API_BASE ?? "http://127.0.0.1:3001";
+
 const server = http.createServer((request, response) => {
   const target = files[new URL(request.url, `http://${host}:${port}`).pathname];
 
@@ -27,7 +29,16 @@ const server = http.createServer((request, response) => {
     return;
   }
 
-  sendText(response, 200, fs.readFileSync(target.path, "utf8"), target.contentType);
+  let content = fs.readFileSync(target.path, "utf8");
+
+  if (request.url === "/" || request.url === "/index.html") {
+    content = content.replace(
+      "</head>",
+      `<script>window.OPENCLOW_API_BASE = ${JSON.stringify(apiBase)};</script></head>`
+    );
+  }
+
+  sendText(response, 200, content, target.contentType);
 });
 
 server.listen(port, host, () => {

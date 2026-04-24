@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 030 completed)
+- **last-updated-by:** codex (task 031 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,34 +17,35 @@
 
 ## Tasks em Voo
 
-1. TASK-030 concluída com storage durável e queue separada.
-2. Próximo passo: iniciar a próxima task do backlog conforme a prioridade atual.
+1. TASK-031 concluída com dashboard operacional expandido e smoke E2E validado.
+2. Próximo passo: iniciar a próxima task do backlog ou consolidar regressão adicional.
 
 ---
 
 ## Última Ação Completada
 
-Consolidação documental e de contratos para o próximo corte do programa, agora com a TASK-030 concluída para integrar persistência transacional e filas duráveis.
+Consolidação da expansão do dashboard operacional para o fluxo real de squads e validação E2E do smoke do dashboard.
 
 **Mudanças concluídas nesta sessão:**
-- backlog reconciliado e Squad 1 semeado com tarefas futuras em `workboard/BACKLOG.md`
-- `workboard/DONE.md` atualizado para incluir `TASK-013`, `TASK-014`, `TASK-015`, `TASK-016`, `TASK-020`, `TASK-027`, `TASK-028`, `TASK-029` e `TASK-030`
+- dashboard reestruturado para run view, step view, checkpoint panel, outputs e histórico
+- servidor do dashboard passou a injetar `OPENCLOW_API_BASE` no HTML servido
+- harness E2E passou a validar o dashboard além das jornadas de marketing, inteligência, promotion/rollback e restart recovery
+- `workboard/DONE.md` atualizado para incluir `TASK-031`
 - `workboard/IN_PROGRESS.md` zerado
-- `handoffs/ACTIVE.md` atualizado para refletir a conclusão da TASK-030
-- documentação de preparação da `TASK-028` criada e expandida
-- contrato E2E staging-first documentado
-- contrato já mapeado contra a API/runtime atual
-- harness executável validado localmente com sucesso
+- `handoffs/ACTIVE.md` reconciliado para refletir a conclusão da TASK-031
+- dashboard reestruturado para run view, step view, checkpoint panel, outputs e histórico
+- servidor do dashboard passou a injetar `OPENCLOW_API_BASE` no HTML servido
+- harness E2E passou a validar o dashboard além das jornadas de marketing, inteligência, promotion/rollback e restart recovery
 
 ---
 
 ## Próxima Ação Recomendada
 
 1. Iniciar a próxima task do backlog
-2. Se necessário, reutilizar o harness E2E como regressão para o próximo incremento
+2. Consolidar regressão adicional se o próximo corte exigir
 3. Manter `openclow-prep` como base operacional da Doze
 
-**Papéis recomendados para a próxima sessão:** `Program Architect`, `Durable Runtime Analyst`, `Observability and Evals Analyst`, `Security and Agency Boundaries Analyst`, `Documentation Agent`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Documentation Agent`
 
 ---
 
@@ -56,7 +57,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-030-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-031-complete.md`
 
 ---
 

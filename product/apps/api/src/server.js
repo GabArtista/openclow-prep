@@ -137,6 +137,20 @@ async function handler(request, response) {
       return;
     }
 
+    if (request.method === "GET" && matchRoute(segments, ["v1", "runs", "*", "checkpoints"])) {
+      const run = runtime.getRun(segments[2]);
+
+      if (!run) {
+        notFound(response, "Run not found");
+        return;
+      }
+
+      sendJson(response, 200, {
+        items: run.checkpoints
+      });
+      return;
+    }
+
     if (request.method === "GET" && matchRoute(segments, ["v1", "runs", "*", "artifacts"])) {
       const run = runtime.getRun(segments[2]);
 
