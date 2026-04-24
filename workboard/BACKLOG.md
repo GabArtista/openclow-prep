@@ -12,25 +12,20 @@
 
 ### P0 — Crítico (Caminho Crítico)
 
-### TASK-023 | P0 | L | Implementar o core server-first do OpenClow em `product/`
-- **Output:** scaffold funcional em `product/apps/api`, `product/apps/dashboard`, `product/apps/worker` e pacotes base
-- **Critério de aceite:** o core mínimo consegue modelar capabilities, iniciar runs, registrar checkpoints e expor histórico sem quebrar a operação atual da Doze na raiz do repositório
-- **Dependências:** TASK-021, TASK-022
-
 ### TASK-024 | P0 | M | Integrar runtime local, filas e persistência base
 - **Output:** wiring inicial com `Ollama`, `Postgres`, `Redis` e `MinIO` em `product/`
 - **Critério de aceite:** tiers `fast` e `powerful`, run state, artifact persistence e retry/restart funcionam no ambiente de referência sem tocar produção por default
-- **Dependências:** TASK-023
+- **Dependências:** nenhuma
 
 ### TASK-025 | P0 | L | Portar capacidades day-1 da Doze para o OpenClow
 - **Output:** capacidades equivalentes a `marketing-dozecrew` e `inteligencia-dozecrew`, mais integrações reais day-1
 - **Critério de aceite:** o produto reproduz os fluxos que hoje já sustentam o trabalho da Doze com as empresas da 12, mas com enforcement próprio e lifecycle `draft/staging/active`
-- **Dependências:** TASK-023, TASK-024
+- **Dependências:** TASK-024
 
 ### TASK-026 | P0 | M | Implementar registry, promotion flow e meta-squad do MVP
 - **Output:** lifecycle de capabilities, promotion/rollback e base do meta-squad
 - **Critério de aceite:** novas capabilities podem ser criadas e promovidas até `staging`, nunca autopublicadas, com aprovação humana e trilha auditável
-- **Dependências:** TASK-023, TASK-024, TASK-025
+- **Dependências:** TASK-024, TASK-025
 
 ### TASK-027 | P0 | M | Instrumentar observabilidade, segurança e rollback operacional
 - **Output:** baseline de logs, tracing, allowlist de tools, rollback e hardening de segredos

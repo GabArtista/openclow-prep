@@ -1,0 +1,11 @@
+{
+  "name": "@openclow/product",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:api": "node apps/api/src/server.js",
+    "dev:worker": "node apps/worker/src/worker.js",
+    "dev:dashboard": "node apps/dashboard/src/server.js",
+    "check": "node --check apps/api/src/server.js && node --check apps/worker/src/worker.js && node --check apps/dashboard/src/server.js && node --check packages/shared/src/contracts.js && node --check packages/shared/src/http.js && node --check packages/shared/src/ids.js && node --check packages/shared/src/seeds.js && node --check packages/registry/src/service.js && node --check packages/orchestrator/src/service.js && node --check packages/runtime/src/service.js && node --check packages/skills/src/catalog.js"
+  }
+}

@@ -8,42 +8,43 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (product governance and bootstrap)
-- **last-updated-at:** 2026-04-23 20:50 -03
+- **last-updated-by:** codex (TASK-023 / core server-first complete)
+- **last-updated-at:** 2026-04-23 21:06 -03
 - **last-read-by:** codex
-- **last-read-at:** 2026-04-23 20:50 -03
+- **last-read-at:** 2026-04-23 21:06 -03
 
 ---
 
 ## Tasks em Voo
 
-1. Nenhuma task ativa no momento; `TASK-021 / TASK-022` foram concluídas na branch `task/2-product-monorepo-bootstrap`
-2. Próxima captura do bastão deve abrir `TASK-023` para iniciar o core server-first em `product/`
+1. Nenhuma task ativa no momento; `TASK-023` foi concluída na branch `task/4-core-server-first`
+2. Próxima captura do bastão deve abrir `TASK-024` para integrar runtime real, filas e persistência base
 
 ---
 
 ## Última Ação Completada
 
-Fechamento da governança do `product/`, aceite dos ADRs-base e bootstrap inicial do monorepo separado.
+Conclusão de `TASK-023` com core server-first executável em `product/`.
 
 **Mudanças concluídas nesta sessão:**
-- `research/ecosystem-fit/opensquad-portability-matrix.md` criado para fechar a matriz de portabilidade do benchmark operacional atual da Doze
-- ADR-0001 a ADR-0005 aceitos como baseline de bootstrap
-- `decisions/ADR-0006-product-workspace-monorepo-boundary.md` criado para liberar implementação apenas em `product/`
-- `AGENTS.md`, `MISSION.md`, `README.md`, `context/POLICY.md`, `squads/squad-0/CHARTER.md`, `squads/squad-0/WORKPLAN.md` e `workboard/` atualizados para refletir a nova governança
-- `.github/workflows/validate-structure.yml` atualizado para validar a fronteira de código em `product/`
-- `product/` bootstrapado com layout inicial de apps, packages, infra, E2E e contratos públicos versionados
-- o papel da raiz do repositório como base operacional atual da Doze com as empresas da 12 foi incorporado à decisão e aos guardrails
+- issue `#4` aberta para `TASK-023`
+- branch `task/4-core-server-first` criada
+- `product/package.json` criado com scripts de API, worker, dashboard e check sintático
+- API HTTP local implementada com endpoints para capabilities, squads, runs, checkpoints, outputs, history e worker tick
+- worker local implementado com polling HTTP e pausa em checkpoints humanos
+- dashboard estático implementado para visualizar workspace `doze`, iniciar runs e decidir checkpoints
+- services iniciais de `shared`, `registry`, `orchestrator`, `runtime` e `skills` criados
+- smoke test executado: criação de run do `marketing-dozecrew`, avanço do worker e pausa correta no primeiro checkpoint humano
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Abrir issue para `TASK-023`
-2. Implementar o core server-first do OpenClow em `product/`
+1. Abrir `TASK-024`
+2. Integrar `Ollama`, persistência real e filas ao core atual
 3. Manter a raiz estável para não quebrar o modo atual de operação da Doze
 
-**Papéis recomendados para a próxima sessão:** `Program Architect`, `Backlog Manager`, `Durable Runtime Analyst`
+**Papéis recomendados para a próxima sessão:** `Durable Runtime Analyst`, `Program Architect`, `Observability and Evals Analyst`
 
 ---
 
@@ -55,22 +56,22 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-23-codex-product-bootstrap.md`
+`handoffs/snapshots/2026-04-23-codex-core-server-first.md`
 
 ---
 
 ## Notas para o Próximo Agente
 
-O repositório agora tem uma regra operacional clara:
+O repositório agora tem duas camadas ativas e coerentes:
 
 - a raiz continua sendo a base de trabalho atual da Doze com as empresas da 12
-- o build do OpenClow acontece somente em `product/`
-- o benchmark `mkt-ag-dozecrew/opensquad` foi assumido como referência operacional do day-1
-- os contratos públicos mínimos já existem e o próximo passo correto é implementá-los
+- `product/` já possui um core server-first executável para desenvolvimento local
+- o benchmark `mkt-ag-dozecrew/opensquad` já influencia seeds, fluxos e checkpoints do workspace `doze`
+- o próximo salto não é mais scaffold, e sim integração com runtime e persistência reais
 
 **O que fazer a seguir:**
-- abrir `TASK-023` e escolher a stack inicial do core server-first
-- ligar o runtime mínimo ao contrato já definido
-- começar a portabilidade dos squads de marketing e inteligência sem romper o fluxo operacional atual
+- abrir `TASK-024`
+- ligar `Ollama`, `Postgres`, `Redis` e `MinIO` ao core já implementado
+- preparar o endurecimento do lifecycle de capabilities e a portabilidade day-1
 
-**Próximo agente recomendado:** `Program Architect` com apoio de `Durable Runtime Analyst`
+**Próximo agente recomendado:** `Durable Runtime Analyst` com apoio de `Program Architect`

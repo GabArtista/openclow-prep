@@ -6,3 +6,7 @@ Responsável por:
 - manter lifecycle `draft`, `staging`, `active`, `retired`
 - registrar promotion, rollback e aprovação
 - servir de base para o meta-squad
+
+## Primeiro corte executável
+
+`src/service.js` já lista e cria capabilities no runtime local de desenvolvimento.

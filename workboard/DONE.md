@@ -21,6 +21,28 @@
 
 ## Histórico
 
+### TASK-023 | Implementar o core server-first do OpenClow em `product/`
+- **Concluída em:** 2026-04-23
+- **Por:** codex
+- **Issue:** #4 (fechada)
+- **Branch:** task/4-core-server-first
+- **Output produzido:**
+  - `product/package.json`
+  - `product/.gitignore`
+  - `product/apps/api/src/server.js`
+  - `product/apps/api/src/state.js`
+  - `product/apps/worker/src/worker.js`
+  - `product/apps/dashboard/src/server.js`
+  - `product/apps/dashboard/src/index.html`
+  - `product/apps/dashboard/src/app.js`
+  - `product/packages/shared/src/`
+  - `product/packages/registry/src/service.js`
+  - `product/packages/orchestrator/src/service.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/skills/src/catalog.js`
+  - atualização dos READMEs de `product/`
+- **Notas:** O core inicial ficou sem dependências externas, com API HTTP local como fonte de verdade em memória, worker por polling HTTP e dashboard estático; smoke test validou criação de run e pausa no primeiro checkpoint humano do squad de marketing.
+
 ### TASK-021 / TASK-022 | Governança do `product/` e bootstrap inicial do monorepo separado
 - **Concluída em:** 2026-04-23
 - **Por:** codex

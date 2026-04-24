@@ -27,6 +27,6 @@ Nenhuma task ativa no momento.
 
 Próxima captura do bastão:
 
-- abrir issue para `TASK-023`
-- criar branch `task/<issue>-core-server-first`
-- continuar a partir de `handoffs/snapshots/2026-04-23-codex-product-bootstrap.md`
+- abrir `TASK-024`
+- integrar `Ollama`, persistência e filas ao core já implementado em `product/`
+- continuar a partir de `handoffs/snapshots/2026-04-23-codex-core-server-first.md`
