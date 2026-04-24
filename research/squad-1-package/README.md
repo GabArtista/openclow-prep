@@ -6,3 +6,4 @@ Trilha para a definição formal do Squad 1 e os insumos diretos de handoff.
 
 - `squad-1-definition.md`
 - `mvp-execution-plan.md`
+- `task-028-prep-checklist.md`

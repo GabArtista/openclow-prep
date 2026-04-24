@@ -12,26 +12,6 @@
 
 ### P0 — Crítico (Caminho Crítico)
 
-### TASK-024 | P0 | M | Integrar runtime local, filas e persistência base
-- **Output:** wiring inicial com `Ollama`, `Postgres`, `Redis` e `MinIO` em `product/`
-- **Critério de aceite:** tiers `fast` e `powerful`, run state, artifact persistence e retry/restart funcionam no ambiente de referência sem tocar produção por default
-- **Dependências:** nenhuma
-
-### TASK-025 | P0 | L | Portar capacidades day-1 da Doze para o OpenClow
-- **Output:** capacidades equivalentes a `marketing-dozecrew` e `inteligencia-dozecrew`, mais integrações reais day-1
-- **Critério de aceite:** o produto reproduz os fluxos que hoje já sustentam o trabalho da Doze com as empresas da 12, mas com enforcement próprio e lifecycle `draft/staging/active`
-- **Dependências:** TASK-024
-
-### TASK-026 | P0 | M | Implementar registry, promotion flow e meta-squad do MVP
-- **Output:** lifecycle de capabilities, promotion/rollback e base do meta-squad
-- **Critério de aceite:** novas capabilities podem ser criadas e promovidas até `staging`, nunca autopublicadas, com aprovação humana e trilha auditável
-- **Dependências:** TASK-024, TASK-025
-
-### TASK-027 | P0 | M | Instrumentar observabilidade, segurança e rollback operacional
-- **Output:** baseline de logs, tracing, allowlist de tools, rollback e hardening de segredos
-- **Critério de aceite:** ações externas sem checkpoint falham, capabilities sem permissão não executam tools fora da allowlist e o sistema produz trilha operacional útil
-- **Dependências:** TASK-024, TASK-025, TASK-026
-
 ### TASK-028 | P0 | M | Rodar E2E staging-first e preparar validações controladas em produção
 - **Output:** suíte E2E em `product/tests/e2e` e runbook de homologação
 - **Critério de aceite:** marketing, inteligência, checkpoints, promotion e persistência passam em staging; qualquer validação em produção fica restrita a leitura/dry-run com aprovação explícita

@@ -7,42 +7,41 @@
 
 ## Estado do Bastão
 
-- **baton:** codex
-- **last-updated-by:** codex (TASK-027 observability baseline checkpointed)
-- **last-updated-at:** 2026-04-24 12:10 -03
+- **baton:** UNASSIGNED
+- **last-updated-by:** codex (status reestruturado / TASK-028 prep)
+- **last-updated-at:** 2026-04-24 12:20 -03
 - **last-read-by:** codex
-- **last-read-at:** 2026-04-24 12:02 -03
+- **last-read-at:** 2026-04-24 12:20 -03
 
 ---
 
 ## Tasks em Voo
 
-1. `TASK-027` em execução na branch `task/12-observability-security`
-2. Foco atual: baseline de observabilidade, allowlist de tools e rollback operacional
+1. Nenhuma task em voo.
+2. Próximo passo: seguir o checklist de preparação da `TASK-028`.
 
 ---
 
 ## Última Ação Completada
 
-Conclusão de `TASK-026` com registry, promotion flow e base do meta-squad do MVP.
+Reestruturação do status operacional para refletir o estado real do projeto após TASK-024 a TASK-027.
 
 **Mudanças concluídas nesta sessão:**
-- issue `#12` aberta para `TASK-027`
-- branch `task/12-observability-security` criada a partir de `origin/main`
-- `TASK-026` mergeada no `main` após aprovação explícita do PR `#11`
-- `workboard/IN_PROGRESS.md` atualizado para a nova task em execução
-- trilha de auditoria persistida criada e smoke-testada com capability e promotion events
-- branch `task/12-observability-security` publicada e PR draft `#13` aberto
+- backlog limpo para deixar só trabalho futuro em `workboard/BACKLOG.md`
+- `workboard/DONE.md` atualizado para incluir `TASK-027`
+- `workboard/IN_PROGRESS.md` zerado
+- `handoffs/ACTIVE.md` reescrito para baton `UNASSIGNED`
+- checklist de preparação da `TASK-028` em criação
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Mapear e endurecer os pontos de enforcement já existentes
-2. Manter a raiz estável para não quebrar o modo atual de operação da Doze
-3. Só depois avançar para integrações externas reais e hardening de produção
+1. Executar o checklist de preparação da `TASK-028`
+2. Completar `research/architecture/architecture-target.md` e as trilhas de runtime/observability/security/cost
+3. Depois disso, iniciar a suíte E2E staging-first da `TASK-028`
 
-**Papéis recomendados para a próxima sessão:** `Program Architect`, `Registry Analyst`, `Security and Agency Boundaries Analyst`
+**Papéis recomendados para a próxima sessão:** `Program Architect`, `Durable Runtime Analyst`, `Observability and Evals Analyst`, `Security and Agency Boundaries Analyst`, `Documentation Agent`
 
 ---
 
@@ -54,7 +53,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-registry-promotion.md`
+`handoffs/snapshots/2026-04-24-codex-task-028-prep-checklist.md`
 
 ---
 

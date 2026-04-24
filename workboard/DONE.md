@@ -21,6 +21,22 @@
 
 ## Histórico
 
+### TASK-027 | Instrumentar observabilidade, segurança e rollback operacional
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/orchestrator/src/service.js`
+  - `product/apps/api/src/server.js`
+  - `product/packages/shared/contracts/v1/openclow-api.yaml`
+  - `product/packages/runtime/src/persistence.js`
+  - `product/apps/api/README.md`
+  - `product/packages/registry/README.md`
+  - atualização de `workboard/IN_PROGRESS.md` e `handoffs/ACTIVE.md`
+- **Notas:** O MVP ganhou trilha de auditoria persistida para capabilities, promotions, runs e checkpoints, mais endpoint `GET /v1/audit`. A auditoria foi smoke-testada com capability criada e promoção aprovada.
+
 ### TASK-026 | Implementar registry, promotion flow e meta-squad do MVP
 - **Concluída em:** 2026-04-24
 - **Por:** codex
