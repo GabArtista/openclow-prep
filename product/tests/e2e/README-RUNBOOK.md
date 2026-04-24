@@ -10,9 +10,10 @@
 1. seed capability and run fixtures
 2. execute marketing scenario
 3. execute intelligence scenario
-4. approve and reject checkpoints
-5. promote and rollback capability
-6. restart services and verify recovery
+4. execute creative image scenario and approve render gate
+5. approve and reject checkpoints
+6. promote and rollback capability
+7. restart services and verify recovery
 
 ## Verification points
 
@@ -21,6 +22,7 @@
 - promotion status
 - audit trail
 - output availability
+- persisted preview files and manifest availability
 
 ## Stop conditions
 

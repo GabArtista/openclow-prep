@@ -21,6 +21,27 @@
 
 ## Histórico
 
+### TASK-040 | Implementar `creative-image` como primeiro fluxo criativo renderizável
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #24 (fechada)
+- **Branch:** task/24-creative-image-first-renderable
+- **Output produzido:**
+  - `product/packages/shared/src/seeds.js`
+  - `product/packages/tools/src/runner.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/tests/e2e/run.mjs`
+  - `product/README.md`
+  - `product/tests/e2e/README.md`
+  - `product/tests/e2e/SCENARIO_MATRIX.md`
+  - `product/tests/e2e/README-RUNBOOK.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-040-complete.md`
+- **Notas:** O produto agora executa `creative-image` como primeiro fluxo renderizável de imagem, persistindo `asset_plan`, `composition_plan`, previews SVG e gallery HTML de dry-run validados pela regressão canônica.
+
 ### TASK-039 | Implementar o primeiro corte do sistema criativo em `product/`
 - **Concluída em:** 2026-04-24
 - **Por:** codex
