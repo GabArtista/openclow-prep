@@ -21,6 +21,19 @@
 
 ## Histórico
 
+### TASK-035 | Reconciliar WORKPLAN e CHARTER do Squad 0 com o baseline concluído
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #15 (fechada)
+- **Branch:** task/15-workplan-charter-closure
+- **Output produzido:**
+  - `squads/squad-0/CHARTER.md`
+  - `squads/squad-0/WORKPLAN.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-035-complete.md`
+- **Notas:** O charter e o workplan do Squad 0 passaram a refletir o baseline já concluído, com as fases principais marcadas como completas e o Squad 0 registrado como encerrado.
+
 ### TASK-034 | Reconciliar pacote de handoff final do Squad 0
 - **Concluída em:** 2026-04-24
 - **Por:** codex

@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 034 completed)
+- **last-updated-by:** codex (task 035 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,14 +17,14 @@
 
 ## Tasks em Voo
 
-1. TASK-034 concluída com o pacote final de handoff reconciliado.
+1. TASK-035 concluída com o charter e o workplan do Squad 0 reconciliados.
 2. Próximo passo: iniciar a próxima task do backlog.
 
 ---
 
 ## Última Ação Completada
 
-Consolidação do pacote final de handoff do Squad 0 sobre a base staging-first já validada.
+Consolidação do baseline do Squad 0 como documento histórico e encerrado.
 
 **Mudanças concluídas nesta sessão:**
 - dashboard reestruturado para run view, step view, checkpoint panel, outputs e histórico
@@ -48,13 +48,16 @@ Consolidação do pacote final de handoff do Squad 0 sobre a base staging-first 
 - `workboard/DONE.md` atualizado para incluir `TASK-034`
 - `workboard/IN_PROGRESS.md` zerado
 - `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-034
+- `squads/squad-0/CHARTER.md` e `squads/squad-0/WORKPLAN.md` reconciliados para baseline encerrado
+- `workboard/DONE.md` atualizado para incluir `TASK-035`
+- `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da TASK-035
 
 ---
 
 ## Próxima Ação Recomendada
 
 1. Iniciar a próxima task do backlog
-2. Consolidar o pacote de handoff como baseline de referência
+2. Consolidar o baseline como referência histórica
 3. Manter `openclow-prep` como base operacional da Doze
 
 **Papéis recomendados para a próxima sessão:** `Program Architect`, `Documentation Agent`
@@ -69,7 +72,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-034-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-035-complete.md`
 
 ---
 
