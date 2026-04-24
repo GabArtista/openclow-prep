@@ -70,6 +70,12 @@ paths:
       responses:
         "200":
           description: Promotion rejected
+  /audit:
+    get:
+      summary: List audit events
+      responses:
+        "200":
+          description: Audit event collection
   /runs:
     post:
       summary: Start run

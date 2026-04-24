@@ -150,6 +150,17 @@ async function handler(request, response) {
       return;
     }
 
+    if (request.method === "GET" && matchRoute(segments, ["v1", "audit"])) {
+      const url = new URL(request.url, `http://${host}:${port}`);
+      const limit = Number(url.searchParams.get("limit") ?? "0");
+      const items = [...(store.audit_events ?? [])].sort((left, right) => left.created_at.localeCompare(right.created_at));
+
+      sendJson(response, 200, {
+        items: limit > 0 ? items.slice(-limit) : items
+      });
+      return;
+    }
+
     if (request.method === "GET" && matchRoute(segments, ["v1", "promotions"])) {
       const url = new URL(request.url, `http://${host}:${port}`);
       const capabilityId = url.searchParams.get("capability_id");

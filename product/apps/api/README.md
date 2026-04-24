@@ -34,5 +34,6 @@ Endpoints mínimos já implementados:
 - `POST /v1/checkpoints/:id/approve`
 - `POST /v1/checkpoints/:id/reject`
 - `GET /v1/history`
+- `GET /v1/audit`
 - `GET /v1/worker/claim`
 - `POST /v1/worker/runs/:id/tick`

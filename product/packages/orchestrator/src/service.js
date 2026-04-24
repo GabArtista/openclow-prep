@@ -5,6 +5,19 @@ export class OrchestratorService {
     this.store = store;
   }
 
+  recordAuditEvent(event) {
+    const entry = {
+      id: createId(),
+      created_at: new Date().toISOString(),
+      ...event
+    };
+
+    this.store.audit_events ??= [];
+    this.store.audit_events.push(entry);
+
+    return entry;
+  }
+
   listSquads() {
     return this.store.squads.map((squad) => ({
       id: squad.id,
@@ -55,6 +68,17 @@ export class OrchestratorService {
     if (!this.store.queue.includes(run.id)) {
       this.store.queue.push(run.id);
     }
+    this.recordAuditEvent({
+      event: "run.requested",
+      subject_kind: "run",
+      subject_id: run.id,
+      actor: run.requested_by,
+      workspace_slug: run.workspace_slug,
+      details: {
+        squad_slug: run.squad_slug,
+        pipeline_id: run.pipeline_id
+      }
+    });
     this.store.persist?.();
     return run;
   }

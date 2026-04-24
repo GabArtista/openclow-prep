@@ -7,9 +7,9 @@
 
 ## Estado do Bastão
 
-- **baton:** UNASSIGNED
-- **last-updated-by:** codex (TASK-026 concluída / registry-promotion)
-- **last-updated-at:** 2026-04-24 11:15 -03
+- **baton:** codex
+- **last-updated-by:** codex (TASK-027 observability baseline em andamento)
+- **last-updated-at:** 2026-04-24 12:09 -03
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24 12:02 -03
 
@@ -17,8 +17,8 @@
 
 ## Tasks em Voo
 
-1. Nenhuma task em voo.
-2. Próximo passo: `TASK-027` para observabilidade, segurança e rollback operacional.
+1. `TASK-027` em execução na branch `task/12-observability-security`
+2. Foco atual: baseline de observabilidade, allowlist de tools e rollback operacional
 
 ---
 
@@ -27,21 +27,17 @@
 Conclusão de `TASK-026` com registry, promotion flow e base do meta-squad do MVP.
 
 **Mudanças concluídas nesta sessão:**
-- issue `#10` aberta para `TASK-026`
-- branch `task/10-registry-promotion` criada a partir de `origin/main`
-- `decisions/ADR-0007-registry-promotion-approval-flow.md` criado para formalizar promotion request + approval explícitos
-- `product/packages/registry/src/service.js` atualizado para CRUD, promotion requests, approvals e rollback
-- `product/apps/api/src/server.js` atualizado com endpoints de capability/promotion e approval
-- `product/packages/shared/contracts/v1/promotion.schema.json` criado e `openclow-api.yaml` ampliado
-- `product/packages/shared/src/seeds.js` atualizado com a capability interna `meta-squad`
-- `product/packages/runtime/src/persistence.js` atualizado com `promotions: []`
-- smoke test executado: capability `content-eval-suite` criada como `draft`, promovida para `staging`, aprovada, revertida para `draft` e trilha persistida com `promotions` e `approvals`
+- issue `#12` aberta para `TASK-027`
+- branch `task/12-observability-security` criada a partir de `origin/main`
+- `TASK-026` mergeada no `main` após aprovação explícita do PR `#11`
+- `workboard/IN_PROGRESS.md` atualizado para a nova task em execução
+- trilha de auditoria persistida criada e smoke-testada com capability e promotion events
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Implementar `TASK-027` para observabilidade, segurança e rollback operacional
+1. Mapear e endurecer os pontos de enforcement já existentes
 2. Manter a raiz estável para não quebrar o modo atual de operação da Doze
 3. Só depois avançar para integrações externas reais e hardening de produção
 
