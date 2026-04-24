@@ -39,6 +39,19 @@ export class RegistryService {
     this.store = store;
   }
 
+  recordAuditEvent(event) {
+    const entry = {
+      id: createId(),
+      created_at: now(),
+      ...event
+    };
+
+    this.store.audit_events ??= [];
+    this.store.audit_events.push(entry);
+
+    return entry;
+  }
+
   listCapabilities() {
     return this.store.capabilities;
   }
@@ -89,6 +102,18 @@ export class RegistryService {
     };
 
     this.store.capabilities.push(capability);
+    this.recordAuditEvent({
+      event: "capability.created",
+      subject_kind: "capability",
+      subject_id: capability.id,
+      actor: input.requested_by ?? "human",
+      workspace_slug: capability.workspace_slug,
+      details: {
+        slug: capability.slug,
+        kind: capability.kind,
+        status: capability.status
+      }
+    });
     this.store.persist?.();
     return capability;
   }
@@ -138,6 +163,16 @@ export class RegistryService {
     }
 
     capability.updated_at = now();
+    this.recordAuditEvent({
+      event: "capability.updated",
+      subject_kind: "capability",
+      subject_id: capability.id,
+      actor: input.requested_by ?? "human",
+      workspace_slug: capability.workspace_slug,
+      details: {
+        changes: Object.keys(input)
+      }
+    });
     this.store.persist?.();
     return capability;
   }
@@ -183,6 +218,19 @@ export class RegistryService {
     };
 
     this.store.promotions.push(promotion);
+    this.recordAuditEvent({
+      event: "promotion.requested",
+      subject_kind: "promotion",
+      subject_id: promotion.id,
+      actor: promotion.requested_by,
+      workspace_slug: capability.workspace_slug,
+      details: {
+        capability_id: capability.id,
+        from_status: promotion.from_status,
+        to_status: promotion.to_status,
+        operation: promotion.operation
+      }
+    });
     this.store.persist?.();
     return promotion;
   }
@@ -223,6 +271,18 @@ export class RegistryService {
     promotion.updated_at = approval.created_at;
 
     this.store.approvals.push(approval);
+    this.recordAuditEvent({
+      event: "promotion.approved",
+      subject_kind: "promotion",
+      subject_id: promotion.id,
+      actor,
+      workspace_slug: capability.workspace_slug,
+      details: {
+        capability_id: capability.id,
+        from_status: promotion.from_status,
+        to_status: promotion.to_status
+      }
+    });
     this.store.persist?.();
 
     return {
@@ -258,6 +318,18 @@ export class RegistryService {
     promotion.updated_at = approval.created_at;
 
     this.store.approvals.push(approval);
+    this.recordAuditEvent({
+      event: "promotion.rejected",
+      subject_kind: "promotion",
+      subject_id: promotion.id,
+      actor,
+      workspace_slug: capability.workspace_slug,
+      details: {
+        capability_id: capability.id,
+        from_status: promotion.from_status,
+        to_status: promotion.to_status
+      }
+    });
     this.store.persist?.();
 
     return {

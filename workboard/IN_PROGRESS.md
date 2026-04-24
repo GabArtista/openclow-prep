@@ -23,4 +23,12 @@
 
 ## Em Progresso Agora
 
-Nenhuma task em andamento.
+### TASK-027 | Instrumentar observabilidade, segurança e rollback operacional
+- **Owner:** codex
+- **Papéis ativos:** Security and Agency Boundaries Analyst | Program Architect | Registry Analyst
+- **Iniciada em:** 2026-04-24
+- **Branch:** task/12-observability-security
+- **Issue:** #12
+- **Estado atual:** baseline de auditoria persistida e endpoint de consulta já validados no API local; capability e promotion events entram na trilha
+- **Próxima ação:** cobrir observabilidade de runtime/rollback e endurecer os pontos de enforcement restantes
+- **Bloqueadores:** NENHUM

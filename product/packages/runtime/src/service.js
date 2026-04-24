@@ -6,6 +6,19 @@ export class RuntimeService {
     this.store = store;
   }
 
+  recordAuditEvent(event) {
+    const entry = {
+      id: createId(),
+      created_at: new Date().toISOString(),
+      ...event
+    };
+
+    this.store.audit_events ??= [];
+    this.store.audit_events.push(entry);
+
+    return entry;
+  }
+
   listRuns(status) {
     this.reconcileQueue();
 
@@ -63,6 +76,16 @@ export class RuntimeService {
         event: "run.started",
         message: "Worker iniciou o run"
       });
+      this.recordAuditEvent({
+        event: "run.started",
+        subject_kind: "run",
+        subject_id: run.id,
+        actor: "worker",
+        workspace_slug: run.workspace_slug,
+        details: {
+          squad_slug: run.squad_slug
+        }
+      });
     }
 
     const step = run.steps[run.pointer];
@@ -75,6 +98,16 @@ export class RuntimeService {
         at: new Date().toISOString(),
         event: "run.completed",
         message: "Run concluído com sucesso"
+      });
+      this.recordAuditEvent({
+        event: "run.completed",
+        subject_kind: "run",
+        subject_id: run.id,
+        actor: "worker",
+        workspace_slug: run.workspace_slug,
+        details: {
+          squad_slug: run.squad_slug
+        }
       });
       this.persist();
       return run;
@@ -103,6 +136,18 @@ export class RuntimeService {
         event: "checkpoint.created",
         message: `Checkpoint criado para ${step.id}`
       });
+      this.recordAuditEvent({
+        event: "checkpoint.created",
+        subject_kind: "checkpoint",
+        subject_id: checkpoint.id,
+        actor: "worker",
+        workspace_slug: run.workspace_slug,
+        details: {
+          run_id: run.id,
+          step_id: step.id,
+          risk_level: checkpoint.risk_level
+        }
+      });
       this.persist();
       return run;
     }
@@ -117,6 +162,16 @@ export class RuntimeService {
       event: "step.completed",
       message: `${step.id} concluído`
     });
+    this.recordAuditEvent({
+      event: "step.completed",
+      subject_kind: "run",
+      subject_id: run.id,
+      actor: "worker",
+      workspace_slug: run.workspace_slug,
+      details: {
+        step_id: step.id
+      }
+    });
     run.pointer += 1;
     run.current_step_id = run.steps[run.pointer]?.id ?? null;
 
@@ -128,6 +183,16 @@ export class RuntimeService {
         at: new Date().toISOString(),
         event: "run.completed",
         message: "Run concluído com sucesso"
+      });
+      this.recordAuditEvent({
+        event: "run.completed",
+        subject_kind: "run",
+        subject_id: run.id,
+        actor: "worker",
+        workspace_slug: run.workspace_slug,
+        details: {
+          squad_slug: run.squad_slug
+        }
       });
     }
 
@@ -163,6 +228,18 @@ export class RuntimeService {
 
     run.approvals.push(approval);
     this.store.approvals.push(approval);
+    this.recordAuditEvent({
+      event: `checkpoint.${decision}`,
+      subject_kind: "checkpoint",
+      subject_id: checkpointId,
+      actor,
+      workspace_slug: run.workspace_slug,
+      details: {
+        run_id: run.id,
+        step_id: step.id,
+        comment
+      }
+    });
 
     if (decision === "approved") {
       run.status = "queued";
@@ -364,7 +441,8 @@ export class RuntimeService {
     return {
       queue_length: this.store.queue.length,
       ollama: this.store.runtime.ollama,
-      active_runs: this.store.runs.filter((run) => ["queued", "running", "waiting_checkpoint"].includes(run.status)).length
+      active_runs: this.store.runs.filter((run) => ["queued", "running", "waiting_checkpoint"].includes(run.status)).length,
+      audit_events: this.store.audit_events?.length ?? 0
     };
   }
 }
