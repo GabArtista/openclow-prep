@@ -1,7 +1,7 @@
 # Required ADR Backlog and Decision Status
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Rollout-control documentation package closed after TASK-033
+> **Updated:** 2026-04-24
 
 ## Fechados para liberar bootstrap
 
@@ -15,7 +15,7 @@
 | Product Workspace Boundary | fechado | `decisions/ADR-0006-product-workspace-monorepo-boundary.md` |
 | Opensquad Portability Decision | fechado para bootstrap | `research/ecosystem-fit/opensquad-portability-matrix.md` |
 
-## Ainda obrigatórios antes do rollout amplo
+## Incluídos no pacote de rollout controlado
 
 1. **Checkpoint and Approval Model**
    - representação formal de checkpoints, rejeição e promoção

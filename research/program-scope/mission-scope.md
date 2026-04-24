@@ -1,7 +1,7 @@
 # Mission Scope — OpenClow
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Sources:** `MISSION.md`, `workboard/BACKLOG.md`, `opensquad` local repo, server inventory on `root@78.109.16.236`
 
 ## Objective
@@ -50,7 +50,7 @@ OpenClow deve acrescentar o que o `opensquad` ainda não garante de forma forte:
 O MVP não precisa, nesta fase:
 
 - ser marketplace público
-- suportar qualquer domínio arbitrário desde o dia 1
+- suportar qualquer domínio arbitrário desde o baseline
 - substituir toda IDE host como ambiente de autoria
 - resolver inferência multimodal pesada localmente sem GPU confirmada
 - automatizar publicação irrestrita sem checkpoints humanos
@@ -90,7 +90,7 @@ Isso é suficiente para orientar o desenho do MVP como sistema utilizável, não
 ## Questions This Phase Must Answer
 
 1. Qual é o corte exato entre o que será herdado do `opensquad` e o que será reconstruído no `OpenClow`?
-2. Quais integrações entram no dia 1 e quais ficam para fase seguinte?
+2. Quais integrações entram no baseline e quais ficam para fase seguinte?
 3. Qual runtime local é aceitável sem GPU confirmada?
 4. Onde ficará o enforcement de permissões, checkpoints e publicação?
 5. Como o meta-squad interno poderá evoluir o sistema sem ampliar risco operacional?
@@ -101,6 +101,6 @@ O escopo estará suficientemente fechado quando estas afirmações forem verdade
 
 - o MVP estiver definido como sistema server-first para workflows reais da Doze
 - o `opensquad` estiver classificado como benchmark e fonte de portabilidade
-- o conjunto de integrações day-1 estiver definido
+- o conjunto de integrações do baseline estiver definido
 - o meta-squad de auto-construção estiver dentro do escopo explícito do produto
 - as principais dúvidas restantes tiverem sido empurradas para ADRs e backlog, e não permanecerem implícitas

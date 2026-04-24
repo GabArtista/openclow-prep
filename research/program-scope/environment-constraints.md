@@ -1,7 +1,7 @@
 # Environment Constraints — OpenClow MVP
 
-> **Status:** Draft for Plan 0 closure
-> **Updated:** 2026-04-23
+> **Status:** Post-TASK-033 / MVP baseline established
+> **Updated:** 2026-04-24
 > **Sources:** `context/POLICY.md`, `opensquad` local repo, live server audit on `root@78.109.16.236`
 
 ## Reference Environment
@@ -33,7 +33,7 @@ O ambiente de referência do MVP é o servidor `root@78.109.16.236`.
 
 - O MVP precisa funcionar sem depender de GPU dedicada.
 - Jobs pesados devem ser assíncronos e tolerantes a maior latência.
-- Vídeo e geração visual intensiva não podem ser pressupostos como capacidades locais baratas no dia 1.
+- Vídeo e geração visual intensiva não podem ser pressupostos como capacidades locais baratas no baseline.
 
 ### Security
 
@@ -57,7 +57,7 @@ O ambiente de referência do MVP é o servidor `root@78.109.16.236`.
 
 ## Integration Constraints
 
-As integrações day-1 devem ser escolhidas a partir do que já está provado localmente:
+As integrações do baseline devem ser escolhidas a partir do que já está provado localmente:
 
 - `GA4`
 - `WooCommerce`
@@ -89,15 +89,15 @@ Essas integrações exigem:
 - O backlog oficial ainda não formalizou `opensquad`, servidor e meta-squad; isso deve ser resolvido no Plano 1.
 - O time precisa conseguir operar com Claude, Codex e outros agentes sem quebrar o protocolo de bastão.
 
-## Day-1 vs Later
+## Baseline vs Later
 
-### Day-1 Required
+### Baseline Required
 
 - squads de marketing e BI equivalentes aos já usados na Doze
 - dashboard básico
 - orquestração com checkpoints
 - memória persistente
-- integrações day-1
+- integrações do baseline
 - meta-squad para criar e revisar capacidades
 
 ### Defer to Later
@@ -113,5 +113,5 @@ Essas integrações exigem:
 - GPU não confirmada
 - política final de segredos ainda não desenhada
 - envelope de concorrência aceitável ainda não medido
-- estratégia de vídeo no dia 1 ainda indefinida
+- estratégia de vídeo no baseline ainda indefinida
 - papel exato de `OpenClaw` e `Paperclip` ainda não decidido
