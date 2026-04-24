@@ -8,8 +8,8 @@
 ## Estado do Bastão
 
 - **baton:** codex
-- **last-updated-by:** codex (TASK-027 observability baseline em andamento)
-- **last-updated-at:** 2026-04-24 12:09 -03
+- **last-updated-by:** codex (TASK-027 observability baseline checkpointed)
+- **last-updated-at:** 2026-04-24 12:10 -03
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24 12:02 -03
 
@@ -32,6 +32,7 @@ Conclusão de `TASK-026` com registry, promotion flow e base do meta-squad do MV
 - `TASK-026` mergeada no `main` após aprovação explícita do PR `#11`
 - `workboard/IN_PROGRESS.md` atualizado para a nova task em execução
 - trilha de auditoria persistida criada e smoke-testada com capability e promotion events
+- branch `task/12-observability-security` publicada e PR draft `#13` aberto
 
 ---
 
