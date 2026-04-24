@@ -2,7 +2,7 @@
 
 # Security and Agency Boundaries
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Goal:** impedir que o sistema ultrapasse os limites aprovados de autonomia e acesso
 
 ## Core rules

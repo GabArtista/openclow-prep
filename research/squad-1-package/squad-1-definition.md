@@ -2,7 +2,7 @@
 
 # Squad 1 Definition
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** definir o time que vai construir o produto OpenClow a partir do pacote do Squad 0
 
 ## Mission

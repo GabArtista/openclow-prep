@@ -2,7 +2,7 @@
 
 # Architecture Target
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Goal:** definir a arquitetura-alvo do OpenClow sem quebrar a operação atual da Doze na raiz do repositório
 
 ## Summary

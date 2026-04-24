@@ -2,7 +2,7 @@
 
 # Durable Runtime Analysis
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Focus:** durabilidade operacional, restart safety e checkpoint recovery
 
 ## Purpose

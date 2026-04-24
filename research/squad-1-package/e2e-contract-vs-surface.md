@@ -2,7 +2,7 @@
 
 # E2E Contract vs Product Surface
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** mapear o contrato staging-first contra a API/runtime atuais do `product/`
 
 ## Summary

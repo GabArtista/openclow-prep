@@ -2,7 +2,7 @@
 
 # Cost and Throughput Model
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** modelar custo operacional e capacidade sem depender de estimativa vaga
 
 ## Model inputs

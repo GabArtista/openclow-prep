@@ -2,7 +2,7 @@
 
 # Transactional Persistence and Durable Queue
 
-> **Status:** Draft for TASK-030
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** registrar como o MVP trata persistência transacional, fila durável e artefatos persistidos
 
 ## Summary

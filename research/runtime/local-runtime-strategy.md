@@ -1,6 +1,6 @@
 # Local Runtime Strategy — OpenClow MVP
 
-> **Status:** Draft for Plan 2
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Updated:** 2026-04-23
 
 ## Runtime Goal

@@ -2,7 +2,7 @@
 
 # Staging Rollout and Rollback Runbook
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Use case:** validar changes do OpenClow sem expor produção a risco desnecessário
 
 ## Preconditions

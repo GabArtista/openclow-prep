@@ -1,6 +1,6 @@
 # MVP Server Architecture — OpenClow
 
-> **Status:** Draft for Plan 2
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Updated:** 2026-04-23
 > **Reference host:** `root@78.109.16.236`
 

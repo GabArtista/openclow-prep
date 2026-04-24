@@ -1,6 +1,6 @@
 # MVP Execution Plan — OpenClow
 
-> **Status:** Draft for staged rollout in `product/`
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Updated:** 2026-04-23
 
 ## Purpose

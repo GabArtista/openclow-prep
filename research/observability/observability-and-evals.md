@@ -2,7 +2,7 @@
 
 # Observability and Evals
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Scope:** logs, audit, metrics, eval gates and staging validation
 
 ## Purpose

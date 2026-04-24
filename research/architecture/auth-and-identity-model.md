@@ -2,7 +2,7 @@
 
 # Auth and Identity Model
 
-> **Status:** Draft for TASK-029
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** definir o modelo mínimo de identidade e autorização do OpenClow sem quebrar a separação entre operador humano, worker e meta-squad
 
 ## Context

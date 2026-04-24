@@ -2,7 +2,7 @@
 
 # Doze Marketing and Content Workflows
 
-> **Status:** Draft for TASK-028 prep
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Scope:** workflows de marketing e criação de conteúdo já usados pela Doze e mapeados a partir do `opensquad`
 > **Non-goal:** expor credenciais, tokens, chaves ou segredos operacionais
 
