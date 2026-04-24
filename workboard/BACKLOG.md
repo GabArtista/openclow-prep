@@ -14,17 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-039 | Implementar o primeiro corte do sistema criativo em `product/`
+### TASK-040 | Implementar `creative-image` como primeiro fluxo criativo renderizável
 - **Tipo:** research
 - **Prioridade:** P1
 - **Tamanho:** M
 - **Status:** `backlog`
-- **Objetivo:** implementar no produto o primeiro corte criativo já definido por `TASK-038`: `creative-control`, `reference-lab` e `creative-qa`, com seeds, contracts e leitura básica via API/dashboard.
-- **Dependências:** TASK-038 concluída
+- **Objetivo:** estender o corte criativo atual para executar o primeiro fluxo renderizável de imagem estática/carrossel com `paperclip-composer`, `ffmpeg-render` e QA já seeded.
+- **Dependências:** TASK-039 concluída
 - **Output esperado:**
-  - atualização do runtime e da API para expor os squads criativos seeded
-  - primeiro fluxo criativo consultável e iniciável no `product/`
-  - harness ou smoke test cobrindo o fluxo básico de contexto → referência → QA
-  - documentação de uso local/staging do corte criativo inicial
+  - fluxo `creative-image` implementado no `product/`
+  - artifacts e previews renderizáveis persistidos
+  - regressão cobrindo o fluxo de imagem
+  - documentação local/staging do primeiro fluxo renderizável
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

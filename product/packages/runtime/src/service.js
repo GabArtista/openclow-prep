@@ -292,20 +292,16 @@ export class RuntimeService {
   }
 
   executeStep(step, run) {
-    if (step.kind === "tool" || step.executor === "tool-runner" || step.executor === "subagent") {
+    if (
+      step.kind === "tool" ||
+      step.executor === "tool-runner" ||
+      step.executor === "subagent" ||
+      (Array.isArray(step.tool_slugs) && step.tool_slugs.length > 0)
+    ) {
       return this.executeToolStep(step, run);
     }
 
-    return [
-      {
-        id: createId(),
-        step_id: step.id,
-        run_id: run.id,
-        created_at: new Date().toISOString(),
-        summary: `${step.label} executado em modo local de desenvolvimento`,
-        artifact_type: "text_note"
-      }
-    ];
+    return this.buildPromptOutputs(step, run);
   }
 
   executeToolStep(step, run) {
@@ -342,7 +338,11 @@ export class RuntimeService {
         run_id: run.id,
         squad_slug: run.squad_slug,
         workspace_slug: run.workspace_slug,
-        step_id: step.id
+        step_id: step.id,
+        request_context: run.request_context,
+        machine_profile: run.machine_profile,
+        environment_scope: run.environment_scope,
+        intent_kind: run.intent_kind
       });
 
       outputs.push({
@@ -375,7 +375,11 @@ export class RuntimeService {
         run_id: run.id,
         squad_slug: run.squad_slug,
         workspace_slug: run.workspace_slug,
-        step_id: step.id
+        step_id: step.id,
+        request_context: run.request_context,
+        machine_profile: run.machine_profile,
+        environment_scope: run.environment_scope,
+        intent_kind: run.intent_kind
       });
 
       outputs.push({
@@ -390,6 +394,59 @@ export class RuntimeService {
     }
 
     return outputs;
+  }
+
+  buildPromptOutputs(step, run) {
+    const contracts = step.output_contracts ?? [];
+
+    if (contracts.length === 0) {
+      return [
+        {
+          id: createId(),
+          step_id: step.id,
+          run_id: run.id,
+          created_at: new Date().toISOString(),
+          summary: `${step.label} executado em modo local de desenvolvimento`,
+          artifact_type: "text_note"
+        }
+      ];
+    }
+
+    return contracts.map((contractName) => ({
+      id: createId(),
+      step_id: step.id,
+      run_id: run.id,
+      created_at: new Date().toISOString(),
+      artifact_type: this.contractToArtifactType(contractName),
+      summary: this.buildContractSummary(step, contractName, run),
+      details: {
+        contract: contractName,
+        machine_profile: step.machine_profile ?? run.machine_profile ?? null,
+        environment_scope: step.environment_scope ?? run.environment_scope ?? null,
+        intent_kind: run.intent_kind ?? null,
+        request_context: run.request_context ?? {}
+      }
+    }));
+  }
+
+  contractToArtifactType(contractName) {
+    return contractName.replace(/\.json$/u, "").replace(/[^a-z0-9]+/giu, "_");
+  }
+
+  buildContractSummary(step, contractName, run) {
+    const contractLabelMap = {
+      "creative_intent.json": "Intento criativo consolidado",
+      "approval_packet.json": "Pacote de aprovacao preparado",
+      "brand_context.json": "Contexto de marca consolidado",
+      "reference_pack.json": "Pacote de referencias consolidado",
+      "style_signals.json": "Sinais visuais extraidos",
+      "visual_anti_patterns.json": "Anti-patterns visuais registrados",
+      "qa_report_brand.json": "QA de identidade executado",
+      "qa_report_delivery.json": "QA tecnico executado"
+    };
+
+    const label = contractLabelMap[contractName] ?? `${contractName} gerado`;
+    return `${label} para ${run.squad_slug} em ${step.id}`;
   }
 
   inferToolSlugs(step, run) {
