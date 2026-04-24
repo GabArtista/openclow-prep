@@ -14,6 +14,7 @@
 | E2E-05 | Rollback approval | rollback pending | approve rollback | capability transitions back and audit is stored |
 | E2E-06 | Restart recovery | run waiting_checkpoint | restart services | run state restored without losing checkpoint |
 | E2E-07 | Creative image render | `creative-image` at least `staging` | start run, render previews, approve render gate | preview artifacts and manifest persistidos |
+| E2E-08 | Creative video render | `creative-video` at least `staging` | start run, render vertical previews, approve preview gate | shot plan, edit plan, playlist and previews persistidos |
 
 ## Notes
 
@@ -21,3 +22,4 @@
 - production validation is explicitly out of scope here
 - write-capable integrations require explicit approval path
 - `creative-image` is validated with dry-run artifacts only; no production publishing is involved
+- `creative-video` is validated with storyboard and vertical preview artifacts only; no production publishing is involved

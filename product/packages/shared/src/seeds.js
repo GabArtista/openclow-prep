@@ -267,6 +267,70 @@ function createCreativeImageSteps() {
   ];
 }
 
+function createCreativeVideoSteps() {
+  return [
+    {
+      id: "planejar-frames",
+      kind: "prompt",
+      executor: "inline",
+      label: "Planeja beats, shots e linguagem de VFX do video",
+      output_contracts: ["shot_plan.json", "vfx_plan.json"],
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      qa_gate: "brand",
+      risk_level: "medium"
+    },
+    {
+      id: "compor-storyboard",
+      kind: "tool",
+      executor: "tool-runner",
+      label: "Compõe storyboard vertical e quadros-guia do video",
+      tool_slugs: ["paperclip-composer"],
+      input_contracts: ["shot_plan.json", "vfx_plan.json", "creative_intent.json", "reference_pack.json"],
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      qa_gate: "brand",
+      risk_level: "medium"
+    },
+    {
+      id: "montar-edl",
+      kind: "prompt",
+      executor: "inline",
+      label: "Monta o edit decision list do video curto",
+      output_contracts: ["edit_decision_list.json"],
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "renderizar-video",
+      kind: "tool",
+      executor: "tool-runner",
+      label: "Renderiza previews verticais e pacote de entrega do video",
+      tool_slugs: ["ffmpeg-render"],
+      input_contracts: ["shot_plan.json", "edit_decision_list.json", "vfx_plan.json"],
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "aprovar-previas-video",
+      kind: "checkpoint",
+      executor: "checkpoint",
+      label: "Aprovar previews do video antes do QA final",
+      input_contracts: ["preview_manifest.json"],
+      requiresCheckpoint: true,
+      on_reject: "compor-storyboard",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand-and-delivery",
+      risk_level: "high"
+    }
+  ];
+}
+
 export function createSeeds() {
   const capabilities = [
     {
@@ -440,6 +504,60 @@ export function createSeeds() {
     {
       id: createId(),
       kind: "skill",
+      slug: "frame-planner",
+      name: "Frame Planner",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["frame-planner"],
+      summary: "Quebra o video em beats, shots e ritmos aprovaveis",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["shot_plan.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "motion-editor",
+      name: "Motion Editor",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["motion-editor"],
+      summary: "Traduz shots em ritmo, cortes e decisoes de montagem",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["edit_decision_list.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
+      slug: "vfx-finisher",
+      name: "VFX Finisher",
+      workspace_slug: "doze",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "medium",
+      allowed_tools: ["vfx-finisher"],
+      summary: "Define overlays, textura, tipografia e linguagem de VFX",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      supports_dry_run: true,
+      requires_checkpoint: false,
+      artifact_contracts: ["vfx_plan.json"]
+    },
+    {
+      id: createId(),
+      kind: "skill",
       slug: "brand-qa",
       name: "Brand QA",
       workspace_slug: "doze",
@@ -535,6 +653,7 @@ export function createSeeds() {
   const referenceLabId = createId();
   const creativeQaId = createId();
   const creativeImageId = createId();
+  const creativeVideoId = createId();
 
   const squads = [
     {
@@ -646,6 +765,37 @@ export function createSeeds() {
         .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
         .map((capability) => capability.id),
       steps: createCreativeImageSteps()
+    },
+    {
+      id: creativeVideoId,
+      slug: "creative-video",
+      name: "Creative Video",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) =>
+          [
+            "frame-planner",
+            "motion-editor",
+            "vfx-finisher",
+            "paperclip-composer",
+            "ffmpeg-render",
+            "brand-qa",
+            "delivery-qa"
+          ].includes(capability.slug)
+        )
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "powerful",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      steps: createCreativeVideoSteps()
     }
   ];
 

@@ -14,17 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-041 | Implementar `creative-video` como primeiro fluxo vertical renderizável
+### TASK-042 | Implementar `publishing-control` como empacotamento dry-run do fluxo criativo
 - **Tipo:** research
 - **Prioridade:** P1
-- **Tamanho:** L
+- **Tamanho:** M
 - **Status:** `backlog`
-- **Objetivo:** estender a trilha criativa para o primeiro fluxo vertical curto com planejamento de frames, composição, render de previews e QA orientado a identidade e retenção.
-- **Dependências:** TASK-040 concluída
+- **Objetivo:** conectar `creative-image` e `creative-video` a um fluxo de empacotamento dry-run com receipts persistidos, sem publicação real por default.
+- **Dependências:** TASK-041 concluída
 - **Output esperado:**
-  - fluxo `creative-video` implementado no `product/`
-  - artifacts persistidos de shot plan, edit plan e previews verticais
-  - regressão cobrindo o fluxo de vídeo curto
-  - documentação local/staging do primeiro fluxo vertical renderizável
+  - fluxo `publishing-control` implementado no `product/`
+  - artifacts persistidos de `publication_plan` e `publish_receipt`
+  - regressão cobrindo o handoff criativo para publicação dry-run
+  - documentação local/staging do empacotamento de entrega
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

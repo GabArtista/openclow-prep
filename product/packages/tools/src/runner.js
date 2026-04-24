@@ -44,6 +44,32 @@ function createSlideSvg({ title, subtitle, accent, slideIndex, slideCount, width
   ].join("\n");
 }
 
+function createStoryboardSvg({ title, subtitle, accent, beatLabel, index, count, width, height }) {
+  return [
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`,
+    '  <defs>',
+    '    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">',
+    '      <stop offset="0%" stop-color="#050505" />',
+    '      <stop offset="100%" stop-color="#181818" />',
+    "    </linearGradient>",
+    '    <filter id="grain">',
+    '      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" stitchTiles="stitch" />',
+    '      <feColorMatrix type="saturate" values="0" />',
+    '      <feComponentTransfer><feFuncA type="table" tableValues="0 0.08" /></feComponentTransfer>',
+    "    </filter>",
+    "  </defs>",
+    '  <rect width="100%" height="100%" fill="url(#bg)" />',
+    `  <rect x="72" y="72" width="${width - 144}" height="${height - 144}" rx="44" fill="none" stroke="${accent}" stroke-width="10" />`,
+    `  <text x="96" y="180" fill="${accent}" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700">VERTICAL CUT ${index} / ${count}</text>`,
+    `  <text x="96" y="310" fill="#f6f6f6" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="700">${title}</text>`,
+    `  <text x="96" y="410" fill="#d6d6d6" font-family="Arial, Helvetica, sans-serif" font-size="42">${subtitle}</text>`,
+    `  <text x="96" y="${height - 220}" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700">${beatLabel}</text>`,
+    `  <line x1="96" y1="${height - 170}" x2="${width - 96}" y2="${height - 170}" stroke="${accent}" stroke-width="8" />`,
+    '  <rect width="100%" height="100%" fill="#ffffff" opacity="0.07" filter="url(#grain)" />',
+    "</svg>"
+  ].join("\n");
+}
+
 function createStaticHtmlPreview({ title, subtitle, previewFiles }) {
   const cards = previewFiles
     .map(
@@ -77,6 +103,52 @@ function createStaticHtmlPreview({ title, subtitle, previewFiles }) {
     <main>${cards}</main>
   </body>
 </html>`;
+}
+
+function resolveOutputFormat(context) {
+  if (context.request_context?.output_format) {
+    return context.request_context.output_format;
+  }
+
+  if (context.intent_kind === "creative-video") {
+    return "vertical-video";
+  }
+
+  return "static-post";
+}
+
+function resolveFrameCount(outputFormat, requestedFrameCount) {
+  if (requestedFrameCount) {
+    return Math.max(1, Number(requestedFrameCount));
+  }
+
+  if (outputFormat === "carousel") {
+    return 3;
+  }
+
+  if (outputFormat === "vertical-video") {
+    return 6;
+  }
+
+  return 1;
+}
+
+function resolveCanvas(outputFormat) {
+  if (outputFormat === "stories" || outputFormat === "vertical-video") {
+    return { width: 1080, height: 1920 };
+  }
+
+  return { width: 1080, height: 1350 };
+}
+
+function resolveCompositionDir(context) {
+  const runRoot = path.join(context.artifacts_dir ?? process.cwd(), context.run_id ?? "global");
+  const candidates = [
+    path.join(runRoot, "compor-layout", "composition"),
+    path.join(runRoot, "compor-storyboard", "composition")
+  ];
+
+  return candidates.find((candidate) => fs.existsSync(candidate)) ?? candidates[0];
 }
 
 function buildGa4Artifact(context) {
@@ -260,10 +332,9 @@ function buildDeliveryQaArtifact(context) {
 
 function buildPaperclipComposerArtifact(context) {
   const stepArtifactsDir = getStepArtifactsDir(context);
-  const outputFormat = context.request_context?.output_format ?? "static-post";
-  const slideCount = Math.max(1, Number(context.request_context?.frame_count ?? (outputFormat === "carousel" ? 3 : 1)));
-  const width = outputFormat === "stories" ? 1080 : 1080;
-  const height = outputFormat === "stories" ? 1920 : 1350;
+  const outputFormat = resolveOutputFormat(context);
+  const slideCount = resolveFrameCount(outputFormat, context.request_context?.frame_count);
+  const { width, height } = resolveCanvas(outputFormat);
   const accent = context.request_context?.accent_color ?? "#ff4d4f";
   const campaignName = context.request_context?.campaign_slug ?? "creative-baseline";
   const brandName = context.request_context?.brand_slug ?? "doze-crew";
@@ -274,15 +345,27 @@ function buildPaperclipComposerArtifact(context) {
 
   for (let index = 1; index <= slideCount; index += 1) {
     const framePath = path.join(framesDir, `frame-${String(index).padStart(2, "0")}.svg`);
-    const frameSvg = createSlideSvg({
-      title: brandName.toUpperCase(),
-      subtitle: `${campaignName} • ${outputFormat} • ${context.intent_kind ?? "creative-image"}`,
-      accent,
-      slideIndex: index,
-      slideCount,
-      width,
-      height
-    });
+    const frameSvg =
+      outputFormat === "vertical-video"
+        ? createStoryboardSvg({
+            title: brandName.toUpperCase(),
+            subtitle: `${campaignName} • ${context.intent_kind ?? "creative-video"}`,
+            accent,
+            beatLabel: `Beat ${index}`,
+            index,
+            count: slideCount,
+            width,
+            height
+          })
+        : createSlideSvg({
+            title: brandName.toUpperCase(),
+            subtitle: `${campaignName} • ${outputFormat} • ${context.intent_kind ?? "creative-image"}`,
+            accent,
+            slideIndex: index,
+            slideCount,
+            width,
+            height
+          });
 
     writeTextArtifact(framePath, frameSvg);
     framePaths.push(framePath);
@@ -326,10 +409,11 @@ function buildFfmpegRenderArtifact(context) {
   const renderDir = path.join(stepArtifactsDir, "render");
   const previewManifestPath = path.join(stepArtifactsDir, "preview-manifest.json");
   const galleryPath = path.join(stepArtifactsDir, "preview-gallery.html");
-  const compositionDir = path.join(context.artifacts_dir ?? process.cwd(), context.run_id ?? "global", "compor-layout", "composition");
+  const compositionDir = resolveCompositionDir(context);
   const previewFiles = [];
-  const outputFormat = context.request_context?.output_format ?? "static-post";
-  const requestedFrames = Math.max(1, Number(context.request_context?.frame_count ?? (outputFormat === "carousel" ? 3 : 1)));
+  const outputFormat = resolveOutputFormat(context);
+  const requestedFrames = resolveFrameCount(outputFormat, context.request_context?.frame_count);
+  const playlistPath = path.join(stepArtifactsDir, "preview-playlist.json");
 
   ensureDirectory(renderDir);
 
@@ -340,15 +424,28 @@ function buildFfmpegRenderArtifact(context) {
     if (fs.existsSync(sourcePath)) {
       fs.copyFileSync(sourcePath, targetPath);
     } else {
-      const fallbackSvg = createSlideSvg({
-        title: (context.request_context?.brand_slug ?? "doze-crew").toUpperCase(),
-        subtitle: `${context.request_context?.campaign_slug ?? "creative-baseline"} • preview fallback`,
-        accent: context.request_context?.accent_color ?? "#ff4d4f",
-        slideIndex: index,
-        slideCount: requestedFrames,
-        width: 1080,
-        height: outputFormat === "stories" ? 1920 : 1350
-      });
+      const { width, height } = resolveCanvas(outputFormat);
+      const fallbackSvg =
+        outputFormat === "vertical-video"
+          ? createStoryboardSvg({
+              title: (context.request_context?.brand_slug ?? "doze-crew").toUpperCase(),
+              subtitle: `${context.request_context?.campaign_slug ?? "creative-baseline"} • preview fallback`,
+              accent: context.request_context?.accent_color ?? "#ff4d4f",
+              beatLabel: `Fallback beat ${index}`,
+              index,
+              count: requestedFrames,
+              width,
+              height
+            })
+          : createSlideSvg({
+              title: (context.request_context?.brand_slug ?? "doze-crew").toUpperCase(),
+              subtitle: `${context.request_context?.campaign_slug ?? "creative-baseline"} • preview fallback`,
+              accent: context.request_context?.accent_color ?? "#ff4d4f",
+              slideIndex: index,
+              slideCount: requestedFrames,
+              width,
+              height
+            });
       writeTextArtifact(targetPath, fallbackSvg);
     }
 
@@ -371,10 +468,20 @@ function buildFfmpegRenderArtifact(context) {
       index: index + 1,
       path: filePath
     })),
-    gallery_path: galleryPath
+    gallery_path: galleryPath,
+    playlist_path: playlistPath
   };
 
   writeJsonArtifact(previewManifestPath, manifest);
+  writeJsonArtifact(playlistPath, {
+    tool: "ffmpeg-render",
+    sequence_kind: outputFormat === "vertical-video" ? "vertical-preview-cut" : "image-preview-strip",
+    items: previewFiles.map((filePath, index) => ({
+      index: index + 1,
+      path: filePath,
+      duration_ms: outputFormat === "vertical-video" ? 850 : null
+    }))
+  });
 
   return {
     tool: "ffmpeg-render",
@@ -386,7 +493,8 @@ function buildFfmpegRenderArtifact(context) {
       output_format: outputFormat,
       preview_manifest_path: previewManifestPath,
       preview_files: previewFiles,
-      gallery_path: galleryPath
+      gallery_path: galleryPath,
+      playlist_path: playlistPath
     }
   };
 }

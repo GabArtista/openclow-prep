@@ -20,6 +20,21 @@ export const skillCatalog = [
     description: "Gera a intenção criativa e o treatment da peça"
   },
   {
+    slug: "frame-planner",
+    mode: "inline",
+    description: "Quebra o vídeo em beats, shots e ritmo aprováveis"
+  },
+  {
+    slug: "motion-editor",
+    mode: "inline",
+    description: "Traduz storyboard em cortes, ritmo e decisão de montagem"
+  },
+  {
+    slug: "vfx-finisher",
+    mode: "inline",
+    description: "Define textura, overlays, tipografia e linguagem de VFX"
+  },
+  {
     slug: "brand-qa",
     mode: "inline",
     description: "Valida aderência da peça à identidade da empresa"

@@ -21,6 +21,28 @@
 
 ## Histórico
 
+### TASK-041 | Implementar `creative-video` como primeiro fluxo vertical renderizável
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #26 (fechada)
+- **Branch:** task/26-creative-video-first-renderable
+- **Output produzido:**
+  - `product/packages/shared/src/seeds.js`
+  - `product/packages/skills/src/catalog.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/tools/src/runner.js`
+  - `product/tests/e2e/run.mjs`
+  - `product/README.md`
+  - `product/tests/e2e/README.md`
+  - `product/tests/e2e/SCENARIO_MATRIX.md`
+  - `product/tests/e2e/README-RUNBOOK.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-041-complete.md`
+- **Notas:** O produto agora executa `creative-video` como primeiro fluxo vertical renderizável, persistindo `shot_plan`, `vfx_plan`, `edit_decision_list`, storyboard vertical, previews SVG e playlist de dry-run validados pela regressão canônica.
+
 ### TASK-040 | Implementar `creative-image` como primeiro fluxo criativo renderizável
 - **Concluída em:** 2026-04-24
 - **Por:** codex
