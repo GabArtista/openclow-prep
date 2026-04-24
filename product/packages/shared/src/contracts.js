@@ -1,5 +1,7 @@
 export const capabilityKinds = ["skill", "squad", "pipeline", "tool"];
 export const capabilityStatuses = ["draft", "staging", "active", "retired"];
+export const machineProfiles = ["cpu-safe", "balanced", "quality-first"];
+export const environmentScopes = ["local-dev", "staging", "production"];
 export const runStatuses = [
   "queued",
   "running",
@@ -25,6 +27,14 @@ export function assertCapabilityInput(input) {
 
   if (!input.workspace_slug) {
     throw new Error("Capability workspace_slug is required");
+  }
+
+  if (input.machine_profile && !machineProfiles.includes(input.machine_profile)) {
+    throw new Error(`Capability machine_profile must be one of: ${machineProfiles.join(", ")}`);
+  }
+
+  if (input.environment_scope && !environmentScopes.includes(input.environment_scope)) {
+    throw new Error(`Capability environment_scope must be one of: ${environmentScopes.join(", ")}`);
   }
 }
 

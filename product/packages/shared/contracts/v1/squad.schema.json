@@ -52,6 +52,32 @@
     "default_model_tier": {
       "type": "string",
       "enum": ["fast", "powerful"]
+    },
+    "system_family": {
+      "type": "string",
+      "enum": ["core", "analytics", "creative", "publishing", "governance"]
+    },
+    "machine_profile": {
+      "type": "string",
+      "enum": ["cpu-safe", "balanced", "quality-first"]
+    },
+    "environment_scope": {
+      "type": "string",
+      "enum": ["local-dev", "staging", "production"]
+    },
+    "context_precedence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"]
+      }
+    },
+    "qa_capability_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
     }
   }
 }

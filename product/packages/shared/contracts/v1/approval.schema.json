@@ -25,6 +25,14 @@
       "type": "string",
       "format": "uuid"
     },
+    "workspace_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "environment_scope": {
+      "type": "string",
+      "enum": ["local-dev", "staging", "production"]
+    },
     "decision": {
       "type": "string",
       "enum": ["approved", "rejected"]

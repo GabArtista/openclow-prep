@@ -15,9 +15,25 @@
       "type": "string",
       "format": "uuid"
     },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspace_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
     "version": {
       "type": "string",
       "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "machine_profile": {
+      "type": "string",
+      "enum": ["cpu-safe", "balanced", "quality-first"]
+    },
+    "environment_scope": {
+      "type": "string",
+      "enum": ["local-dev", "staging", "production"]
     },
     "entry_step": {
       "type": "string",

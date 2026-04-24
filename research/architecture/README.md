@@ -8,3 +8,5 @@ Trilha para critérios de qualidade, opções de control plane, arquitetura alvo
 - `control-plane-options.md`
 - `architecture-target.md`
 - `creative-workflow-reference-architecture.md`
+- `creative-agent-contracts.md`
+- `creative-squad-manifests.md`

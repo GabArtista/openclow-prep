@@ -21,6 +21,33 @@
 
 ## Histórico
 
+### TASK-038 | Transformar a arquitetura criativa em contracts e seeds implementáveis
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #20 (fechada)
+- **Branch:** task/20-creative-contracts-manifests
+- **Output produzido:**
+  - `research/architecture/creative-agent-contracts.md`
+  - `research/architecture/creative-squad-manifests.md`
+  - `research/architecture/README.md`
+  - `product/packages/shared/contracts/v1/capability.schema.json`
+  - `product/packages/shared/contracts/v1/squad.schema.json`
+  - `product/packages/shared/contracts/v1/pipeline.schema.json`
+  - `product/packages/shared/contracts/v1/step.schema.json`
+  - `product/packages/shared/contracts/v1/run.schema.json`
+  - `product/packages/shared/contracts/v1/checkpoint.schema.json`
+  - `product/packages/shared/contracts/v1/approval.schema.json`
+  - `product/packages/shared/contracts/v1/openclow-api.yaml`
+  - `product/packages/shared/src/contracts.js`
+  - `product/packages/shared/src/seeds.js`
+  - `product/packages/skills/src/catalog.js`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-038-complete.md`
+- **Notas:** O produto agora tem contratos públicos e seeds iniciais para a trilha criativa. O próximo corte já pode entrar em implementação real no `product/`, ainda sob boundary de `local-dev` e `staging`.
+
 ### TASK-037 | Traduzir a pesquisa de campo em arquitetura de referência para workflows criativos
 - **Concluída em:** 2026-04-24
 - **Por:** codex

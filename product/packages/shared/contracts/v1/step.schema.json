@@ -22,9 +22,57 @@
       "type": "string",
       "enum": ["inline", "subagent", "tool-runner", "checkpoint"]
     },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
     "uses_capability_id": {
       "type": "string",
       "format": "uuid"
+    },
+    "tool_slugs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "optional_tool_slugs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_contracts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "output_contracts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "machine_profile": {
+      "type": "string",
+      "enum": ["cpu-safe", "balanced", "quality-first"]
+    },
+    "environment_scope": {
+      "type": "string",
+      "enum": ["local-dev", "staging", "production"]
+    },
+    "qa_gate": {
+      "type": "string",
+      "enum": ["none", "brand", "delivery", "brand-and-delivery"]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
     },
     "on_success": {
       "type": "string"

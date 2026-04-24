@@ -56,6 +56,31 @@
     "summary": {
       "type": "string"
     },
+    "system_family": {
+      "type": "string",
+      "enum": ["core", "analytics", "creative", "publishing", "governance"]
+    },
+    "machine_profile": {
+      "type": "string",
+      "enum": ["cpu-safe", "balanced", "quality-first"]
+    },
+    "environment_scope": {
+      "type": "string",
+      "enum": ["local-dev", "staging", "production"]
+    },
+    "supports_dry_run": {
+      "type": "boolean"
+    },
+    "requires_checkpoint": {
+      "type": "boolean"
+    },
+    "artifact_contracts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
     "created_at": {
       "type": "string",
       "format": "date-time"
