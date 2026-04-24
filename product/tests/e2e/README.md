@@ -14,6 +14,7 @@
 6. validar restart safety para runs aguardando checkpoint
 7. validar rollback de capability com trilha auditável
 8. validar o primeiro fluxo renderizável de `creative-image` com artifacts persistidos
+9. validar o primeiro fluxo vertical renderizável de `creative-video` com shot plan, edit plan e previews persistidos
 
 ## Scenario matrix
 
@@ -27,6 +28,7 @@
 | Rollback | desfazer uma promoção | status volta ao estado anterior com evento auditado | staging only |
 | Restart recovery | reiniciar API/worker | run retoma do último estado seguro | staging only |
 | Creative image render | renderizar a primeira peça estática/carrossel | `asset_plan`, `composition_plan`, `preview_manifest` e previews persistidos | staging only |
+| Creative video render | renderizar o primeiro corte vertical curto | `shot_plan`, `edit_decision_list`, `preview_manifest` e previews verticais persistidos | staging only |
 
 ## Acceptance criteria
 
@@ -35,6 +37,7 @@
 - checkpoints rejeitados precisam levar o run para o passo correto
 - os outputs precisam permanecer consultáveis após restart
 - o fluxo `creative-image` precisa persistir arquivos renderizáveis consultáveis no storage local
+- o fluxo `creative-video` precisa persistir storyboard, previews e playlist consultáveis no storage local
 - qualquer validação em produção continua proibida até o gate staging ficar verde
 - o comando `npm --prefix product run regression` executa a suíte completa sem passos manuais intermediários
 

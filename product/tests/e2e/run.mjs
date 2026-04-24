@@ -279,6 +279,10 @@ async function runCreativeScenario() {
     squads.items.some((item) => item.slug === "creative-image"),
     "Creative image squad should be listed by the API"
   );
+  assert(
+    squads.items.some((item) => item.slug === "creative-video"),
+    "Creative video squad should be listed by the API"
+  );
 
   const referenceRun = await requestJson("/v1/runs", {
     method: "POST",
@@ -405,17 +409,83 @@ async function runCreativeScenario() {
   );
   assert(existsSync(previewArtifact.details.gallery_path), "Preview gallery file should exist");
 
+  const videoRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "creative-video",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-video",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      request_context: {
+        brand_slug: "doze-crew",
+        campaign_slug: "opium-drop",
+        channel: "instagram-reels",
+        style_direction: "opium-industrial",
+        output_format: "vertical-video",
+        frame_count: 6,
+        accent_color: "#ff4d4f"
+      }
+    })
+  });
+
+  const completedVideo = await driveCheckpointedRun(videoRun.id, { expectedCheckpoints: 1 });
+  assert(completedVideo.status === "succeeded", "Creative video run did not finish successfully");
+
+  const videoOutputs = await requestJson(`/v1/runs/${videoRun.id}/outputs`);
+  assert(
+    videoOutputs.items.some((item) => item.artifact_type === "shot_plan"),
+    "Creative video should produce a shot plan"
+  );
+  assert(
+    videoOutputs.items.some((item) => item.artifact_type === "vfx_plan"),
+    "Creative video should produce a vfx plan"
+  );
+  assert(
+    videoOutputs.items.some((item) => item.artifact_type === "edit_decision_list"),
+    "Creative video should produce an edit decision list"
+  );
+  assert(
+    videoOutputs.items.some((item) => item.artifact_type === "composition_plan"),
+    "Creative video should produce a composition plan"
+  );
+  assert(
+    videoOutputs.items.some((item) => item.artifact_type === "preview_manifest"),
+    "Creative video should produce a preview manifest"
+  );
+
+  const videoArtifacts = await requestJson(`/v1/runs/${videoRun.id}/artifacts`);
+  const videoCompositionArtifact = videoArtifacts.items.find((item) => item.artifact_type === "composition_plan");
+  const videoPreviewArtifact = videoArtifacts.items.find((item) => item.artifact_type === "preview_manifest");
+
+  assert(videoCompositionArtifact, "Creative video should persist a composition artifact");
+  assert(videoPreviewArtifact, "Creative video should persist a preview artifact");
+  assert(existsSync(videoCompositionArtifact.details.composition_path), "Video composition plan file should exist");
+  assert(
+    videoCompositionArtifact.details.frame_paths.every((framePath) => existsSync(framePath)),
+    "Video storyboard frames should exist"
+  );
+  assert(existsSync(videoPreviewArtifact.details.preview_manifest_path), "Video preview manifest file should exist");
+  assert(
+    videoPreviewArtifact.details.preview_files.every((previewPath) => existsSync(previewPath)),
+    "Video preview files should exist"
+  );
+  assert(existsSync(videoPreviewArtifact.details.gallery_path), "Video preview gallery file should exist");
+  assert(existsSync(videoPreviewArtifact.details.playlist_path), "Video preview playlist file should exist");
+
   const qaRun = await requestJson("/v1/runs", {
     method: "POST",
     body: JSON.stringify({
       squad_slug: "creative-qa",
       workspace_slug: "doze",
       requested_by: "e2e",
-      intent_kind: "creative-image",
+      intent_kind: "creative-video",
       machine_profile: "cpu-safe",
       environment_scope: "staging",
       request_context: {
-        channel: "instagram"
+        channel: "instagram-reels",
+        output_format: "vertical-video"
       }
     })
   });
@@ -437,6 +507,7 @@ async function runCreativeScenario() {
     referenceRunId: referenceRun.id,
     controlRunId: controlRun.id,
     imageRunId: imageRun.id,
+    videoRunId: videoRun.id,
     qaRunId: qaRun.id
   };
 }

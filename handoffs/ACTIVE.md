@@ -8,7 +8,7 @@
 ## Estado do Bastão
 
 - **baton:** UNASSIGNED
-- **last-updated-by:** codex (task 040 completed)
+- **last-updated-by:** codex (task 041 completed)
 - **last-updated-at:** 2026-04-24
 - **last-read-by:** codex
 - **last-read-at:** 2026-04-24
@@ -17,34 +17,35 @@
 
 ## Tasks em Voo
 
-1. TASK-040 concluída com o primeiro fluxo renderizável de imagem em `product/`.
-2. Próximo passo: iniciar `TASK-041` no backlog.
+1. TASK-041 concluída com o primeiro fluxo vertical renderizável em `product/`.
+2. Próximo passo: iniciar `TASK-042` no backlog.
 
 ---
 
 ## Última Ação Completada
 
-Fechamento da TASK-040 com `creative-image` implementado e regressão verde.
+Fechamento da TASK-041 com `creative-video` implementado e regressão verde.
 
 **Mudanças concluídas nesta sessão:**
-- `product/packages/shared/src/seeds.js` atualizado com o squad `creative-image`
-- `product/packages/tools/src/runner.js` atualizado para persistir composition plan, previews SVG e gallery HTML
-- `product/packages/runtime/src/service.js` atualizado para passar `artifacts_dir` aos tool bindings
-- `product/tests/e2e/run.mjs` atualizado para cobrir o fluxo renderizável de imagem
+- `product/packages/shared/src/seeds.js` atualizado com o squad `creative-video` e capabilities de video
+- `product/packages/skills/src/catalog.js` atualizado com `frame-planner`, `motion-editor` e `vfx-finisher`
+- `product/packages/tools/src/runner.js` atualizado para persistir storyboard vertical, previews SVG e playlist de dry-run
+- `product/packages/runtime/src/service.js` atualizado com summaries dos contracts de video
+- `product/tests/e2e/run.mjs` atualizado para cobrir o fluxo renderizável de video
 - `product/README.md` e docs de `product/tests/e2e/` atualizados para refletir o novo corte
 - `npm --prefix product run check` executado com sucesso
 - `npm --prefix product run regression` executado com sucesso
-- `workboard/BACKLOG.md` atualizado com `TASK-041`
+- `workboard/BACKLOG.md` atualizado com `TASK-042`
 - `workboard/IN_PROGRESS.md` zerado
-- `workboard/DONE.md` atualizado para incluir `TASK-040`
+- `workboard/DONE.md` atualizado para incluir `TASK-041`
 - `handoffs/ACTIVE.md` reconciliado para refletir o fechamento da task
 
 ---
 
 ## Próxima Ação Recomendada
 
-1. Iniciar `TASK-041`
-2. Implementar `creative-video` como primeiro fluxo vertical renderizável
+1. Iniciar `TASK-042`
+2. Implementar `publishing-control` como empacotamento dry-run do fluxo criativo
 3. Manter staging-first antes de qualquer passo ligado ao servidor de produção
 
 **Papéis recomendados para a próxima sessão:** `Program Architect`, `Workflow Field Researcher`
@@ -59,7 +60,7 @@ NENHUM.
 
 ## Snapshot de Contexto
 
-`handoffs/snapshots/2026-04-24-codex-task-040-complete.md`
+`handoffs/snapshots/2026-04-24-codex-task-041-complete.md`
 
 ---
 
@@ -73,8 +74,8 @@ O repositório agora tem duas camadas ativas e coerentes:
 - o registry agora tem lifecycle formal e approvals explícitos
 
 **O que fazer a seguir:**
-- iniciar `TASK-041`
-- usar o corte de `creative-image` como base para o primeiro fluxo vertical de vídeo
+- iniciar `TASK-042`
+- conectar `creative-image` e `creative-video` ao primeiro handoff de publicação dry-run
 - seguir preservando o fluxo operacional atual da Doze e o guardrail de staging-first
 
 **Próximo agente recomendado:** `Program Architect` com apoio de `Workflow Field Researcher`
