@@ -275,6 +275,10 @@ async function runCreativeScenario() {
     squads.items.some((item) => item.slug === "creative-qa"),
     "Creative QA squad should be listed by the API"
   );
+  assert(
+    squads.items.some((item) => item.slug === "creative-image"),
+    "Creative image squad should be listed by the API"
+  );
 
   const referenceRun = await requestJson("/v1/runs", {
     method: "POST",
@@ -345,6 +349,62 @@ async function runCreativeScenario() {
     "Creative control should produce approval packet"
   );
 
+  const imageRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "creative-image",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-image",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      request_context: {
+        brand_slug: "doze-crew",
+        campaign_slug: "spring-drop",
+        channel: "instagram",
+        style_direction: "modern-underground",
+        output_format: "carousel",
+        frame_count: 3,
+        accent_color: "#ff4d4f"
+      }
+    })
+  });
+
+  const completedImage = await driveCheckpointedRun(imageRun.id, { expectedCheckpoints: 1 });
+  assert(completedImage.status === "succeeded", "Creative image run did not finish successfully");
+
+  const imageOutputs = await requestJson(`/v1/runs/${imageRun.id}/outputs`);
+  assert(
+    imageOutputs.items.some((item) => item.artifact_type === "asset_plan"),
+    "Creative image should produce an asset plan"
+  );
+  assert(
+    imageOutputs.items.some((item) => item.artifact_type === "composition_plan"),
+    "Creative image should produce a composition plan"
+  );
+  assert(
+    imageOutputs.items.some((item) => item.artifact_type === "preview_manifest"),
+    "Creative image should produce a preview manifest"
+  );
+
+  const imageArtifacts = await requestJson(`/v1/runs/${imageRun.id}/artifacts`);
+  const compositionArtifact = imageArtifacts.items.find((item) => item.artifact_type === "composition_plan");
+  const previewArtifact = imageArtifacts.items.find((item) => item.artifact_type === "preview_manifest");
+
+  assert(compositionArtifact, "Creative image should persist a composition artifact");
+  assert(previewArtifact, "Creative image should persist a preview artifact");
+  assert(existsSync(compositionArtifact.details.composition_path), "Composition plan file should exist");
+  assert(
+    compositionArtifact.details.frame_paths.every((framePath) => existsSync(framePath)),
+    "Composition frame files should exist"
+  );
+  assert(existsSync(previewArtifact.details.preview_manifest_path), "Preview manifest file should exist");
+  assert(
+    previewArtifact.details.preview_files.every((previewPath) => existsSync(previewPath)),
+    "Rendered preview files should exist"
+  );
+  assert(existsSync(previewArtifact.details.gallery_path), "Preview gallery file should exist");
+
   const qaRun = await requestJson("/v1/runs", {
     method: "POST",
     body: JSON.stringify({
@@ -376,6 +436,7 @@ async function runCreativeScenario() {
   return {
     referenceRunId: referenceRun.id,
     controlRunId: controlRun.id,
+    imageRunId: imageRun.id,
     qaRunId: qaRun.id
   };
 }

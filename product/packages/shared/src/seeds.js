@@ -214,6 +214,59 @@ function createCreativeQaSteps() {
   ];
 }
 
+function createCreativeImageSteps() {
+  return [
+    {
+      id: "planejar-assets",
+      kind: "prompt",
+      executor: "inline",
+      label: "Planeja assets, formatos e densidade do criativo",
+      output_contracts: ["asset_plan.json"],
+      machine_profile: "cpu-safe",
+      environment_scope: "local-dev",
+      qa_gate: "brand",
+      risk_level: "low"
+    },
+    {
+      id: "compor-layout",
+      kind: "tool",
+      executor: "tool-runner",
+      label: "Compõe o layout declarativo da peça",
+      tool_slugs: ["paperclip-composer"],
+      input_contracts: ["asset_plan.json", "creative_intent.json", "reference_pack.json"],
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      qa_gate: "brand",
+      risk_level: "medium"
+    },
+    {
+      id: "renderizar-previews",
+      kind: "tool",
+      executor: "tool-runner",
+      label: "Renderiza previews e pacote de entrega da peça",
+      tool_slugs: ["ffmpeg-render"],
+      input_contracts: ["asset_plan.json"],
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      qa_gate: "delivery",
+      risk_level: "medium"
+    },
+    {
+      id: "aprovar-render",
+      kind: "checkpoint",
+      executor: "checkpoint",
+      label: "Aprovar render antes do QA final",
+      input_contracts: ["preview_manifest.json"],
+      requiresCheckpoint: true,
+      on_reject: "compor-layout",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      qa_gate: "brand-and-delivery",
+      risk_level: "medium"
+    }
+  ];
+}
+
 export function createSeeds() {
   const capabilities = [
     {
@@ -481,6 +534,7 @@ export function createSeeds() {
   const creativeControlId = createId();
   const referenceLabId = createId();
   const creativeQaId = createId();
+  const creativeImageId = createId();
 
   const squads = [
     {
@@ -571,6 +625,27 @@ export function createSeeds() {
         .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
         .map((capability) => capability.id),
       steps: createCreativeQaSteps()
+    },
+    {
+      id: creativeImageId,
+      slug: "creative-image",
+      name: "Creative Image",
+      workspace_slug: "doze",
+      version: "1.0.0",
+      pipeline_id: createId(),
+      capability_ids: capabilities
+        .filter((capability) => ["paperclip-composer", "ffmpeg-render", "brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      memory_scope: "run",
+      default_model_tier: "powerful",
+      system_family: "creative",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      context_precedence: ["operational-truth", "campaign-context", "brand-profile", "creative-playbook"],
+      qa_capability_ids: capabilities
+        .filter((capability) => ["brand-qa", "delivery-qa"].includes(capability.slug))
+        .map((capability) => capability.id),
+      steps: createCreativeImageSteps()
     }
   ];
 

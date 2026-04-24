@@ -14,17 +14,17 @@
 
 ### P1 — Alta Prioridade
 
-### TASK-040 | Implementar `creative-image` como primeiro fluxo criativo renderizável
+### TASK-041 | Implementar `creative-video` como primeiro fluxo vertical renderizável
 - **Tipo:** research
 - **Prioridade:** P1
-- **Tamanho:** M
+- **Tamanho:** L
 - **Status:** `backlog`
-- **Objetivo:** estender o corte criativo atual para executar o primeiro fluxo renderizável de imagem estática/carrossel com `paperclip-composer`, `ffmpeg-render` e QA já seeded.
-- **Dependências:** TASK-039 concluída
+- **Objetivo:** estender a trilha criativa para o primeiro fluxo vertical curto com planejamento de frames, composição, render de previews e QA orientado a identidade e retenção.
+- **Dependências:** TASK-040 concluída
 - **Output esperado:**
-  - fluxo `creative-image` implementado no `product/`
-  - artifacts e previews renderizáveis persistidos
-  - regressão cobrindo o fluxo de imagem
-  - documentação local/staging do primeiro fluxo renderizável
+  - fluxo `creative-video` implementado no `product/`
+  - artifacts persistidos de shot plan, edit plan e previews verticais
+  - regressão cobrindo o fluxo de vídeo curto
+  - documentação local/staging do primeiro fluxo vertical renderizável
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)

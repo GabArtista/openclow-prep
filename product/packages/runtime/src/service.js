@@ -339,6 +339,7 @@ export class RuntimeService {
         squad_slug: run.squad_slug,
         workspace_slug: run.workspace_slug,
         step_id: step.id,
+        artifacts_dir: this.store.artifactsDir,
         request_context: run.request_context,
         machine_profile: run.machine_profile,
         environment_scope: run.environment_scope,
@@ -376,6 +377,7 @@ export class RuntimeService {
         squad_slug: run.squad_slug,
         workspace_slug: run.workspace_slug,
         step_id: step.id,
+        artifacts_dir: this.store.artifactsDir,
         request_context: run.request_context,
         machine_profile: run.machine_profile,
         environment_scope: run.environment_scope,
@@ -435,6 +437,7 @@ export class RuntimeService {
 
   buildContractSummary(step, contractName, run) {
     const contractLabelMap = {
+      "asset_plan.json": "Plano de assets consolidado",
       "creative_intent.json": "Intento criativo consolidado",
       "approval_packet.json": "Pacote de aprovacao preparado",
       "brand_context.json": "Contexto de marca consolidado",
