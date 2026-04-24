@@ -259,6 +259,127 @@ async function runIntelligenceScenario() {
   return run.id;
 }
 
+async function runCreativeScenario() {
+  log("creative scenario");
+
+  const squads = await requestJson("/v1/squads");
+  assert(
+    squads.items.some((item) => item.slug === "creative-control"),
+    "Creative control squad should be listed by the API"
+  );
+  assert(
+    squads.items.some((item) => item.slug === "reference-lab"),
+    "Reference lab squad should be listed by the API"
+  );
+  assert(
+    squads.items.some((item) => item.slug === "creative-qa"),
+    "Creative QA squad should be listed by the API"
+  );
+
+  const referenceRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "reference-lab",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-image",
+      machine_profile: "balanced",
+      environment_scope: "local-dev",
+      request_context: {
+        brand_slug: "doze-crew",
+        campaign_slug: "spring-drop",
+        reference_urls: [
+          "https://example.com/ref-1",
+          "https://example.com/ref-2"
+        ],
+        style_direction: "modern-underground"
+      }
+    })
+  });
+
+  const completedReference = await driveCheckpointedRun(referenceRun.id, { expectedCheckpoints: 0 });
+  assert(completedReference.status === "succeeded", "Reference lab run did not finish successfully");
+
+  const referenceOutputs = await requestJson(`/v1/runs/${referenceRun.id}/outputs`);
+  assert(
+    referenceOutputs.items.some((item) => item.artifact_type === "reference_pack"),
+    "Reference lab should produce a reference pack artifact"
+  );
+  assert(
+    referenceOutputs.items.some((item) => item.artifact_type === "style_signals"),
+    "Reference lab should produce style signals"
+  );
+
+  const controlRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "creative-control",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-image",
+      machine_profile: "balanced",
+      environment_scope: "staging",
+      request_context: {
+        brand_slug: "doze-crew",
+        campaign_slug: "spring-drop",
+        channel: "instagram",
+        style_direction: "modern-underground"
+      }
+    })
+  });
+
+  const completedControl = await driveCheckpointedRun(controlRun.id, { expectedCheckpoints: 1 });
+  assert(completedControl.status === "succeeded", "Creative control run did not finish successfully");
+
+  const controlOutputs = await requestJson(`/v1/runs/${controlRun.id}/outputs`);
+  assert(
+    controlOutputs.items.some((item) => item.artifact_type === "brand_context"),
+    "Creative control should produce brand context"
+  );
+  assert(
+    controlOutputs.items.some((item) => item.artifact_type === "creative_intent"),
+    "Creative control should produce creative intent"
+  );
+  assert(
+    controlOutputs.items.some((item) => item.artifact_type === "approval_packet"),
+    "Creative control should produce approval packet"
+  );
+
+  const qaRun = await requestJson("/v1/runs", {
+    method: "POST",
+    body: JSON.stringify({
+      squad_slug: "creative-qa",
+      workspace_slug: "doze",
+      requested_by: "e2e",
+      intent_kind: "creative-image",
+      machine_profile: "cpu-safe",
+      environment_scope: "staging",
+      request_context: {
+        channel: "instagram"
+      }
+    })
+  });
+
+  const completedQa = await driveCheckpointedRun(qaRun.id, { expectedCheckpoints: 1 });
+  assert(completedQa.status === "succeeded", "Creative QA run did not finish successfully");
+
+  const qaOutputs = await requestJson(`/v1/runs/${qaRun.id}/outputs`);
+  assert(
+    qaOutputs.items.some((item) => item.artifact_type === "brand_qa"),
+    "Creative QA should produce brand QA output"
+  );
+  assert(
+    qaOutputs.items.some((item) => item.artifact_type === "delivery_qa"),
+    "Creative QA should produce delivery QA output"
+  );
+
+  return {
+    referenceRunId: referenceRun.id,
+    controlRunId: controlRun.id,
+    qaRunId: qaRun.id
+  };
+}
+
 async function runPromotionScenario() {
   log("promotion scenario");
   const capability = await requestJson("/v1/capabilities", {
@@ -383,6 +504,7 @@ async function main() {
 
     const marketingRunId = await runMarketingScenario();
     const intelligenceRunId = await runIntelligenceScenario();
+    const creativeRuns = await runCreativeScenario();
     await runPromotionScenario();
     const restartedApi = await runRestartRecoveryScenario(apiProcess);
 
@@ -407,6 +529,7 @@ async function main() {
 
     log(`marketing run: ${marketingRunId}`);
     log(`intelligence run: ${intelligenceRunId}`);
+    log(`creative runs: ${creativeRuns.referenceRunId}, ${creativeRuns.controlRunId}, ${creativeRuns.qaRunId}`);
     log("all scenarios passed");
 
     await stop(dashboardProcess);

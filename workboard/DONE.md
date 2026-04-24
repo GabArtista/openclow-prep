@@ -21,6 +21,24 @@
 
 ## Histórico
 
+### TASK-039 | Implementar o primeiro corte do sistema criativo em `product/`
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #22 (fechada)
+- **Branch:** task/22-creative-first-cut
+- **Output produzido:**
+  - `product/packages/orchestrator/src/service.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/packages/tools/src/runner.js`
+  - `product/tests/e2e/run.mjs`
+  - `product/README.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `workboard/DONE.md`
+  - `handoffs/ACTIVE.md`
+  - `handoffs/snapshots/2026-04-24-codex-task-039-complete.md`
+- **Notas:** O produto agora expõe e executa o primeiro corte criativo seeded (`creative-control`, `reference-lab`, `creative-qa`) com outputs persistidos e regressão passando junto com marketing e inteligência.
+
 ### TASK-038 | Transformar a arquitetura criativa em contracts e seeds implementáveis
 - **Concluída em:** 2026-04-24
 - **Por:** codex

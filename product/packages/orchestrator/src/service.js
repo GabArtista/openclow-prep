@@ -25,7 +25,10 @@ export class OrchestratorService {
       name: squad.name,
       workspace_slug: squad.workspace_slug,
       version: squad.version,
-      default_model_tier: squad.default_model_tier
+      default_model_tier: squad.default_model_tier,
+      system_family: squad.system_family ?? "core",
+      machine_profile: squad.machine_profile ?? null,
+      environment_scope: squad.environment_scope ?? null
     }));
   }
 
@@ -44,12 +47,17 @@ export class OrchestratorService {
       squad_slug: squad.slug,
       pipeline_id: squad.pipeline_id,
       workspace_slug: input.workspace_slug ?? squad.workspace_slug,
+      intent_kind: input.intent_kind ?? null,
+      machine_profile: input.machine_profile ?? squad.machine_profile ?? null,
+      environment_scope: input.environment_scope ?? squad.environment_scope ?? null,
       status: "queued",
       requested_at: new Date().toISOString(),
       started_at: null,
       completed_at: null,
       current_step_id: null,
       requested_by: input.requested_by ?? "unknown",
+      request_context: input.request_context ?? {},
+      requested_capability_ids: input.requested_capability_ids ?? [],
       history: [
         {
           at: new Date().toISOString(),
@@ -69,16 +77,19 @@ export class OrchestratorService {
       this.store.queue.push(run.id);
     }
     this.recordAuditEvent({
-      event: "run.requested",
-      subject_kind: "run",
-      subject_id: run.id,
-      actor: run.requested_by,
-      workspace_slug: run.workspace_slug,
-      details: {
-        squad_slug: run.squad_slug,
-        pipeline_id: run.pipeline_id
-      }
-    });
+        event: "run.requested",
+        subject_kind: "run",
+        subject_id: run.id,
+        actor: run.requested_by,
+        workspace_slug: run.workspace_slug,
+        details: {
+          squad_slug: run.squad_slug,
+          pipeline_id: run.pipeline_id,
+          intent_kind: run.intent_kind,
+          machine_profile: run.machine_profile,
+          environment_scope: run.environment_scope
+        }
+      });
     this.store.persist?.();
     return run;
   }

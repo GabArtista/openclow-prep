@@ -54,3 +54,22 @@ Eles definem o wire contract inicial para:
 - API mínima do MVP
 
 Esses contratos já reservam espaço para identificar o workspace/empresa associado a squads, capabilities e runs, porque o modo atual de operação da Doze não é single-context.
+
+## Primeiro corte criativo
+
+O baseline do produto agora também inclui o primeiro corte da trilha criativa:
+
+- `creative-control`
+- `reference-lab`
+- `creative-qa`
+
+Neste corte:
+- os squads já existem como seeds do produto
+- o fluxo básico `contexto -> referencia -> QA` já pode ser iniciado localmente
+- o objetivo ainda é `local-dev` e `staging`
+- produção continua fora do caminho default
+
+O que ainda nao entra neste corte:
+- deploy no servidor de produção
+- publicação real por default
+- pipeline completa de imagem e vídeo final
