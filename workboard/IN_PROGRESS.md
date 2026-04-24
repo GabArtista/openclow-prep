@@ -27,6 +27,6 @@ Nenhuma task ativa no momento.
 
 Próxima captura do bastão:
 
-- abrir `TASK-024`
-- integrar `Ollama`, persistência e filas ao core já implementado em `product/`
-- continuar a partir de `handoffs/snapshots/2026-04-23-codex-core-server-first.md`
+- abrir `TASK-025`
+- portar capacidades day-1 da Doze para o runtime persistente
+- continuar a partir de `handoffs/snapshots/2026-04-24-codex-runtime-persistence-queue.md`

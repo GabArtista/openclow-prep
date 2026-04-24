@@ -21,6 +21,23 @@
 
 ## Histórico
 
+### TASK-024 | Integrar runtime local, persistencia base e fila ao core do `product/`
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #6 (fechada)
+- **Branch:** task/6-runtime-persistence-queue
+- **Output produzido:**
+  - `product/packages/runtime/src/persistence.js`
+  - `product/packages/runtime/src/ollama.js`
+  - `product/packages/runtime/src/service.js`
+  - `product/apps/api/src/state.js`
+  - `product/apps/api/src/server.js`
+  - `product/packages/orchestrator/src/service.js`
+  - `product/packages/registry/src/service.js`
+  - `product/package.json`
+  - atualização de `workboard/IN_PROGRESS.md` e `handoffs/ACTIVE.md`
+- **Notas:** O runtime agora usa persistência em arquivo local de desenvolvimento, fila durável simples e probe opcional de Ollama. Smoke test validou restart da API com o run em `waiting_checkpoint` preservado no disco.
+
 ### TASK-023 | Implementar o core server-first do OpenClow em `product/`
 - **Concluída em:** 2026-04-23
 - **Por:** codex

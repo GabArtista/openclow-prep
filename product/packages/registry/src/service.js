@@ -26,6 +26,7 @@ export class RegistryService {
     };
 
     this.store.capabilities.push(capability);
+    this.store.persist?.();
     return capability;
   }
 }

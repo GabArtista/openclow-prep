@@ -1,6 +1,7 @@
 import http from "node:http";
 import { methodNotAllowed, notFound, readJson, sendJson } from "../../../packages/shared/src/http.js";
 import { summarizeRun } from "../../../packages/shared/src/contracts.js";
+import { probeOllama } from "../../../packages/runtime/src/ollama.js";
 import { orchestrator, registry, runtime, store } from "./state.js";
 
 const host = process.env.OPENCLOW_API_HOST ?? "127.0.0.1";
@@ -32,7 +33,10 @@ async function handler(request, response) {
       sendJson(response, 200, {
         ok: true,
         service: "openclow-api",
-        runtime: "in-memory-local-dev"
+        runtime: runtime.getRuntimeStatus(),
+        storage: {
+          state_path: store.statePath
+        }
       });
       return;
     }
@@ -110,6 +114,26 @@ async function handler(request, response) {
           }))
         )
       });
+      return;
+    }
+
+    if (request.method === "GET" && matchRoute(segments, ["v1", "runtime"])) {
+      sendJson(response, 200, {
+        state_path: store.statePath,
+        queue_length: store.queue.length,
+        runtime: runtime.getRuntimeStatus()
+      });
+      return;
+    }
+
+    if (request.method === "POST" && matchRoute(segments, ["v1", "runtime", "ollama", "probe"])) {
+      const ollama = await probeOllama(store.runtime.ollama.baseUrl);
+      store.runtime.ollama = {
+        ...store.runtime.ollama,
+        ...ollama
+      };
+      store.persist?.();
+      sendJson(response, 200, store.runtime.ollama);
       return;
     }
 

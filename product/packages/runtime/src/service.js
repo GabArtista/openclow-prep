@@ -6,6 +6,8 @@ export class RuntimeService {
   }
 
   listRuns(status) {
+    this.reconcileQueue();
+
     if (!status) {
       return this.store.runs;
     }
@@ -18,7 +20,27 @@ export class RuntimeService {
   }
 
   claimNextRunnableRun() {
-    return this.store.runs.find((run) => ["queued", "running"].includes(run.status));
+    this.reconcileQueue();
+
+    const queuedRunId = this.store.queue.shift();
+
+    if (queuedRunId) {
+      const queuedRun = this.getRun(queuedRunId);
+
+      if (queuedRun && ["queued", "running"].includes(queuedRun.status)) {
+        this.persist();
+        return queuedRun;
+      }
+    }
+
+    const fallback = this.store.runs.find((run) => ["queued", "running"].includes(run.status));
+
+    if (fallback && !this.store.queue.includes(fallback.id)) {
+      this.store.queue.push(fallback.id);
+      this.persist();
+    }
+
+    return fallback;
   }
 
   tickRun(runId) {
@@ -47,11 +69,13 @@ export class RuntimeService {
     if (!step) {
       run.status = "succeeded";
       run.completed_at = new Date().toISOString();
+      this.dequeueRun(run.id);
       run.history.push({
         at: new Date().toISOString(),
         event: "run.completed",
         message: "Run concluído com sucesso"
       });
+      this.persist();
       return run;
     }
 
@@ -70,6 +94,7 @@ export class RuntimeService {
       };
 
       run.status = "waiting_checkpoint";
+      this.dequeueRun(run.id);
       run.checkpoints.push(checkpoint);
       this.store.checkpoints.push(checkpoint);
       run.history.push({
@@ -77,6 +102,7 @@ export class RuntimeService {
         event: "checkpoint.created",
         message: `Checkpoint criado para ${step.id}`
       });
+      this.persist();
       return run;
     }
 
@@ -97,6 +123,7 @@ export class RuntimeService {
     if (!run.steps[run.pointer]) {
       run.status = "succeeded";
       run.completed_at = new Date().toISOString();
+      this.dequeueRun(run.id);
       run.history.push({
         at: new Date().toISOString(),
         event: "run.completed",
@@ -104,6 +131,7 @@ export class RuntimeService {
       });
     }
 
+    this.persist();
     return run;
   }
 
@@ -139,6 +167,7 @@ export class RuntimeService {
     if (decision === "approved") {
       run.status = "queued";
       run.pointer += 1;
+      this.enqueueRun(run.id);
       run.history.push({
         at: new Date().toISOString(),
         event: "checkpoint.approved",
@@ -155,6 +184,7 @@ export class RuntimeService {
       const fallbackIndex = run.steps.findIndex((candidate) => candidate.id === fallbackStepId);
       run.pointer = fallbackIndex >= 0 ? fallbackIndex : 0;
       run.status = "queued";
+      this.enqueueRun(run.id);
       run.history.push({
         at: new Date().toISOString(),
         event: "checkpoint.rejected",
@@ -169,11 +199,50 @@ export class RuntimeService {
     }
 
     run.current_step_id = run.steps[run.pointer]?.id ?? null;
+    this.persist();
 
     return {
       checkpoint,
       approval,
       run
+    };
+  }
+
+  enqueueRun(runId) {
+    if (!this.store.queue.includes(runId)) {
+      this.store.queue.push(runId);
+    }
+  }
+
+  dequeueRun(runId) {
+    this.store.queue = this.store.queue.filter((candidate) => candidate !== runId);
+  }
+
+  reconcileQueue() {
+    const activeRunIds = new Set(
+      this.store.runs
+        .filter((run) => ["queued", "running"].includes(run.status))
+        .map((run) => run.id)
+    );
+
+    const filtered = this.store.queue.filter((runId) => activeRunIds.has(runId));
+    const missing = this.store.runs
+      .filter((run) => ["queued", "running"].includes(run.status))
+      .map((run) => run.id)
+      .filter((runId) => !filtered.includes(runId));
+
+    this.store.queue = [...filtered, ...missing];
+  }
+
+  persist() {
+    this.store.persist?.();
+  }
+
+  getRuntimeStatus() {
+    return {
+      queue_length: this.store.queue.length,
+      ollama: this.store.runtime.ollama,
+      active_runs: this.store.runs.filter((run) => ["queued", "running", "waiting_checkpoint"].includes(run.status)).length
     };
   }
 }

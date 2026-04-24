@@ -52,6 +52,10 @@ export class OrchestratorService {
     };
 
     this.store.runs.push(run);
+    if (!this.store.queue.includes(run.id)) {
+      this.store.queue.push(run.id);
+    }
+    this.store.persist?.();
     return run;
   }
 }
