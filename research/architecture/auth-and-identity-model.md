@@ -118,7 +118,7 @@ Cada decisão importante precisa persistir:
 - qual o resultado
 - em qual workspace
 
-## Day-1 implementation implications
+## Post-TASK-033 implementation implications
 
 - o dashboard deve operar em nome de um actor humano explícito
 - o worker deve se identificar como worker, não como humano

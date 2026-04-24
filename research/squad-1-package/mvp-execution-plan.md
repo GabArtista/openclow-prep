@@ -1,7 +1,7 @@
 # MVP Execution Plan — OpenClow
 
 > **Status:** Post-TASK-033 / MVP baseline established
-> **Updated:** 2026-04-23
+> **Updated:** 2026-04-24
 
 ## Purpose
 
@@ -82,7 +82,7 @@ Escopo:
 - `Postgres`, `Redis` e `MinIO`
 - scheduling, retry, restart e checkpointing
 
-### Fase F — Portabilidade Day-1 da Doze
+### Fase F — Portabilidade inicial da Doze
 
 Objetivo:
 - portar apenas o que já prova valor operacional

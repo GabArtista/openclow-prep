@@ -95,7 +95,7 @@ O que não pode ser documentado:
 - dumps de `env`
 - prints de painel com segredo visível
 
-## Day-1 implications
+## Post-TASK-033 implications
 
 1. Os dois workflows são a referência funcional mínima do OpenClow.
 2. `marketing-dozecrew` precisa de checkpoint humano antes de qualquer publicação externa.

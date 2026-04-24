@@ -1,7 +1,7 @@
 # User Experience and Meta-Squad Flow — OpenClow MVP
 
 > **Status:** Post-TASK-033 / MVP baseline established
-> **Updated:** 2026-04-23
+> **Updated:** 2026-04-24
 
 ## Product Experience Goal
 
@@ -100,7 +100,7 @@ Promotion exige:
 - histórico deve ser navegável por squad e run
 - criação de capability deve parecer workflow assistido, não edição bruta de arquivos
 
-## Day-1 UX Deliverables
+## MVP baseline UX deliverables
 
 - tela/lista de squads
 - tela de run com progresso por step

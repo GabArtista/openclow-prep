@@ -2,7 +2,7 @@
 
 # Capability Registry and Meta-Squad
 
-> **Status:** Draft for Squad 1 handoff
+> **Status:** Post-TASK-033 / MVP baseline established
 > **Purpose:** consolidar como capabilities são registradas, promovidas e evoluem via meta-squad
 
 ## Scope
@@ -66,7 +66,7 @@ O meta-squad é uma capability interna que pode:
 - checkpoints humanos continuam obrigatórios
 - o registry não deve ser manipulado diretamente por arquivos soltos fora do contrato
 
-## Day-1 implication
+## Post-TASK-033 implications
 
 O MVP só está pronto se o usuário conseguir:
 

@@ -1,7 +1,7 @@
 # Local Runtime Strategy — OpenClow MVP
 
 > **Status:** Post-TASK-033 / MVP baseline established
-> **Updated:** 2026-04-23
+> **Updated:** 2026-04-24
 
 ## Runtime Goal
 
@@ -16,7 +16,7 @@ O servidor já tem `Ollama` ativo com modelos instalados:
 - `qwen2.5-coder:32b`
 - `gemma4:31b-it-q4_K_M`
 
-## Recommended Day-1 Strategy
+## Recommended MVP baseline strategy
 
 ### Model Access Layer
 
@@ -48,7 +48,7 @@ Sem benchmark formal ainda, a política inicial deve ser conservadora:
 - `fast`: começar com 1-2 execuções concorrentes e medir
 - jobs pesados de design/vídeo devem entrar em fila separada
 
-## Day-1 Workloads That Fit Well
+## Workloads That Fit Well in the MVP baseline
 
 - estratégia
 - BI
@@ -90,7 +90,7 @@ Se o servidor ganhar GPU NVIDIA, a evolução recomendada é:
 2. avaliar `vLLM` para serving de modelos maiores com melhor throughput
 3. só introduzir `LiteLLM` se houver necessidade real de fallback híbrido e roteamento entre múltiplos backends
 
-## What Not To Do on Day-1
+## What Not To Do in the MVP baseline
 
 - não introduzir `vLLM`, `LiteLLM`, `LM Studio` e outro gateway ao mesmo tempo
 - não prometer edição de vídeo local pesada sem benchmark

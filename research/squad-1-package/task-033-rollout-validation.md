@@ -14,7 +14,7 @@
 | **Criada em** | 2026-04-24 |
 | **Issue GitHub** | #12 |
 | **Branch** | task/12-observability-security |
-| **Status** | in-progress |
+| **Status** | done |
 
 ## Descrição
 
