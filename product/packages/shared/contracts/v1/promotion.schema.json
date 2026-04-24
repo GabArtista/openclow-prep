@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclow.local/contracts/v1/promotion.schema.json",
+  "title": "Promotion",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "capability_id",
+    "capability_slug",
+    "from_status",
+    "to_status",
+    "operation",
+    "status",
+    "requested_by",
+    "requested_at",
+    "updated_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "capability_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "capability_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "from_status": {
+      "type": "string",
+      "enum": ["draft", "staging", "active", "retired"]
+    },
+    "to_status": {
+      "type": "string",
+      "enum": ["draft", "staging", "active", "retired"]
+    },
+    "operation": {
+      "type": "string",
+      "enum": ["promotion", "rollback"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "approved", "rejected"]
+    },
+    "requested_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approval_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

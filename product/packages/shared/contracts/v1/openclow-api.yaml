@@ -34,13 +34,42 @@ paths:
         "200":
           description: Capability updated
   /capabilities/{capabilityId}/promotions:
+    get:
+      summary: List promotions for a capability
+      parameters:
+        - $ref: "#/components/parameters/CapabilityId"
+      responses:
+        "200":
+          description: Promotion collection
     post:
-      summary: Promote capability between lifecycle stages
+      summary: Request promotion or rollback for a capability
       parameters:
         - $ref: "#/components/parameters/CapabilityId"
       responses:
         "202":
           description: Promotion queued for approval
+  /promotions:
+    get:
+      summary: List promotions
+      responses:
+        "200":
+          description: Promotion collection
+  /promotions/{promotionId}/approve:
+    post:
+      summary: Approve promotion
+      parameters:
+        - $ref: "#/components/parameters/PromotionId"
+      responses:
+        "200":
+          description: Promotion approved
+  /promotions/{promotionId}/reject:
+    post:
+      summary: Reject promotion
+      parameters:
+        - $ref: "#/components/parameters/PromotionId"
+      responses:
+        "200":
+          description: Promotion rejected
   /runs:
     post:
       summary: Start run
@@ -83,6 +112,13 @@ components:
   parameters:
     CapabilityId:
       name: capabilityId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    PromotionId:
+      name: promotionId
       in: path
       required: true
       schema:
