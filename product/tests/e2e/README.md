@@ -2,6 +2,7 @@
 
 > **Status:** staging-first contract
 > **Purpose:** transformar o recorte operacional do OpenClow em cenários verificáveis antes de qualquer validação controlada em produção.
+> **Canonical regression command:** `npm --prefix product run regression`
 
 ## Minimum executable coverage
 
@@ -32,6 +33,7 @@
 - checkpoints rejeitados precisam levar o run para o passo correto
 - os outputs precisam permanecer consultáveis após restart
 - qualquer validação em produção continua proibida até o gate staging ficar verde
+- o comando `npm --prefix product run regression` executa a suíte completa sem passos manuais intermediários
 
 ## Source of truth
 
@@ -44,4 +46,4 @@
 
 ## Implementation note
 
-Este diretório é o contrato do que precisa ser testado; o harness de execução pode entrar depois sem mudar o recorte funcional.
+Este diretório é o contrato do que precisa ser testado; o harness de execução já existe e deve ser usado como regressão padrão.

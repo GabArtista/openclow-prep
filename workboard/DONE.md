@@ -21,6 +21,20 @@
 
 ## Histórico
 
+### TASK-032 | Formalizar a suíte E2E como regressão automatizada
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #12 (fechada)
+- **Branch:** task/12-observability-security
+- **Output produzido:**
+  - `product/package.json`
+  - `product/tests/e2e/README.md`
+  - `product/tests/e2e/REGRESSION.md`
+  - `workboard/BACKLOG.md`
+  - `workboard/IN_PROGRESS.md`
+  - `handoffs/ACTIVE.md`
+- **Notas:** O harness staging-first foi formalizado como regressão canônica do produto via `npm --prefix product run regression`, com cobertura explícita de marketing, inteligência, checkpoints, promotion/rollback, restart recovery e smoke do dashboard.
+
 ### TASK-031 | Expandir o dashboard operacional para o fluxo real de squads
 - **Concluída em:** 2026-04-24
 - **Por:** codex

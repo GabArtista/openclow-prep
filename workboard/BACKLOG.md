@@ -15,16 +15,6 @@
 ### P1 — Alta Prioridade
 
 ## Backlog do Squad 1 (a ser preenchido pelo Squad 0 via TASK-015)
-### TASK-031 | P1 | M | Expandir o dashboard operacional para o fluxo real de squads
-- **Output:** telas/contratos para run view, step view, checkpoint panel, outputs e histórico
-- **Critério de aceite:** um operador consegue acompanhar um run, revisar checkpoints e inspecionar outputs sem abrir arquivos internos
-- **Dependências:** TASK-023, TASK-028
-
-### TASK-032 | P1 | M | Formalizar a suíte E2E como regressão automatizada
-- **Output:** suite automatizada completa para marketing, inteligência, checkpoints, promotion/rollback e restart recovery
-- **Critério de aceite:** o harness staging-first pode rodar como regressão padrão do produto
-- **Dependências:** TASK-028
-
 ### TASK-033 | P1 | M | Fechar o primeiro ciclo de rollout e validação controlada
 - **Output:** runbook de leitura/dry-run em produção, checklist de aprovação e evidência de mudança segura
 - **Critério de aceite:** a equipe sabe exatamente como sair de staging para produção sem violar checkpoints ou segredos
