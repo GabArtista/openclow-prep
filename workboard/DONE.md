@@ -21,6 +21,24 @@
 
 ## Histórico
 
+### TASK-026 | Implementar registry, promotion flow e meta-squad do MVP
+- **Concluída em:** 2026-04-24
+- **Por:** codex
+- **Issue:** #10 (fechada)
+- **Branch:** task/10-registry-promotion
+- **Output produzido:**
+  - `decisions/ADR-0007-registry-promotion-approval-flow.md`
+  - `product/packages/registry/src/service.js`
+  - `product/apps/api/src/server.js`
+  - `product/packages/shared/contracts/v1/promotion.schema.json`
+  - `product/packages/shared/contracts/v1/openclow-api.yaml`
+  - `product/packages/runtime/src/persistence.js`
+  - `product/packages/shared/src/seeds.js`
+  - `product/apps/api/README.md`
+  - `product/packages/registry/README.md`
+  - atualização de `workboard/IN_PROGRESS.md` e `handoffs/ACTIVE.md`
+- **Notas:** O registry agora registra capabilities, promotion requests e rollback explícitos com aprovação humana. O meta-squad ganhou uma capability interna seeded como `draft`. Smoke test validou promotion `draft -> staging`, approval, rollback `staging -> draft` e trilha persistida em `approvals`/`promotions`.
+
 ### TASK-025 | Portar capacidades day-1 da Doze para o OpenClow
 - **Concluída em:** 2026-04-24
 - **Por:** codex

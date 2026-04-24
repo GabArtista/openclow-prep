@@ -4,6 +4,7 @@ Responsável por:
 
 - autenticação e autorização
 - CRUD de capabilities
+- promotion requests e approvals de capability
 - start e consulta de runs
 - checkpoints e approvals
 - outputs e histórico
@@ -20,6 +21,11 @@ Endpoints mínimos já implementados:
 
 - `GET /healthz`
 - `GET|POST /v1/capabilities`
+- `GET|PATCH /v1/capabilities/:id`
+- `GET|POST /v1/capabilities/:id/promotions`
+- `GET /v1/promotions`
+- `POST /v1/promotions/:id/approve`
+- `POST /v1/promotions/:id/reject`
 - `GET /v1/squads`
 - `GET|POST /v1/runs`
 - `GET /v1/runs/:id`

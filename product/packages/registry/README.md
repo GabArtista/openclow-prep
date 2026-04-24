@@ -9,4 +9,4 @@ Responsável por:
 
 ## Primeiro corte executável
 
-`src/service.js` já lista e cria capabilities no runtime local de desenvolvimento.
+`src/service.js` já lista, cria e atualiza capabilities, além de registrar promotion requests e aprovações no runtime local de desenvolvimento.

@@ -19,6 +19,7 @@ export function createInitialState() {
     runs: [],
     checkpoints: [],
     approvals: [],
+    promotions: [],
     queue: [],
     runtime: {
       ollama: {

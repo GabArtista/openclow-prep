@@ -48,10 +48,43 @@ async function handler(request, response) {
       return;
     }
 
+    if (request.method === "GET" && matchRoute(segments, ["v1", "capabilities", "*"])) {
+      const capability = registry.getCapability(segments[2]);
+
+      if (!capability) {
+        notFound(response, "Capability not found");
+        return;
+      }
+
+      sendJson(response, 200, capability);
+      return;
+    }
+
     if (request.method === "POST" && matchRoute(segments, ["v1", "capabilities"])) {
       const payload = await readJson(request);
       const capability = registry.createCapability(payload);
       sendJson(response, 201, capability);
+      return;
+    }
+
+    if (request.method === "PATCH" && matchRoute(segments, ["v1", "capabilities", "*"])) {
+      const payload = await readJson(request);
+      const capability = registry.updateCapability(segments[2], payload);
+      sendJson(response, 200, capability);
+      return;
+    }
+
+    if (request.method === "GET" && matchRoute(segments, ["v1", "capabilities", "*", "promotions"])) {
+      sendJson(response, 200, {
+        items: registry.listPromotions(segments[2])
+      });
+      return;
+    }
+
+    if (request.method === "POST" && matchRoute(segments, ["v1", "capabilities", "*", "promotions"])) {
+      const payload = await readJson(request);
+      const promotion = registry.createPromotion(segments[2], payload);
+      sendJson(response, 202, promotion);
       return;
     }
 
@@ -114,6 +147,29 @@ async function handler(request, response) {
           }))
         )
       });
+      return;
+    }
+
+    if (request.method === "GET" && matchRoute(segments, ["v1", "promotions"])) {
+      const url = new URL(request.url, `http://${host}:${port}`);
+      const capabilityId = url.searchParams.get("capability_id");
+      sendJson(response, 200, {
+        items: registry.listPromotions(capabilityId)
+      });
+      return;
+    }
+
+    if (request.method === "POST" && matchRoute(segments, ["v1", "promotions", "*", "approve"])) {
+      const payload = await readJson(request);
+      const result = registry.approvePromotion(segments[2], payload.actor ?? "human", payload.comment ?? "");
+      sendJson(response, 200, result);
+      return;
+    }
+
+    if (request.method === "POST" && matchRoute(segments, ["v1", "promotions", "*", "reject"])) {
+      const payload = await readJson(request);
+      const result = registry.rejectPromotion(segments[2], payload.actor ?? "human", payload.comment ?? "");
+      sendJson(response, 200, result);
       return;
     }
 

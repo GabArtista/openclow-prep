@@ -183,6 +183,18 @@ export function createSeeds() {
       risk_level: "critical",
       allowed_tools: ["instagram-publisher"],
       summary: "Publicação direta sujeita a checkpoint"
+    },
+    {
+      id: createId(),
+      kind: "squad",
+      slug: "meta-squad",
+      name: "Meta Squad",
+      workspace_slug: "openclow",
+      status: "draft",
+      version: "1.0.0",
+      risk_level: "high",
+      allowed_tools: [],
+      summary: "Capability interna para criar, revisar e promover outras capabilities"
     }
   ];
 
