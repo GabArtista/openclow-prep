@@ -7,3 +7,4 @@ Trilha para critérios de qualidade, opções de control plane, arquitetura alvo
 - `quality-criteria.md`
 - `control-plane-options.md`
 - `architecture-target.md`
+- `creative-workflow-reference-architecture.md`

@@ -6,3 +6,4 @@ Trilha para interoperabilidade, adaptações necessárias, MCP landscape e encai
 
 - `mcp-landscape.md`
 - `mcp-interoperability-checklist.md`
+- `creative-tooling-profiles.md`
